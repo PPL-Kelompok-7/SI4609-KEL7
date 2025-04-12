@@ -14,7 +14,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('landingpage');
 });
 
 //Menuju halaman register oleh Selsya dan SitiN
@@ -29,3 +29,4 @@ Route::get('register', function () {
 Route::get('login', function () {
     return view('login');
 })->name('login');
+
