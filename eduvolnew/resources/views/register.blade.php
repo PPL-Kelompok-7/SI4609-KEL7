@@ -27,8 +27,21 @@
                 <input type="text" name="domicile" placeholder="Domisili" value="{{ old('domicile') }}" required>
                 <input type="email" name="email" placeholder="Email (halo@mail.com)" value="{{ old('email') }}" required>
                 <input type="password" name="password" placeholder="Password" required>
+                
+                <div class="terms-container">
+                    <div class="terms">
+                        <input type="checkbox" id="terms" name="terms" required>
+                        <label for="terms">Saya menyetujui syarat dan ketentuan</label>
+                    </div>
+                    <!-- Placeholder atau nonaktifkan dulu -->
+                    <a href="#" class="forgot-password">Lupa kata sandi?</a>
+                </div>
+                
+                <button type="submit" class="btn-daftar">Daftar</button>
+                <p>Sudah punya akun? <a href="#">Masuk</a></p>
             </form>
         </div>
     </div>
 </body>
+</html>
 </html>
