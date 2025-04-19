@@ -21,7 +21,7 @@
                     <input type="text" name="last_name" placeholder="Nama Belakang" value="{{ old('last_name') }}" required>
                 </div>
                 <div class="input-group">
-                    <input type="date" name="birth_date" placeholder="Tanggal Lahir" value="{{ old('birth_date') }}" required>
+                <input type="date" name="birth_date" id="birth_date" class="date-input" placeholder="Tanggal Lahir" value="{{ old('birth_date') }}" required>
                     <input type="text" name="profession" placeholder="Profesi" value="{{ old('profession') }}" required>
                 </div>
                 <input type="text" name="domicile" placeholder="Domisili" value="{{ old('domicile') }}" required>
@@ -36,11 +36,32 @@
                     <!-- Placeholder atau nonaktifkan dulu -->
                     <a href="#" class="forgot-password">Lupa kata sandi?</a>
                 </div>
-                
                 <button type="submit" class="btn-daftar">Daftar</button>
-                <p>Sudah punya akun? <a href="#">Masuk</a></p>
+                <p>Sudah punya akun? <a href="{{ route('login') }}">Masuk</a></p>
             </form>
         </div>
     </div>
+    <script>
+  const dateInput = document.getElementById("birth_date");
+
+  // Tambahkan placeholder semu
+  dateInput.placeholder = "Tanggal Lahir";
+
+  // Trik agar placeholder muncul saat value kosong
+  dateInput.addEventListener("focus", function () {
+    this.type = "date";
+  });
+
+  dateInput.addEventListener("blur", function () {
+    if (!this.value) {
+      this.type = "text";
+    }
+  });
+
+  // Inisialisasi jika belum ada nilai
+  if (!dateInput.value) {
+    dateInput.type = "text";
+  }
+</script>
 </body>
 </html>
