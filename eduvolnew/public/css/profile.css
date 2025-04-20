@@ -1,0 +1,353 @@
+/* Global Background dan Teks */
+body {
+    background-color: #4E36E9;
+    color: #fff;
+}
+
+/* --- Navbar Styling ---*/
+.navbar {
+    height: 95px !important;
+    background-color: #462FD8 !important;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 9999;
+    background-color: #462FD8 !important;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+}
+
+.navbar .navbar-brand,
+.navbar .nav-link {
+    color: #fff !important;
+    font-weight: 500;
+}
+
+.navbar .nav-link:hover {
+    color: #ccc !important;
+}
+
+.navbar .navbar-brand img {
+    height: 48px;
+    object-fit: contain;
+    margin-right: 10px;
+}
+
+/* Container Profil */
+.profile-container {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: transparent;
+}
+
+/* Foto Profil */
+.profile-image {
+    width: 180px;
+    height: 180px;
+    object-fit: cover;
+    border: 5px solid #fff;
+    box-shadow: 0 0 10px rgba(0,0,0,0.15);
+}
+
+/* Info Profil */
+.profile-name {
+    font-weight: 600;
+    color: #fff;
+}
+.profile-status {
+    display: block;
+    color: #ccc;
+    margin-top: 5px;
+    font-size: 0.95rem;
+}
+.profile-location {
+    color: #ccc;
+    font-size: 0.9rem;
+}
+
+/* Kartu Statistik */
+.stats-card {
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: 8px;
+    padding: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+.stats-item {
+    text-align: center;
+}
+.stats-item h5 {
+    color: #ddd;
+    margin-bottom: 5px;
+}
+.stats-number {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #fff;
+}
+.vertical-line {
+    width: 1px;
+    background-color: #ddd;
+    height: 50px;
+    margin: 0 20px;
+}
+
+/* Deskripsi Profil */
+.profile-description h5 {
+    margin-bottom: 10px;
+    font-weight: 600;
+    color: #fff;
+}
+.profile-description p {
+    color: #ddd;
+    line-height: 1.6;
+}
+
+/* Featured Event */
+.featured-event h4 {
+    font-weight: 600;
+    color: #fff;
+}
+.event-card {
+    background: #fff;
+    border-radius: 8px;
+    overflow: hidden;
+    margin-bottom: 20px;
+    color: #333;
+}
+.event-img-wrapper {
+    width: 100%;
+    height: 200px;
+    overflow: hidden;
+}
+.event-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+.event-title {
+    font-weight: 600;
+    color: #333;
+    margin-bottom: 6px;
+}
+.event-date {
+    font-size: 0.9rem;
+    color: #777;
+    margin-bottom: 8px;
+}
+.event-desc {
+    font-size: 0.9rem;
+    color: #555;
+}
+
+/* Button Success */
+.btn-success {
+    background-color: #28a745;
+    border-color: #28a745;
+    padding: 10px 20px;
+    font-weight: 600;
+    font-size: 1rem;
+}
+
+/* Icon di Navbar (tetap sama) */
+.navbar .fa-bell,
+.navbar .fa-bolt {
+    color: #fff;
+    transition: color 0.3s ease;
+}
+.navbar .fa-bell:hover,
+.navbar .fa-bolt:hover {
+    color: #ddd;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .stats-card {
+        flex-direction: column;
+    }
+    .vertical-line {
+        display: none;
+    }
+    .profile-description {
+        margin-top: 20px;
+    }
+}
+
+/* --- Style khusus untuk Profile Header dan Konten --- */
+.profile-header-new {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: rgba(255, 255, 255, 0.2);
+    padding: 20px;
+    border-radius: 10px;
+    margin-bottom: 20px;
+}
+
+.profile-header-new .profile-photo img {
+    width: 150px;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 10px;
+}
+
+.profile-header-new .profile-info {
+    text-align: center;
+    padding: 0 20px;
+}
+
+.profile-header-new .profile-info div,
+.profile-header-new .profile-info button {
+    margin-top: 5px;
+}
+
+.profile-header-new .profile-stats div {
+    margin-top: 5px;
+}
+
+.tab-menu {
+    padding: 0 20px;
+    margin-bottom: 20px;
+}
+
+.tab-menu .d-flex {
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.tab-menu hr {
+    border-top: 2px solid #ddd;
+}
+
+.featured-event-header {
+    padding: 0 20px;
+    margin-bottom: 10px;
+    font-size: 16px; /* Ukuran lebih kecil */
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.featured-event-header i {
+    font-size: 14px; /* Kecilkan ikon pensil */
+    color: #ccc;
+    cursor: pointer;
+}
+
+
+.event-card-new {
+    margin-bottom: 20px;
+}
+
+.event-card-new img {
+    width: 100%;
+    border-radius: 10px;
+}
+
+.event-card-new i {
+    color: white !important;
+    font-size: 18px;
+}
+ 
+.event-card-new h5 {
+    font-weight: bold;
+    color: #fff;
+    font-size: 20px;
+}
+
+.event-card-new div {
+    font-size: 16px;
+    color: white;
+}
+
+/* --- Footer Styling --- */
+.footer-navbar {
+    background-color: black;
+    padding: 20px 30px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 80px;
+    color: white;
+    margin-top: auto;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 9999;
+    background-color: #000;
+    box-shadow: 0 -2px 5px rgba(0,0,0,0.2);
+}
+
+.footer-navbar img {
+    height: 40px;
+}
+
+.footer-navbar .text-center {
+    font-size: 16px;
+    text-align: center;
+    line-height: 1.4;
+}
+
+.footer-navbar button {
+    background-color: #69FD8D;
+    color: #4E36E9;
+    font-weight: bold;
+    padding: 10px 18px;
+    border: none;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    font-size: 15px;
+}
+
+.footer-navbar button i {
+    color: #4E36E9;
+    margin-right: 8px;
+}
+
+.featured-event-header {
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+@media (min-width: 768px) {
+    .featured-event-header {
+        padding-left: 30px;
+        padding-right: 30px;
+    }
+}
+
+
+.profile-header-photo {
+    width: 200px;
+    height: 280px;
+    object-fit: cover;
+    border-radius: 10px;
+}
+
+/* Atur ulang posisi dan ukuran logo vendor */
+.vendor-logo {
+    width: 80px;
+    height: 80px;
+    object-fit: contain;
+}
+
+.event-info-wrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px;
+}
+
+/* Jarak antara Mahasiswa dan Lokasi */
+.user-role-location {
+    display: flex;
+    flex-direction: column;
+    gap: 8px; /* Beri spasi vertikal */
+    margin-bottom: 10px;
+}
