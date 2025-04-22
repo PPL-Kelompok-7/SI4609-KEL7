@@ -15,10 +15,18 @@
     <!-- Bungkus Ungu -->
     <div class="event-section-purple">
 
-        <!-- Header Event -->
         <div class="event-header">
-            <!-- Gambar tanpa box -->
-            <img src="{{ asset('Mask group.png') }}" class="event-img" alt="Event Image">
+            <div class="image-mask-group">
+                <img src="{{ asset('Mask group.png') }}" alt="Event Image" class="background-img">
+
+                <div class="logo-bulet">
+                    <img src="{{ asset('telkom.png') }}" alt="Logo Telkom" class="logo-img">
+                </div>
+
+                <div class="center-text">
+                    NGAJAR NGODING
+                </div>
+            </div>
 
             <!-- Info event dalam box putih -->
             <div class="event-text-box">
