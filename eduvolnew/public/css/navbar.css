@@ -1,81 +1,42 @@
-/* General Navbar Styles */
-.navbar {
-    background: #462FD8;
-    padding-top: 15px;
-    padding-bottom: 10px;
-    padding-left: 40px;
-    padding-right: 40px;
-    z-index: 1000;
-    width: 100%;
-}
-
+/* Logo */
 .navbar-brand .logo {
-    width: 150px;
+    width: 130px;
     height: auto;
 }
 
-.nav-link {
-    color: #FFF !important;
-    text-align: center;
-    font-family: "Inter-Regular", Helvetica;
-    font-size: 14px;
-    margin: 0 10px;
-    text-decoration: none;
-    display: block;
-    width: 100%;
-    
+/* Navbar background */
+.navbar {
+    background: #462FD8;
+    padding: 15px 40px;
 }
 
-
+/* Nav links */
+.nav-link {
+    color: #FFFFFF !important;
+    font-family: 'Inter', sans-serif;
+    font-size: 16px;
+    margin: 0 15px;
+}
 
 .nav-link.active {
     color: #69FD8D !important;
     font-weight: 700;
 }
 
-
-.search-container-responsive {
-    display: none;
-}
-
-.search-icon {
-    width: 27px;
-    height: 27px;
-    color: #757575;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-left: 10px;
-}
-
-.search-bar {
-    flex-grow: 1;
-    border: none;
-    outline: none;
-    font-family: Poppins, sans-serif;
-    font-size: 16px;
-    color: #757575;
-    padding-left: 10px;
-    width: 30px;
-}
-
-.search-bar::placeholder {
-    color: #757575;
-    font-weight: 600;
-    opacity: 0.5;
-}
-
+/* Sign Up / Log In button */
 .signup-button {
-    width: 135px;
-    height: 53px;
-    flex-shrink: 0;
-    border-radius: 10px;
-    background: #F3CA4D;
-    color: #03669B;
-    text-align: center;
-    font-family: Poppins, sans-serif;
-    font-size: 18px;
-    font-weight: 600;
+    padding: 10px 25px;
+    background-color: #F0F0F0;
+    color: #000;
+    font-size: 16px;
+    font-weight: 500;
+    border-radius: 12px;
     border: none;
-    margin-left: 20px;
+    transition: background-color 0.3s ease;
+    text-decoration: none;
 }
+
+.signup-button:hover {
+    background-color: #e0e0e0;
+}
+
