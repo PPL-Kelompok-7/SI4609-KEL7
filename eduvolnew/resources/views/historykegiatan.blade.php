@@ -56,6 +56,19 @@
             </div>
         </div>
 
+        <div class="filter-box">
+            <div class="filter-left">
+                <span class="filter-label">Filter berdasarkan :</span>
+                <label for="ongoing"><input type="checkbox" id="ongoing" name="status" value="ongoing"> On Going</label>
+                <label for="coming"><input type="checkbox" id="coming" name="status" value="coming"> Coming Soon</label>
+                <label for="ended"><input type="checkbox" id="ended" name="status" value="ended"> Ended</label>
+            </div>
+            <div class="filter-right">
+                <button class="apply">Terapkan</button>
+                <button class="reset">Hapus Filter</button>
+            </div>
+        </div>
+
         <table class="event-table">
             <thead>
                 <tr>

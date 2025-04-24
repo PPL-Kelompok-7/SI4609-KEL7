@@ -82,6 +82,7 @@ h1 {
 .filter-box input[type="checkbox"] {
     transform: scale(1.2); /* memperbesar checkbox */
     cursor: pointer;
+    cursor: pointer;
 }
 
 .filter-box button {
