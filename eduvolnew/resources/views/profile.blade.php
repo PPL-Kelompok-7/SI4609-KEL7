@@ -5,18 +5,21 @@
     {{-- Profile Header --}}
     <div class="row d-flex align-items-center">
         <div class="col-auto">
-            <img src="{{ asset('profile1.png') }}" alt="Foto Profil" class="profile-header-photo">
+            <img src="{{ $user->profile_photo ? asset('storage/' . $user->profile_photo) : asset('profile1.png') }}" 
+                 alt="Foto Profil" 
+                 class="profile-header-photo"
+                 style="width: 150px; height: 150px; object-fit: cover; border-radius: 50%;">
         </div>
         <div class="col-auto">
             <div class="d-flex flex-column gap-2 mt-3">
                 <div class="fs-3 fw-bold text-white">Relawan</div>
-                <div class="fs-2 fw-bold" style="color: #69FD8D;">Cheryl Lidia Regar</div>
-                <button class="btn btn-light btn-sm fw-bold text-primary" style="max-width: 120px;">
+                <div class="fs-2 fw-bold" style="color: #69FD8D;">{{ $user->first_name }} {{ $user->last_name }}</div>
+                <a href="{{ route('profile.edit') }}" class="btn btn-light btn-sm fw-bold text-primary" style="max-width: 120px;">
                     <i class="fas fa-pencil-alt"></i> Edit Profil
-                </button>
+                </a>
                 <div class="text-white user-role-location">
-                    <div><i class="fas fa-shopping-bag me-2"></i> Mahasiswa</div>
-                    <div><i class="fas fa-map-marker-alt me-2"></i> Balikpapan, Kalimantan Timur</div>
+                    <div><i class="fas fa-shopping-bag me-2"></i> {{ $user->profession }}</div>
+                    <div><i class="fas fa-map-marker-alt me-2"></i> {{ $user->domicile }}</div>
                 </div>
             </div>
         </div>
@@ -24,11 +27,11 @@
             <div class="d-flex gap-5">
                 <div class="text-center">
                     <div class="fs-3 fw-bold text-white">Partisipasi</div>
-                    <div class="fs-1 fw-bold" style="color: #69FD8D;">60</div>
+                    <div class="fs-1 fw-bold" style="color: #69FD8D;">0</div>
                 </div>
                 <div class="text-center">
                     <div class="fs-3 fw-bold text-white">Rating</div>
-                    <div class="fs-1 fw-bold" style="color: #69FD8D;">4,9/5</div>
+                    <div class="fs-1 fw-bold" style="color: #69FD8D;">0/5</div>
                 </div>
             </div>
         </div>
