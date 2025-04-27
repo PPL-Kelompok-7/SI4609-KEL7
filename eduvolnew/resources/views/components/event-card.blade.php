@@ -1,4 +1,3 @@
-event-card.blade.php
 <div class="event-card-new position-relative">
     <img src="{{ asset($banner) }}" alt="{{ $title }}" class="img-fluid" style="width: 100%; height: 180px; object-fit: cover; border-radius: 10px;">
     

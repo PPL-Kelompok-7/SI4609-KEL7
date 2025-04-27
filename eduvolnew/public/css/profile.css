@@ -151,7 +151,7 @@ body {
     font-size: 1rem;
 }
 
-/* Icon di Navbar (tetap sama) */
+/* Icon di Navbar */
 .navbar .fa-bell,
 .navbar .fa-bolt {
     color: #fff;
@@ -175,7 +175,7 @@ body {
     }
 }
 
-/* --- Style khusus untuk Profile Header dan Konten --- */
+/* --- Style Profile Header dan Konten --- */
 .profile-header-new {
     display: flex;
     justify-content: space-between;
@@ -224,7 +224,7 @@ body {
 .featured-event-header {
     padding: 0 20px;
     margin-bottom: 10px;
-    font-size: 16px; /* Ukuran lebih kecil */
+    font-size: 16px; 
     font-weight: 600;
     display: flex;
     align-items: center;
@@ -232,7 +232,7 @@ body {
 }
 
 .featured-event-header i {
-    font-size: 14px; /* Kecilkan ikon pensil */
+    font-size: 14px; 
     color: #ccc;
     cursor: pointer;
 }
@@ -322,7 +322,6 @@ body {
     }
 }
 
-
 .profile-header-photo {
     width: 200px;
     height: 280px;
@@ -330,7 +329,6 @@ body {
     border-radius: 10px;
 }
 
-/* Atur ulang posisi dan ukuran logo vendor */
 .vendor-logo {
     width: 80px;
     height: 80px;
@@ -344,10 +342,102 @@ body {
     gap: 10px;
 }
 
-/* Jarak antara Mahasiswa dan Lokasi */
 .user-role-location {
     display: flex;
     flex-direction: column;
-    gap: 8px; /* Beri spasi vertikal */
+    gap: 8px; 
     margin-bottom: 10px;
+}
+
+/* --- Milestone Section --- */
+.milestone-card {
+    background: linear-gradient(135deg, rgba(255,255,255,0.1), rgba(255,255,255,0.05));
+    border-radius: 16px;
+    padding: 24px;
+    margin-bottom: 32px;
+    box-shadow: 0 8px 16px rgba(0,0,0,0.3);
+  }
+  .milestone-header {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    margin-bottom: 24px;
+  }
+  .milestone-header .badge-icon {
+    width: 64px;
+    height: 64px;
+  }
+  .milestone-header .badge-label {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #FFD700;
+  }
+  .progress-circle {
+    position: relative;
+    width: 100px;
+    height: 100px;
+    margin-right: 24px;
+    background: conic-gradient(#69FD8D var(--percent), rgba(255,255,255,0.1) 0);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .progress-circle .percentage {
+    position: absolute;
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: #fff;
+  }
+  .milestone-details {
+    flex: 1;
+  }
+  .milestone-progress {
+    margin: 16px 0;
+  }
+  .milestone-progress .progress {
+    height: 12px;
+    background: rgba(255,255,255,0.2);
+    border-radius: 6px;
+  }
+  .milestone-progress .progress-bar {
+    background-color: #69FD8D;
+    border-radius: 6px;
+  }
+  .milestone-stats {
+    display: flex;
+    gap: 32px;
+    font-size: 1rem;
+    margin-bottom: 12px;
+  }
+  .milestone-stats strong {
+    color: #fff;
+  }
+  .milestone-target {
+    font-size: 0.9rem;
+    color: #ddd;
+    margin-bottom: 16px;
+  }
+  .btn-milestone-detail {
+    background: #69FD8D;
+    color: #4E36E9;
+    padding: 8px 16px;
+    border-radius: 8px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: background 0.2s;
+  }
+  .btn-milestone-detail:hover {
+    background: #4EDC97;
+  }
+
+.tab-menu .nav-tabs .nav-link {
+    color: #fff;                   
+    background-color: transparent;  
+    border: none;                  
+}
+.tab-menu .nav-tabs .nav-link.active {
+    color: #333;    
+    background-color: #fff;         
+    border-radius: 8px 8px 0 0;     
 }

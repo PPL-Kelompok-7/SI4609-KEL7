@@ -1,4 +1,3 @@
-app.blade.php
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -12,7 +11,7 @@ app.blade.php
     <link rel="stylesheet" href="{{ asset('css/profile.css') }}">
 </head>
 <body>
-    <!-- NAVBAR: Kode header sama persis seperti sebelumnya -->
+    <!-- NAVBAR -->
     <nav class="navbar navbar-expand-lg">
         <div class="container d-flex align-items-center justify-content-between">
             <!-- Logo Kiri -->
@@ -75,4 +74,3 @@ app.blade.php
 
 </body>
 </html>
-

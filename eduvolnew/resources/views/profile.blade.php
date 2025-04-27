@@ -1,4 +1,3 @@
-profile.blade.php
 @extends('layouts.app')
 
 @section('content')
@@ -37,42 +36,60 @@ profile.blade.php
 
     {{-- Tab Menu --}}
     <div class="tab-menu my-4">
-        <div class="d-flex justify-content-around fs-5 fw-bold text-white">
-            <div>Partisipasi</div>
-            <div>Review</div>
-            <div>Milestone</div>
-        </div>
-        <hr>
+        <ul class="nav nav-tabs nav-fill" id="profileTab" role="tablist">
+            <li class="nav-item" role="presentation">
+                <button class="nav-link active" id="participasi-tab" data-bs-toggle="tab" data-bs-target="#participasi" type="button" role="tab" aria-controls="participasi" aria-selected="true">Partisipasi</button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="review-tab" data-bs-toggle="tab" data-bs-target="#review" type="button" role="tab" aria-controls="review" aria-selected="false">Review</button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="milestone-tab" data-bs-toggle="tab" data-bs-target="#milestone" type="button" role="tab" aria-controls="milestone" aria-selected="false">Milestone</button>
+            </li>
+        </ul>
     </div>
 
-    {{-- Featured Event Header --}}
-    <div class="featured-event-header mb-3">
-        Featured Event <i class="fas fa-pencil-alt"></i>
-    </div>
-
-    {{-- Featured Event Cards --}}
-    <div class="row mb-4 px-3 px-md-4">
-        {{-- Event 1 --}}
-        <div class="col-md-6 mb-3">
-            @include('components.event-card', [
-                'banner' => 'banner1.png',
-                'title' => 'Ngajar Ngoding Selasa #2',
-                'rating' => '5/5',
-                'date' => '24 Oktober 2024',
-                'vendor' => 'vendor.png'
-            ])
+    {{-- Tab Content --}}
+    <div class="tab-content" id="profileTabContent">
+        {{-- Partisipasi --}}
+        <div class="tab-pane fade show active" id="participasi" role="tabpanel" aria-labelledby="participasi-tab">
+            <div class="featured-event-header mb-3">
+                Featured Event <i class="fas fa-pencil-alt"></i>
+            </div>
+            <div class="row mb-4 px-3 px-md-4">
+                <div class="col-md-6 mb-3">
+                    @include('components.event-card', [
+                        'banner' => 'banner1.png',
+                        'title' => 'Ngajar Ngoding Selasa #2',
+                        'rating' => '5/5',
+                        'date' => '24 Oktober 2024',
+                        'vendor' => 'vendor.png'
+                    ])
+                </div>
+                <div class="col-md-6 mb-3">
+                    @include('components.event-card', [
+                        'banner' => 'banner2.png',
+                        'title' => 'Design 101 #4',
+                        'rating' => '5/5',
+                        'date' => '4 Mei 2024',
+                        'vendor' => 'vendor.png'
+                    ])
+                </div>
+            </div>
         </div>
 
-        {{-- Event 2 --}}
-        <div class="col-md-6 mb-3">
-            @include('components.event-card', [
-                'banner' => 'banner2.png',
-                'title' => 'Design 101 #4',
-                'rating' => '5/5',
-                'date' => '4 Mei 2024',
-                'vendor' => 'vendor.png'
-            ])
+        {{-- Review (sementara kosong) --}}
+        <div class="tab-pane fade" id="review" role="tabpanel" aria-labelledby="review-tab">
+            <p class="text-white px-3">Belum ada review.</p>
+        </div>
+
+        {{-- Milestone --}}
+        <div class="tab-pane fade" id="milestone" role="tabpanel" aria-labelledby="milestone-tab">
+            <div class="px-3 px-md-4">
+                @include('components.profile-milestone')
+            </div>
         </div>
     </div>
-</div>
-@endsection
+
+</div> {{-- end container --}}
+@endsection 
