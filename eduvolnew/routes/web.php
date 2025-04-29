@@ -14,3 +14,6 @@ Route::get('login', function () {
     return view('login');
 })->name('login');
 
+Route::get('voucher', function () {
+    return view('voucherpengguna');
+})->name('voucherpengguna');
