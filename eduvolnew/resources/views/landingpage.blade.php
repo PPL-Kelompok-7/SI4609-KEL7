@@ -7,122 +7,185 @@
 @endsection
 
 @section('content')
-<div class="landing-container">
-    <div class="landing-content">
-        <div class="text-section">
-            <button class="join-btn">Join Us</button>
-            <h1>Jadilah bagian dari <span class="highlight">#RelawanPintar</span><br>sekarang juga!</h1>
-            <div class="cta-buttons">
-                <a href="#" class="btn-mulai">▶ Mulai Perjalananmu</a>
-                <a href="#" class="btn-pelajari">Pelajari lebih lanjut →</a>
+
+ <!-- Hero Section -->
+ <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <div class="hero-text">
+                    <button class="join-button">Join Us</button>
+                    <h1>Jadilah bagian dari <span class="highlight">#RelawanPintar</span> sekarang juga!</h1>
+                    <button class="start-button">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <circle cx="12" cy="12" r="10"></circle>
+                            <path d="M10 8l6 4-6 4V8z"></path>
+                        </svg>
+                        Mulai Perjalananmu
+                    </button>
+                    <a href="#" class="learn-more">Pelajari lebih lanjut 
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M5 12h14M12 5l7 7-7 7"></path>
+                        </svg>
+                    </a>
+                </div>
+                <div class="hero-image">
+                    <img src="{{ asset('images/volunteer-group.png') }}" alt="Volunteers">
+                </div>
             </div>
         </div>
-        <div class="image-section">
-            <img src="{{ asset('images/volunteer-group.png') }}" alt="Relawan" />
-        </div>
-    </div>
+    </section>
 
-    <div class="achievement-box">
-        <p>Di tahun <strong>2024</strong>, <strong>EduVolunteer</strong> telah berhasil mencapai :</p>
-        <div class="stats">
-            <div><span class="number">50</span> Partner</div>
-            <div><span class="number">430</span> Relawan</div>
-            <div><span class="number">1500</span> Aksi Volunteer</div>
-        </div>
-    </div>
-
-
-
-        <!-- Section Relawan Pintar -->
-<div class="relawan-section">
-    
-<div class="relawan-header">
-    <div class="relawan-header-columns">
-        <div class="relawan-left">
-            <span class="tag">Relawan Pintar</span>
-        </div>
-        <div class="relawan-right">
-    <div class="text-left">
-        <h2>More people <br> More impact</h2>
-    </div>
-    <div class="text-right">
-        <p>
-            Kami sangat menghargai partisipasi para relawan, dengan EduVolunteer kamu mendapatkan apresiasi atas partisipasi kamu dengan 
-            <span class="badge-link">Volunteer Badge</span>!
-        </p>
-    </div>
-    <a href="#" class="btn-baca">Baca selengkapnya</a>
-
-</div>
-
-    </div>
-</div>
-
-
-    <di/v class="badgecon">
-    <div class="badge-box">
-        <h3>Volunteer Badge</h3>
-        <ul>
-            <li><span class="badge-icon bronze"></span> 1-10 <span>Relawan Pemula</span></li>
-            <li><span class="badge-icon silver"></span> 11-30 <span>Relawan Aktif</span></li>
-            <li><span class="badge-icon gold"></span> >30 <span>Relawan Inspiratif</span></li>
-        </ul>
-        <p>Tingkatkan partisipasi kamu di EduVolunteer dan dapatkan badge dan keuntungan lainnya</p>
-    </div>
-
-        <div class="relawan-cards">
-                <div class="relawan-card">
-                    <div class="photo-box gold-badge">
-                        <!-- Foto -->
-                        <img src="{{ asset('images/deca.jpg') }}" alt="deca">
+    <!-- Stats Section -->
+    <section class="stats">
+        <div class="container">
+            <div class="stats-container">
+                <div class="year">
+                    Di tahun <span class="bold">2024</span>, <br>
+                    <span class="bold">EduVolunteer</span> telah <br>
+                    berhasil mencapai :
+                </div>
+                <div class="stat-items">
+                    <div class="stat-item">
+                        <h2>50</h2>
+                        <p>Partner</p>
                     </div>
-                    <div class="card-footer">
-                        <span>60 participations</span>
-                        <span>@decaanr</span>
+                    <div class="stat-item">
+                        <h2>430</h2>
+                        <p>Relawan</p>
+                    </div>
+                    <div class="stat-item">
+                        <h2>1500</h2>
+                        <p>Aksi Volunteer</p>
                     </div>
                 </div>
-
-                <div class="relawan-card">
-                    <div class="photo-box silver-badge">
-                        <!-- Foto -->
-                        <img src="{{ asset('images/siti.jpg') }}" alt="siti">
-                    </div>
-                    <div class="card-footer">
-                        <span>30 participations</span>
-                        <span>@sitihaya</span>
-                    </div>
-                </div>
-
-                <div class="relawan-card">
-                    <div class="photo-box bronze-badge">
-                        <!-- Foto -->
-                        <img src="{{ asset('images/user3.jpg') }}" alt="user3">
-                    </div>
-                    <div class="card-footer">
-                        <span>10 participations</span>
-                        <span>@username</span>
-                    </div>
-                </div>
-
-                <div class="relawan-card">
-                    <div class="photo-box bronze-badge">
-                        <!-- Foto -->
-                        <img src="{{ asset('images/user3.jpg') }}" alt="user3">
-                    </div>
-                    <div class="card-footer">
-                        <span>10 participations</span>
-                        <span>@username</span>
-                    </div>
-                </div>
-
-                
-
-                
             </div>
-    </div>
+        </div>
+    </section>
 
+    <!-- Impact Section -->
+    <section class="impact">
+        <div class="container">
+            <div class="badge-section">
+                <div class="badge-header">
+                    <div class="badge-title">
+                        <span class="badge">Relawan Pintar</span>
+                        <h2>More people<br>More impact</h2>
+                    </div>
+                    <div class="badge-description">
+                        <p>Kami sangat menghargai partisipasi para relawan, dengan EduVolunteer kamu mendapatkan apresiasi atas partisipasi kamu dengan <a href="#" class="link">Volunteer Badge</a>!</p>
+                        <a href="#" class="read-more">Baca selengkapnya</a>
+                    </div>
+                </div>
 
+                <div class="badge-levels">
+                    <div class="badge-card">
+                        <h3>Volunteer Badge</h3>
+                        <div class="badge-level">
+                            <div class="badge-icon bronze"></div>
+                            <div class="badge-info">
+                                <span class="badge-range">1-10</span>
+                                <span class="badge-type">Relawan <span class="badge-status">Pemula</span></span>
+                            </div>
+                        </div>
+                        <div class="badge-level">
+                            <div class="badge-icon silver"></div>
+                            <div class="badge-info">
+                                <span class="badge-range">11-30</span>
+                                <span class="badge-type">Relawan <span class="badge-status">Aktif</span></span>
+                            </div>
+                        </div>
+                        <div class="badge-level">
+                            <div class="badge-icon gold"></div>
+                            <div class="badge-info">
+                                <span class="badge-range">>30</span>
+                                <span class="badge-type">Relawan <span class="badge-status">Inspiratif</span></span>
+                            </div>
+                        </div>
+                        <p class="badge-note">Tingkatkan partisipasi kamu di EduVolunteer dan dapatkan badge dan keuntungan lainnya</p>
+                    </div>
 
-    
-</div>
+                    <div class="volunteer-profiles">
+                        <div class="volunteer-card pink">
+                            <img src="{{ asset('images/volunteer1.png') }}" alt="Volunteer">
+                            <div class="volunteer-info">
+                                <div class="participation">
+                                    <span class="participation-number">60</span>
+                                    <span class="participation-text">participations</span>
+                                </div>
+                                <span class="volunteer-username">@decaanr</span>
+                            </div>
+                        </div>
+                        <div class="volunteer-card blue">
+                            <img src="{{ asset('images/volunteer2.png') }}" alt="Volunteer">
+                            <div class="volunteer-info">
+                                <div class="participation">
+                                    <span class="participation-number">30</span>
+                                    <span class="participation-text">participations</span>
+                                </div>
+                                <span class="volunteer-username">@sitihaya</span>
+                            </div>
+                        </div>
+                        <div class="volunteer-card orange">
+                            <img src="{{ asset('images/volunteer3.png') }}" alt="Volunteer">
+                            <div class="volunteer-info">
+                                <div class="participation">
+                                    <span class="participation-number">10</span>
+                                    <span class="participation-text">participations</span>
+                                </div>
+                                <span class="volunteer-username">@username</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Community Section -->
+    <section class="community">
+        <div class="container">
+            <div class="community-content">
+                <div class="community-text">
+                    <span class="partnership-badge">Open Partnership (Mitra)</span>
+                    <h2>Bangun komunitas impian dengan platform yang tepat dan terpercaya!</h2>
+                    <a href="#" class="read-more-btn">Baca selengkapnya</a>
+                    
+                    <div class="feature-cards">
+                        <div class="feature-card">
+                            <div class="feature-icon community-icon">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+                                    <circle cx="9" cy="7" r="4"></circle>
+                                    <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+                                    <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+                                </svg>
+                            </div>
+                            <div class="feature-info">
+                                <h3>Komunitas Berkelanjutan</h3>
+                                <p>Sejalan dengan SDGs 4 yaitu Quality Education dan SDGs 10 Reduced Inequalities, kami hadir sebagai platform untuk para komunitas hebat.</p>
+                            </div>
+                        </div>
+                        <div class="feature-card">
+                            <div class="feature-icon global-icon">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <circle cx="12" cy="12" r="10"></circle>
+                                    <line x1="2" y1="12" x2="22" y2="12"></line>
+                                    <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path>
+                                </svg>
+                            </div>
+                            <div class="feature-info">
+                                <h3>Menjangkau Seluruh Daerah</h3>
+                                <p>Dengan adanya platform ini diharapkan bantuan pendidikan dapat kemana saja dengan komunitas yang tepat.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="community-images">
+                    <img src="{{ asset('images/community1.png') }}" alt="Community" class="community-img-1">
+                    <img src="{{ asset('images/community2.png') }}" alt="Community" class="community-img-2">
+                </div>
+            </div>
+        </div>
+    </section>
+
 @endsection
