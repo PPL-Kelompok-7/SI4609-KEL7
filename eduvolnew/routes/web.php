@@ -49,3 +49,7 @@ Route::get('pembayaran/berhasil', function () {
 Route::get('history-pembayaran', function () {
     return view('historypembayaran');
 })->name('history.pembayaran');
+
+Route::get('voucher', function () {
+    return view('voucherpengguna');
+})->name('voucherpengguna');
