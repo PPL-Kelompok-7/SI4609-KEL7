@@ -1,0 +1,149 @@
+body {
+  font-family: 'Segoe UI', sans-serif;
+  background-color: #4728f0; 
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  margin: 0;
+}
+
+.container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 50px;
+  width: 80%;
+}
+
+.logo img {
+  width: 200px;
+}
+
+.form-container {
+  text-align: center;
+  max-width: 400px;
+  width: 100%;
+}
+
+h2 {
+  font-size: 24px;
+  margin-bottom: 5px;
+}
+
+p {
+  font-size: 14px;
+  margin-bottom: 20px;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.input-group {
+  display: flex;
+  justify-content: space-between;
+  width: 106.5%;
+  gap: 10px; /* Tambahkan jarak antar input */
+}
+
+.input-group input {
+  width: calc(50% - 5px); /* Mengurangi sedikit lebar agar tidak terlalu rapat */
+}
+
+
+input {
+  width: 100%;
+  padding: 10px;
+  margin: 5px 0;
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  border-radius: 5px;
+  background-color: transparent;
+  color: white;
+  outline: none;
+}
+
+input::placeholder {
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.terms {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  width: 100%;
+  margin: 10px 0;
+}
+
+.terms input {
+  width: auto;
+  margin-right: 8px;
+}
+
+.terms label {
+  font-size: 14px;
+  color: white;
+}
+
+button {
+  width: 25%;
+  padding: 10px;
+  margin: 10px 0;
+  border: none;
+  background-color: #ddd;
+  color: black;
+  font-weight: bold;
+  border-radius: 30px;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #bbb;
+}
+
+a {
+  color: white;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.terms-container {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  align-items: center;
+  margin: 10px 0;
+}
+
+.forgot-password {
+  font-size: 11px;
+  color: white;
+  text-decoration: none;
+  white-space: nowrap; /* Tambahkan ini */
+}
+
+.forgot-password:hover {
+  text-decoration: underline;
+}
+
+/* Styling khusus untuk input type date agar icon-nya putih */
+input[type="date"]::-webkit-calendar-picker-indicator {
+  filter: invert(1);
+  cursor: pointer;
+}
+
+.btn-daftar {
+  color: #4728f0;
+}
+
+/* Placeholder styling untuk date-input */
+.date-input:invalid {
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.date-input:valid {
+  color: white;
+}
