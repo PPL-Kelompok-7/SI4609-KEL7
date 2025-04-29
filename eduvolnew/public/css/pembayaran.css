@@ -116,7 +116,7 @@ img {
   max-width: 1200px;
   margin: 30px auto;
   padding: 0 20px;
-  margin-top: 150px;
+  margin-top: 90px;
 }
 
 /* Payment Section */
@@ -315,7 +315,7 @@ img {
   display: flex;
   align-items: center;
   gap: 10px;
-  margin-top: 10px; /* tambahkan ini, bisa disesuaikan nilainya */
+  margin-top: 20px; /* tambahkan ini, bisa disesuaikan nilainya */
 }
 
 .info-icon {

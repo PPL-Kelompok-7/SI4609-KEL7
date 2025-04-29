@@ -18,7 +18,7 @@
 </head>
 <body>
     <!-- Navbar -->
-    <!-- <nav class="navbar">
+    <nav class="navbar">
         <div class="nav-container">
             <div class="nav-logo">
                 <img src="{{ asset('images/EDUVOL LOGO 1.png') }}" alt="EduVolunteer" class="logo">
@@ -44,7 +44,7 @@
                 </div>
             </div>
         </div>
-    </nav> -->
+    </nav>
 
     <!-- Main Content -->
     <div class="container">
@@ -130,7 +130,7 @@
     </div>
 
     <!-- Footer -->
-    <!-- <footer class="main-footer">
+    <footer class="main-footer">
         <div class="footer-content">
             <img src="{{ asset('images/eduvolunteer-white.svg') }}" alt="EduVolunteer" class="footer-logo">
             
@@ -145,7 +145,7 @@
                 </div>
             </div>
         </div>
-    </footer> -->
+    </footer>
 
     <!-- Scripts -->
     <script>

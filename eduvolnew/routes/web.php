@@ -39,3 +39,13 @@ Route::get('login', function () {
 Route::get('pembayaran', function () {
     return view('pembayaran');
 })->name('pembayaran');
+
+// Route untuk halaman pembayaran berhasil
+Route::get('pembayaran/berhasil', function () {
+    return view('pembayaran2');
+})->name('pembayaran.berhasil');
+
+// Route untuk halaman history pembayaran
+Route::get('history-pembayaran', function () {
+    return view('historypembayaran');
+})->name('history.pembayaran');
