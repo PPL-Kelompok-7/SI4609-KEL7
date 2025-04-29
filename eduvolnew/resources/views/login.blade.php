@@ -26,9 +26,23 @@
         <img src="{{ asset('logo1.png') }}" alt="Logo EDU Volunteer" class="logo-img" />
         <h2 class="welcome-text">Selamat Datang!</h2>
         <p>Mari Mulai Perjalananmu</p>
+        @if (session('success'))
+            <div class="alert alert-success">
+                {{ session('success') }}
+            </div>
+        @endif
+        @if ($errors->any())
+            <div class="alert alert-danger">
+                <ul>
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+        @endif
         <form id="loginForm" method="POST" action="{{ route('login') }}">
           @csrf
-          <input type="email" name="email" placeholder="Email" required />
+          <input type="email" name="email" value="{{ old('email') }}" placeholder="Email" required />
           <input type="password" name="password" placeholder="Kata Sandi" required />
           <div class="options">
             <label class="remember-me">
@@ -49,4 +63,4 @@
   <script src="{{ asset('script.js') }}"></script>
 </body>
 </html>
-</html>
+
