@@ -18,7 +18,7 @@
 </head>
 <body>
     <!-- Navbar -->
-    <nav class="navbar">
+    <!-- <nav class="navbar">
         <div class="nav-container">
             <div class="nav-logo">
                 <img src="{{ asset('images/EDUVOL LOGO 1.png') }}" alt="EduVolunteer" class="logo">
@@ -29,7 +29,7 @@
                 <a href="#" class="nav-link active">Agenda</a>
                 <a href="#" class="nav-link">Partner Kami</a>
                 <a href="#" class="nav-link">Relawan Kami</a>
-            </div>
+            </div> -->
             
             <div class="profile-section">
                 <button class="icon-button">
