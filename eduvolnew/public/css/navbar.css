@@ -1,0 +1,42 @@
+/* Logo */
+.navbar-brand .logo {
+    width: 130px;
+    height: auto;
+}
+
+/* Navbar background */
+.navbar {
+    background: #462FD8;
+    padding: 15px 40px;
+}
+
+/* Nav links */
+.nav-link {
+    color: #FFFFFF !important;
+    font-family: 'Inter', sans-serif;
+    font-size: 16px;
+    margin: 0 15px;
+}
+
+.nav-link.active {
+    color: #69FD8D !important;
+    font-weight: 700;
+}
+
+/* Sign Up / Log In button */
+.signup-button {
+    padding: 10px 25px;
+    background-color: #F0F0F0;
+    color: #000;
+    font-size: 16px;
+    font-weight: 500;
+    border-radius: 12px;
+    border: none;
+    transition: background-color 0.3s ease;
+    text-decoration: none;
+}
+
+.signup-button:hover {
+    background-color: #e0e0e0;
+}
+
