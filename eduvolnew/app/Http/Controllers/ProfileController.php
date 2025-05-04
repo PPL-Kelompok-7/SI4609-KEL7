@@ -32,54 +32,38 @@ class ProfileController extends Controller
                 'last_name' => 'required|string|max:100',
                 'profession' => 'required|string|max:100',
                 'domicile' => 'required|string|max:100',
-                'mobile_phone' => 'required|string|max:20',
+                'mobile_phone' => 'nullable|string|max:20',
                 'profile_photo' => 'nullable|image|mimes:jpeg,png,jpg|max:2048'
             ]);
 
             // Handle photo upload
             if ($request->hasFile('profile_photo')) {
-                $file = $request->file('profile_photo');
-                
-                // Log file information for debugging
-                \Log::info('Uploading profile photo', [
-                    'original_name' => $file->getClientOriginalName(),
-                    'mime_type' => $file->getMimeType(),
-                    'size' => $file->getSize()
-                ]);
-
-                try {
-                    // Delete old photo if exists
-                    if ($user->profile_photo && Storage::disk('public')->exists($user->profile_photo)) {
-                        Storage::disk('public')->delete($user->profile_photo);
-                    }
-
-                    // Generate unique filename
-                    $filename = 'profile-photos/' . uniqid('profile_') . '_' . time() . '.' . $file->getClientOriginalExtension();
-                    
-                    // Store file directly using Storage facade
-                    Storage::disk('public')->put($filename, file_get_contents($file));
-                    
-                    // Update the path in validated data
-                    $validated['profile_photo'] = $filename;
-
-                    // Log success
-                    \Log::info('Profile photo uploaded successfully', [
-                        'path' => $filename
-                    ]);
-                } catch (\Exception $e) {
-                    \Log::error('Failed to upload profile photo', [
-                        'error' => $e->getMessage(),
-                        'trace' => $e->getTraceAsString()
-                    ]);
-                    throw new \Exception('Gagal mengupload foto profil: ' . $e->getMessage());
+                // Delete old photo if exists
+                if ($user->profile_photo) {
+                    Storage::disk('public')->delete($user->profile_photo);
                 }
+
+                // Store the new photo
+                $path = $request->file('profile_photo')->store('profile-photos', 'public');
+                $validated['profile_photo'] = $path;
+
+                // Log success
+                Log::info('Profile photo uploaded successfully', [
+                    'user_id' => $user->id,
+                    'path' => $path
+                ]);
+            }
+
+            // Remove profile_photo from validated data if no new photo was uploaded
+            if (!$request->hasFile('profile_photo')) {
+                unset($validated['profile_photo']);
             }
 
             // Update user data
             $user->update($validated);
 
             // Log the successful update
-            \Log::info('Profile updated successfully', [
+            Log::info('Profile updated successfully', [
                 'user_id' => $user->id,
                 'updated_fields' => array_keys($validated)
             ]);
@@ -89,7 +73,7 @@ class ProfileController extends Controller
 
         } catch (\Exception $e) {
             // Log the error
-            \Log::error('Profile update failed', [
+            Log::error('Profile update failed', [
                 'error' => $e->getMessage(),
                 'trace' => $e->getTraceAsString()
             ]);
@@ -100,8 +84,7 @@ class ProfileController extends Controller
         }
     }
 
-    // Metode baru untuk mengubah password
-    public function changePassword(Request $request)
+    public function updatePassword(Request $request)
     {
         $request->validate([
             'current_password' => 'required',
@@ -122,27 +105,48 @@ class ProfileController extends Controller
             ->with('success', 'Password berhasil diubah');
     }
 
-    // Metode baru untuk mengubah email
-    public function changeEmail(Request $request)
+    public function updateAvatar(Request $request)
     {
-        $request->validate([
-            'new_email' => 'required|email|unique:users,email',
-            'password' => 'required',
-        ]);
+        try {
+            $request->validate([
+                'profile_photo' => 'required|image|mimes:jpeg,png,jpg|max:2048'
+            ]);
 
-        $user = Auth::user();
+            $user = Auth::user();
 
-        if (!Hash::check($request->password, $user->password)) {
-            return back()->withErrors(['password' => 'Password tidak sesuai']);
+            // Delete old photo if exists
+            if ($user->profile_photo) {
+                Storage::disk('public')->delete($user->profile_photo);
+            }
+
+            // Store the new photo
+            $path = $request->file('profile_photo')->store('profile-photos', 'public');
+
+            // Update user
+            $user->update(['profile_photo' => $path]);
+
+            // Log success
+            Log::info('Avatar updated successfully', [
+                'user_id' => $user->id,
+                'path' => $path
+            ]);
+
+            return response()->json([
+                'success' => true,
+                'message' => 'Foto profil berhasil diperbarui',
+                'path' => Storage::url($path)
+            ]);
+
+        } catch (\Exception $e) {
+            Log::error('Avatar update failed', [
+                'error' => $e->getMessage(),
+                'trace' => $e->getTraceAsString()
+            ]);
+
+            return response()->json([
+                'success' => false,
+                'message' => 'Gagal mengupload foto profil: ' . $e->getMessage()
+            ], 500);
         }
-
-        // Di sini bisa ditambahkan logika untuk mengirim email verifikasi
-        // ke alamat email baru sebelum benar-benar mengubah email
-
-        $user->email = $request->new_email;
-        $user->save();
-
-        return redirect()->route('profile')
-            ->with('success', 'Email berhasil diubah');
     }
 } 

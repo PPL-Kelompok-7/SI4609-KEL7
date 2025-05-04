@@ -5,10 +5,12 @@
     {{-- Profile Header --}}
     <div class="row d-flex align-items-center">
         <div class="col-auto">
-            <img src="{{ $user->profile_photo ? asset('storage/' . $user->profile_photo) : asset('profile1.png') }}" 
-                 alt="Foto Profil" 
-                 class="profile-header-photo"
-                 style="width: 150px; height: 150px; object-fit: cover; border-radius: 50%;">
+            <div class="position-relative">
+                <img src="{{ $user->profile_photo ? Storage::url($user->profile_photo) : asset('profile1.png') }}" 
+                     alt="Foto Profil" 
+                     class="profile-header-photo"
+                     style="width: 150px; height: 150px; object-fit: cover; border-radius: 50%;">
+            </div>
         </div>
         <div class="col-auto">
             <div class="d-flex flex-column gap-2 mt-3">
@@ -81,7 +83,7 @@
             </div>
         </div>
 
-        {{-- Review (sementara kosong) --}}
+        {{-- Review --}}
         <div class="tab-pane fade" id="review" role="tabpanel" aria-labelledby="review-tab">
             <p class="text-white px-3">Belum ada review.</p>
         </div>
@@ -93,6 +95,17 @@
             </div>
         </div>
     </div>
+</div>
 
-</div> {{-- end container --}}
+@push('scripts')
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Refresh halaman setelah kembali dari edit profile
+    if (performance.navigation.type === 2) {
+        location.reload(true);
+    }
+});
+</script>
+@endpush
+
 @endsection 

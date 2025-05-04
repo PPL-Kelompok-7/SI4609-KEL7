@@ -29,7 +29,7 @@
 
         <!-- Grup kanan: Sign Up -->
         <div>
-            <a href="#" class="btn signup-button">Sign Up/Log In</a>
+            <a href="{{ route('login') }}" class="btn signup-button">Sign Up/Log In</a>
         </div>
     </div>
 </nav>

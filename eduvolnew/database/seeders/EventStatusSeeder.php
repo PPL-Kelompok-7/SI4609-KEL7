@@ -14,6 +14,8 @@ class EventStatusSeeder extends Seeder
     public function run(): void
     {
         $statuses = [
+            ['name' => 'Belum dikonfirmasi'],
+            ['name' => 'Sudah dikonfirmasi'],
             ['name' => 'Draft'],
             ['name' => 'Published'],
             ['name' => 'Ongoing'],
