@@ -1,0 +1,220 @@
+body {
+    margin: 0;
+    padding: 0;
+    background-color: #e625c0;
+    font-family: 'Arial', sans-serif;
+}
+
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+
+.form-card {
+    background: #f6f6f6;
+    padding: 2rem;
+    border-radius: 20px;
+    width: 400px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.form-card h1 {
+    text-align: center;
+    font-size: 1.5rem;
+    margin-bottom: 0.5rem;
+}
+
+.form-card p {
+    text-align: center;
+    font-size: 0.9rem;
+    color: #555;
+    margin-bottom: 1.5rem;
+}
+
+label {
+    display: block;
+    margin-bottom: 0.3rem;
+    /* font-weight: bold; */
+}
+
+input[type="text"],
+input[type="date"],
+input[type="time"],
+input[type="number"],
+textarea {
+    width: 100%;
+    padding: 0.5rem;
+    margin-bottom: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    font-size: 0.9rem;
+}
+
+.date-group {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 1rem;
+}
+
+.date-group label {
+    width: 120px;
+    /* font-weight: bold; */
+    margin-bottom: 0;
+}
+
+.date-group input[type="date"] {
+    flex: 1;
+    margin-bottom: 0;
+}
+
+.time-group {
+    display: flex;
+    justify-content: space-between;
+    gap: 2rem;
+    margin-bottom: 1rem;
+}
+
+.time-group > div {
+    flex: 1;
+}
+
+.volunteer-group {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 1rem;
+}
+
+.volunteer-group label {
+    width: 180px;
+    /* font-weight: bold; */
+    margin-bottom: 0;
+}
+
+.volunteer-need {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.volunteer-need input[type="number"] {
+    width: 60px; /* Lebar input diperkecil agar lebih kompak */
+    height: 30px; /* Menjaga tinggi input tetap seragam dengan tombol */
+    text-align: center;
+    font-size: 1rem;
+    border-radius: 8px;
+}
+
+.volunteer-need button {
+    width: 30px;
+    height: 30px;
+    background-color: #000;
+    color: #fff;
+    border: none;
+    border-radius: 50%;
+    font-size: 1.5rem;
+    /* font-weight: bold; */
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+textarea {
+    resize: none;
+}
+
+.ticket-input {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 1rem;
+}
+
+.ticket-input label {
+    width: 180px;
+    /* font-weight: bold; */
+    margin-bottom: 0;
+}
+
+.ticket-field {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    flex: 1;
+}
+
+.ticket-field span {
+    background: #eee;
+    padding: 0.5rem;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    width: 50px;
+    text-align: center;
+}
+
+.ticket-field input {
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    padding: 0.5rem;
+    flex: 1;
+}
+
+.upload-btn {
+    display: block;
+    background: #d9d9d9;
+    color: #2E2564;
+    text-align: center;
+    padding: 1rem;
+    border-radius: 10px;
+    cursor: pointer;
+    margin-bottom: 1rem;
+    /* font-weight: bold; */
+}
+
+.checkbox-group {
+    display: flex;
+    align-items: flex-start;
+    margin-bottom: 1rem;
+}
+
+.checkbox-group input[type="checkbox"] {
+    margin-right: 0.5rem;
+    margin-top: 0.2rem;
+}
+
+.checkbox-group a {
+    font-weight: bold;
+    color: #0E100F;
+    text-decoration: underline;
+}
+
+.button-group {
+    display: flex;
+    justify-content: center; /* Memusatkan tombol secara horizontal */
+    gap: 1rem; /* Memberikan jarak antara tombol "Batal" dan "Daftarkan Event" */
+    margin-top: 1rem; /* Menambahkan jarak atas untuk memperjelas pemisahan dari elemen lainnya */
+}
+
+.cancel-btn,
+.submit-btn {
+    padding: 0.8rem 1.5rem; /* Lebar tombol sedikit lebih besar untuk estetika */
+    border-radius: 50px;
+    font-weight: bold;
+}
+
+.cancel-btn {
+    background: #ccc;
+    border: none;
+    cursor: pointer;
+}
+
+.submit-btn {
+    background: #000;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+}

@@ -16,6 +16,15 @@
             <p>Silahkan isi data untuk registrasi</p>
             <form action="{{ route('register') }}" method="POST">
                 @csrf
+                @if ($errors->any())
+                    <div class="alert alert-danger">
+                        <ul>
+                            @foreach ($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                @endif
                 <div class="input-group">
                     <input type="text" name="first_name" placeholder="Nama Depan" value="{{ old('first_name') }}" required>
                     <input type="text" name="last_name" placeholder="Nama Belakang" value="{{ old('last_name') }}" required>
@@ -27,11 +36,12 @@
                 <input type="text" name="domicile" placeholder="Domisili" value="{{ old('domicile') }}" required>
                 <input type="email" name="email" placeholder="Email (halo@mail.com)" value="{{ old('email') }}" required>
                 <input type="password" name="password" placeholder="Password" required>
+                <input type="password" name="password_confirmation" placeholder="Konfirmasi Password" required>
                 
                 <div class="terms-container">
                     <div class="terms">
-                        <input type="checkbox" id="terms" name="terms" required>
-                        <label for="terms">Saya menyetujui syarat dan ketentuan</label>
+                        <input type="checkbox" id="terms_agreed" name="terms_agreed" required>
+                        <label for="terms_agreed">Saya menyetujui syarat dan ketentuan</label>
                     </div>
                     <!-- Placeholder atau nonaktifkan dulu -->
                     <a href="#" class="forgot-password">Lupa kata sandi?</a>

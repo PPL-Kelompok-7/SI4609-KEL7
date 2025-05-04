@@ -19,21 +19,22 @@
         </div>
 
         <div class="voucher-container">
-            <div class="voucher-card green">
-                <div class="voucher-content">
-                    <div class="voucher-title">POTONGAN 50%<br/>UNTUK EVENT</div>
-                    <div class="voucher-validity">Valid sampai : 22/04/2025</div>
-                    <button class="voucher-button disabled">Milestone Belum Mencukupi</button>
+            @foreach($vouchers as $voucher)
+                <div class="voucher-card {{ $voucher->discount_amount >= 50 ? 'green' : 'pink' }}">
+                    <div class="voucher-content">
+                        <div class="voucher-title">
+                            {{ strtoupper($voucher->code) }}<br/>
+                            POTONGAN {{ $voucher->discount_amount }}% UNTUK EVENT
+                        </div>
+                        <div class="voucher-validity">
+                            Valid sampai : {{ $voucher->valid_until ? $voucher->valid_until->format('d/m/Y') : '-' }}
+                        </div>
+                        <button class="voucher-button {{ $voucher->is_active ? '' : 'disabled' }}">
+                            {{ $voucher->is_active ? 'Gunakan Voucher' : 'Tidak Aktif' }}
+                        </button>
+                    </div>
                 </div>
-            </div>
-
-            <div class="voucher-card pink">
-                <div class="voucher-content">
-                    <div class="voucher-title">FREE 1x TICKET EVENT<br/>VOLUNTEER DI JABAR</div>
-                    <div class="voucher-validity">Valid sampai : 04/06/2025</div>
-                    <button class="voucher-button">Gunakan Voucher</button>
-                </div>
-            </div>
+            @endforeach
         </div>
 
         <div class="table-container">
