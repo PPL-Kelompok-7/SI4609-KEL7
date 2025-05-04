@@ -1,0 +1,253 @@
+body {
+    background-color: #4E36E9;
+    font-family: 'Arial', sans-serif;
+    color: white;
+    margin: 0;
+    padding: 0;
+}
+
+.event-detail-container {
+    padding: 30px 50px;
+}
+
+.breadcrumb {
+    font-size: 14px;
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.breadcrumb a {
+    color: white;
+    text-decoration: none;
+    margin-right: 8px;
+}
+.breadcrumb span {
+    font-weight: bold;
+}
+
+.breadcrumb a::after {
+    content: ">";
+    margin-left: 8px;
+    margin-right: 2px;
+    color: white;
+}
+
+.breadcrumb span::before {
+    content: "";
+    margin-left: 2px;
+}
+
+.event-detail-wrapper {
+    display: flex;
+    gap: 30px;
+}
+
+.event-main {
+    flex: 3;
+}
+
+.banner-wrapper {
+    position: relative;
+    display: inline-block;
+    width: 100%;
+}
+
+.logo-circle {
+    position: absolute;
+    top: 14px;
+    left: 14px;
+    width: 60px;
+    height: 60px;
+    background-color: white;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 10;
+}
+
+.event-banner {
+    width: 100%;
+    height: 380px;
+    object-fit: cover;
+    border-radius: 16px;
+    margin-bottom: 20px;
+    display: block;
+}
+
+.tab-menu {
+    display: flex;
+    gap: 20px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.tab-menu span {
+    cursor: pointer;
+    border-bottom: 3px solid transparent;
+    padding-bottom: 5px;
+}
+
+.tab-menu .active {
+    border-bottom: 3px solid white;
+}
+
+.divider {
+    border: none;
+    border-top: 1px solid #ccc;
+    margin: 20px 0;
+}
+
+.event-description p {
+    margin-bottom: 10px;
+    line-height: 1.6;
+}
+
+.event-sidebar {
+    flex: 1.2;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.event-card,
+.event-price-card {
+    background-color: white;
+    color: #2E2564;
+    padding: 20px;
+    border-radius: 16px;
+}
+
+.event-card h3 {
+    margin-top: 0;
+    font-size: 18px;
+}
+
+.event-info {
+    list-style: none;
+    padding: 0;
+    margin: 10px 0;
+    color: #2E2564;
+}
+
+.event-info li {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.event-info img {
+    width: 24px;
+    margin-right: 14px;
+}
+
+.event-host {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-top: 20px;
+}
+
+.event-host-text {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    color: #2E2564;
+}
+
+.event-host-text p {
+    margin: 0;
+    line-height: 1.5;
+}
+
+.host-label {
+    margin: 0;
+    font-size: 14px;
+    color: #999;
+    font-weight: normal;
+}
+
+.event-host img {
+    margin-top: 0;
+}
+
+.event-price-card .task-icon {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.task-icon p {
+    margin: 0;
+    line-height: 1.4;
+    color: #2E2564;
+}
+
+.task-icon img {
+    width: 42px;
+}
+
+.price-tag {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.price-tag p {
+    margin: 0;
+    font-size: 16px;
+    color: #2E2564;
+}
+
+.price-tag strong {
+    font-size: 18px;
+}
+
+.btn-join {
+    background-color: #69FD8D;
+    border: none;
+    color: #4E36E9;
+    padding: 12px 40px;
+    border-radius: 12px;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 16px;
+    margin-top: 10px;
+    align-self: center;
+    width: 100%;
+    max-width: 300px;
+    text-align: center;
+}
+
+/* Styling untuk tab dan konten Deskripsi / Syarat */
+.event-description {
+    display: none;
+}
+
+#tab-deskripsi {
+    display: block;
+}
+
+/* Footer */
+/* 
+footer.footer {
+    background-color: #000;
+    display: flex;
+    justify-content: space-between;
+    padding: 20px 50px;
+    margin-top: 50px;
+}
+
+.footer-right .btn-start {
+    background-color: #00ff7f;
+    color: black;
+    padding: 10px 20px;
+    border-radius: 12px;
+    text-decoration: none;
+    font-weight: bold;
+}
+*/

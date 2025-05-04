@@ -1,0 +1,219 @@
+body {
+    margin: 0;
+    font-family: 'Poppins', sans-serif;
+    background-color: #4E36E9;
+    color: white;
+}
+
+.container {
+    padding: 40px 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+h2 {
+    text-align: center;
+    font-size: 28px;
+    line-height: 1.4;
+    margin-bottom: 40px;
+}
+
+h2 span {
+    font-weight: normal;
+}
+
+h2 strong {
+    color: #38E25D;
+}
+
+/* Grid 2 kolom */
+.event-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 24px;
+}
+
+/* Responsif: 1 kolom di layar kecil */
+@media (max-width: 768px) {
+    .event-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* CARD lebih persegi dan sedikit memanjang ke bawah */
+.card {
+    background-color: transparent;
+    border-radius: 12px;
+    overflow: hidden;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    box-shadow: none;
+    border: none;
+    height: 380px; /* Memanjang sedikit ke bawah */
+    position: relative; /* Dibutuhkan untuk posisi absolute logo di pojok kiri */
+}
+
+/* Gambar event menjadi lebih persegi, sedikit lebih tinggi */
+.event-image {
+    width: 100%;
+    height: 270px; /* Memanjang sedikit ke bawah */
+    object-fit: cover;
+    border-radius: 12px;
+}
+
+/* Logo di pojok kiri atas */
+.logo-circle {
+    position: absolute;
+    top: 14px;
+    left: 14px;
+    width: 60px;
+    height: 60px;
+    background-color: white;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 10; /* Agar logo berada di atas gambar event */
+}
+
+/* Konten kartu */
+.card-content {
+    padding: 16px;
+    display: flex; /* Menggunakan flexbox untuk menata konten */
+    flex-direction: row; /* Tombol dan judul berada dalam satu baris */
+    justify-content: space-between; /* Menyusun tombol kiri dan konten kanan */
+    align-items: center; /* Menjaga agar elemen sejajar secara vertikal */
+    gap: 16px;
+    height: 100%;
+}
+
+/* Detail konten di kanan tombol */
+.card-details {
+    display: flex;
+    flex-direction: column;
+    gap: 12px; /* Tambah jarak antara judul dan info */
+    align-items: flex-end; /* === DITAMBAH agar konten judul & info rata kanan === */
+    text-align: right; /* === Tambahan agar teks judul dan info rata kanan === */
+}
+
+/* Tombol ikut partisipasi */
+.participate-btn {
+    background-color: #69FD8D;
+    border: 2px solid white;
+    color: #4E36E9;
+    padding: 8px 16px;
+    border-radius: 12px;
+    font-weight: bold;
+    cursor: pointer;
+    align-self: center;
+    margin-top: 0;
+    font-size: 14px;
+    min-width: 160px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 17px;
+    text-align: center;
+    text-decoration: none;
+}
+
+/* Judul event */
+.card h3 {
+    font-size: 16px;
+    margin: 0;
+    color: white;
+    line-height: 1.5;
+    text-align: right; /* === DITAMBAH agar judul rata kanan === */
+}
+
+/* Info harga dan tanggal */
+.event-info {
+    display: flex;
+    justify-content: flex-end; /* === DITAMBAH agar info rata kanan === */
+    gap: 20px;
+    font-size: 16px;
+    color: white;
+    width: 100%;
+}
+
+/* Layout info item */
+.event-info .info {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+/* Icon jadi putih */
+.event-info img {
+    width: 25px;
+    height: 25px;
+    filter: brightness(0) invert(1);
+}
+
+
+/*FOOTER
+.footer {
+    margin-top: 60px;
+    background-color: #111;
+    padding: 40px;
+    border-radius: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+/* Bagian kiri footer */
+/* .footer-left {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+} */
+
+/* Logo EduVolunteer lebih besar */
+/* .eduv-logo {
+    width: 100px; ukuran logo 
+    height: auto;
+} */
+
+/* Konten teks (Lokasi dan Nomor Telepon) */
+/* .contact-info {
+    display: flex;
+    flex-direction: column;
+    gap: 10px; jarak bandung no telp
+} */
+
+/* Menata lokasi */
+/* .location,
+.phone {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 14px;
+} */
+
+/* Ukuran ikon */
+/* .contact-info img {
+    width: 16px;
+    height: 16px;
+} */
+
+/* Menata teks */
+/* .footer-left p {
+    margin: 0;
+    font-size: 14px;
+} */
+
+/* Tombol Mulai perjalanan */
+/* .start-btn {
+    background-color: #38E25D;
+    border: none;
+    color: #4B2EFF;
+    padding: 12px 20px;
+    border-radius: 12px;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+} */
