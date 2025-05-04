@@ -27,6 +27,9 @@
                             <path d="M5 12h14M12 5l7 7-7 7"></path>
                         </svg>
                     </a>
+                    <a href="{{ route('login') }}">
+                        <button class="btn-login">Sign Up/Log In</button>
+                    </a>
                 </div>
                 <div class="hero-image">
                     <img src="{{ asset('images/volunteer-group.png') }}" alt="Volunteers">
