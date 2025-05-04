@@ -7,10 +7,34 @@
     <link rel="stylesheet" href="{{ asset('css/event-detail.css') }}">
 </head>
 <body>
-    <div class="event-detail-container">
+    <nav class="navbar-eduv" style="background:#462FD8;display:flex;align-items:center;justify-content:space-between;padding:0 60px;height:70px;position:fixed;top:0;left:0;right:0;z-index:1000;">
+    <div style="display:flex;align-items:center;gap:32px;">
+            <img src="{{ asset('images/EDUVOL LOGO 1.png') }}" alt="EDU Volunteer" style="height:45px;margin-top:10px;margin: bottom 10px;">
+        </div>
+        <div style="display:flex;align-items:center;gap:56px;flex:1;justify-content:center;">
+            <a href="#" style="color:white;text-decoration:none;font-size:15px;font-weight:bold;">Beranda</a>
+            <a href="{{ url('/events') }}" style="color:#38E25D;text-decoration:none;font-size:15px;font-weight:bold;">Agenda</a>
+            <a href="#" style="color:white;text-decoration:none;font-size:15px;font-weight:bold;">Partner Kami</a>
+            <a href="#" style="color:white;text-decoration:none;font-size:15px;font-weight:bold;">Relawan Kami</a>
+        </div>
+        <div style="display:flex;align-items:center;gap:24px;">
+            <img src="{{ asset('images/activity.png') }}" alt="Task" style="height:28px;">
+            <img src="{{ asset('images/notification.png') }}" alt="Notifikasi" style="height:28px;">
+            @auth
+                <a href="{{ url('/profile') }}" style="display:flex;align-items:center;text-decoration:none;">
+                    <img src="{{ Auth::user()->profile_photo ? asset('storage/' . Auth::user()->profile_photo) : asset('profile1.png') }}" alt="Profil" style="height:38px;width:38px;border-radius:50%;object-fit:cover;border:2px solid #4E36E9;">
+                    <span style="color:white;font-size:16px;margin-left:6px;">{{ Auth::user()->first_name }}</span>
+                </a>
+            @else
+                <img src="{{ asset('profile1.png') }}" alt="Profil" style="height:38px;width:38px;border-radius:50%;object-fit:cover;">
+                <span style="color:white;font-size:16px;margin-left:6px;">Profil</span>
+            @endauth
+        </div>
+    </nav>
+    <div class="event-detail-container" style="padding-top:90px;">
         <div class="breadcrumb">
             <a href="#">Beranda</a>
-            <a href="#">Agenda</a> 
+            <a href="{{ url('/events') }}">Agenda</a> 
             <span>Detail Event</span>
         </div>
 
@@ -20,7 +44,7 @@
                     <div class="logo-circle">
                         <img src="{{ asset('images/logo-telkom-schools.png') }}" alt="Logo" style="width: 30px; height: 40px;">
                     </div>
-                    <img src="{{ asset('images/ngajar-ngoding.jpg') }}" alt="Ngajar Ngoding" class="event-banner">
+                    <img src="{{ $event->event_photo ? asset('storage/'.$event->event_photo) : asset('images/ngajar-ngoding.jpg') }}" alt="Event Banner" class="event-banner">
                 </div>
                 <div class="tab-menu">
                     <span class="active">Deskripsi</span>
@@ -30,30 +54,22 @@
 
                 <!-- Deskripsi -->
                 <div class="event-description" id="tab-deskripsi">
-                    <p>Ngajar Ngoding adalah kegiatan relawan yang bertujuan untuk memberikan edukasi pemrograman kepada siswa SMK Telkom. Dalam kegiatan ini, para relawan akan mengajarkan konsep dasar coding, seperti algoritma, logika pemrograman, serta praktik menggunakan bahasa pemrograman seperti HTML, CSS, JavaScript, atau Python.</p>
-                    <p>Kegiatan ini dirancang untuk membantu siswa mengembangkan keterampilan teknologi yang relevan dengan dunia industri, meningkatkan pemahaman mereka tentang pemrograman, serta mendorong kreativitas dan pemecahan masalah melalui coding. Dengan metode pembelajaran interaktif dan praktik langsung, siswa akan mendapatkan pengalaman nyata dalam mengembangkan proyek digital sederhana.</p>
-                    <p>Ngajar Ngoding tidak hanya memberikan wawasan baru, tetapi juga menjadi ajang berbagi dan kolaborasi antara relawan dan siswa, membangun semangat belajar, serta mempersiapkan generasi muda untuk menghadapi tantangan dunia digital.</p>
+                    {!! nl2br(e($event->description)) !!}
                 </div>
 
                 <!-- Syarat & Ketentuan -->
                 <div class="event-description" id="tab-syarat" style="display: none;">
-                    <ul>
-                        <li>Peserta merupakan pelajar atau umum yang memiliki minat dalam bidang pemrograman.</li>
-                        <li>Wajib membawa laptop pribadi saat kegiatan berlangsung.</li>
-                        <li>Mengisi form registrasi dan melakukan pembayaran sebelum tenggat waktu.</li>
-                        <li>Menjaga ketertiban dan mengikuti arahan dari panitia selama kegiatan berlangsung.</li>
-                        <li>Tiket yang telah dibeli tidak dapat diuangkan kembali (non-refundable).</li>
-                    </ul>
+                    {!! nl2br(e($event->terms)) !!}
                 </div>
             </div>
 
             <div class="event-sidebar">
                 <div class="event-card">
-                    <h3>Ngajar Ngoding Selasa #6<br>Dasar Bahasa Pemrograman PHP</h3>
+                    <h3>{{ $event->title }}</h3>
                     <ul class="event-info">
-                        <li><img src="{{ asset('images/calendar.png') }}" alt=""> 22 Oktober 2025</li>
-                        <li><img src="{{ asset('images/time.png') }}" alt=""> 09:00 - 14:00</li>
-                        <li><img src="{{ asset('images/location1.png') }}" alt=""> Ruangan Multimedia SMK Telkom Bandung</li>
+                        <li><img src="{{ asset('images/calendar.png') }}" alt=""> {{ $tanggal }}</li>
+                        <li><img src="{{ asset('images/time.png') }}" alt=""> {{ $jam }}</li>
+                        <li><img src="{{ asset('images/location1.png') }}" alt=""> {{ $event->location }}</li>
                     </ul>
                     <hr class="divider"> <!-- Garis pemisah ditambahkan di sini -->
                     <div class="event-host">
@@ -68,12 +84,12 @@
                 <div class="event-price-card">
                     <div class="task-icon">
                         <img src="{{ asset('images/tickets.png') }}" alt="">
-                        <p>Kamu belum memilih tiket.<br>Silakan klik “ikut partisipasi” jika kamu tertarik!</p>
+                        <p>Kamu belum memilih tiket.<br>Silakan klik "ikut partisipasi" jika kamu tertarik!</p>
                     </div>
                     <hr class="divider"> <!-- Garis pemisah ditambahkan di sini -->
                     <div class="price-tag">
                         <p>Harga</p>
-                        <strong>Rp210.000</strong>
+                        <strong>{{ $harga }}</strong>
                     </div>
                     <button class="btn-join">Ikut Partisipasi</button>
                 </div>
@@ -81,19 +97,23 @@
         </div>
 
         <!-- Footer -->
-        <!-- <footer class="footer">
-            <div class="footer-left">
-                <img src="{{ asset('images/edu-logo.png') }}" alt="Edu Volunteer">
+        <footer class="footer" style="background:#000; color:white; display:flex; justify-content:space-between; align-items:center; padding:20px 60px; position:fixed; left:0; right:0; bottom:0; z-index:1000;">
+            <div style="display:flex; align-items:center; gap:16px;">
+                <img src="{{ asset('images/EDUVOL LOGO 1.png') }}" alt="Logo EduVolunteer" style="height:40px;">
+                <div style="margin-left:175px;">
+                    <div style="display:flex; align-items:center; gap:8px;">
+                        <img src="{{ asset('images/location.png') }}" alt="Location Icon" style="height:18px;">
+                        <span>Bandung, Indonesia</span>
+                    </div>
+                    <div style="display:flex; align-items:center; gap:8px;">
+                        <img src="{{ asset('images/viber.png') }}" alt="Phone Icon" style="height:18px;">
+                        <span>0821-1234-5678</span>
+                    </div>
+                </div>
             </div>
-            <div class="footer-mid">
-                <p>📍 Bandung, Indonesia</p>
-                <p>📞 0821-1234-5678</p>
-            </div>
-            <div class="footer-right">
-                <a href="#" class="btn-start">🌱 Mulai Perjalananmu</a>
-            </div>
+            <button class="start-btn" style="background:#69FD8D; color:#000; border:none; border-radius:25px; padding:12px 32px; font-weight:700px; font-size:16px; cursor:pointer;">Mulai Perjalananmu</button>
         </footer>
-    </div> -->
+    </div>
 
     <script>
         const tabDeskripsi = document.querySelector('.tab-menu span:nth-child(1)');

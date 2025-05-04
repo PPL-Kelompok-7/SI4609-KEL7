@@ -13,14 +13,14 @@
         </div>
         <div class="right">
             <h1>
-                Event Kamu <span class="highlight">"Belajar Coding Dasar 101"</span> <br>
+                Event Kamu <span class="highlight">"{{ $eventTitle }}"</span> <br>
                 telah terdaftar!
             </h1>
             <p class="desc">
                 Harap menunggu konfirmasi admin dengan <br>
                 waktu pengerjaan paling lambat 24 jam
             </p>
-            <button class="btn">Lihat Event Saya</button>
+            <a href="{{ url('/posting-event') }}" class="btn" style="text-decoration:none;display:inline-block;">Lihat Event Saya</a>
         </div>
     </div>
 </body>

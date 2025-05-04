@@ -7,8 +7,21 @@
     <link rel="stylesheet" href="{{ asset('css/formposting-event.css') }}">
 </head>
 <body>
+    @if ($errors->any())
+        <div class="alert alert-danger">
+            <ul>
+                @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
+    @endif
+    @if(session('success'))
+        <div class="alert alert-success">{{ session('success') }}</div>
+    @endif
     <div class="container">
-        <form class="form-card">
+        <form class="form-card" action="{{ route('events.store') }}" method="POST" enctype="multipart/form-data">
+            @csrf
             <h1>Daftarkan Event Anda!</h1>
             <p>Silahkan isi data untuk kegiatan volunteer Anda</p>
 
@@ -40,6 +53,9 @@
                 </div>
             </div>
 
+            <label>Lokasi Event :</label>
+            <input type="text" name="lokasi" required>
+
             <label>Deskripsi Event</label>
             <textarea name="deskripsi_event" rows="4" required></textarea>
 
@@ -60,7 +76,7 @@
             </label>
 
             <div class="checkbox-group">
-                <input type="checkbox" id="agreement" required>
+                <input type="checkbox" id="agreement" name="agreement" required>
                 <label for="agreement">
                     Saya sudah membaca dan menyetujui 
                     <a href="#">syarat dan ketentuan</a> untuk mendaftarkan event di platform EduVolunteer.

@@ -32,7 +32,7 @@
 
         <!-- Tombol Tambah Event -->
         <div class="add-event-container">
-            <button class="add-event-btn">Tambah Event</button>
+            <a href="{{ url('/formposting-event') }}" class="add-event-btn" style="text-decoration:none;display:inline-block;">Tambah Event</a>
         </div>
 
         <table class="event-table">
@@ -45,10 +45,15 @@
                 </tr>
             </thead>
             <tbody>
+                @foreach($events as $event)
                 <tr>
                     <td><span class="dot coming-soon"></span></td>
-                    <td>Ngajar Ngoding Selasa #6 Dasar Bahasa Pemrograman PHP</td>
-                    <td><span class="confirmation pending">Belum Dikonfirmasi</span></td> <!-- Tambahan -->
+                    <td>{{ $event->title }}</td>
+                    <td>
+                        <span class="confirmation pending">
+                            {{ $event->status_id == 1 ? 'Belum Dikonfirmasi' : 'Sudah Dikonfirmasi' }}
+                        </span>
+                    </td>
                     <td>
                         <button class="detail-btn">
                             <span class="icon-eye">👁</span>
@@ -56,17 +61,7 @@
                         </button>
                     </td>
                 </tr>
-                <!-- <tr>
-                    <td><span class="dot ended"></span></td>
-                    <td>Ngajar Ngoding Selasa #2</td> -->
-                    <!-- <td><span class="confirmation pending">Belum Dikonfirmasi</span></td> Tambahan
-                    <td>
-                        <button class="detail-btn">
-                            <span class="icon-eye">👁</span>
-                            <span>Lihat Detail Event</span>
-                        </button>
-                    </td>
-                </tr> -->
+                @endforeach
             </tbody>
         </table>
     </div>

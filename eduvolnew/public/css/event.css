@@ -106,10 +106,16 @@ h2 strong {
     border-radius: 12px;
     font-weight: bold;
     cursor: pointer;
-    align-self: center; /* Tombol sejajar dengan konten */
+    align-self: center;
     margin-top: 0;
     font-size: 14px;
-    min-width: 160px; /* Lebar tombol lebih ideal */
+    min-width: 160px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 17px;
+    text-align: center;
+    text-decoration: none;
 }
 
 /* Judul event */
@@ -144,6 +150,7 @@ h2 strong {
     height: 25px;
     filter: brightness(0) invert(1);
 }
+
 
 /*FOOTER
 .footer {
