@@ -48,3 +48,10 @@ Route::get('voucher', function () {
     return view('voucherpengguna');
 })->name('voucherpengguna');
 
+Route::get('daftarrelawan', function () {
+    return view('daftarrelawan');
+})->name('daftarrelawan');
+
+Route::get('historykegiatan', function () {
+    return view('historykegiatan');
+})->name('historykegiatan');
