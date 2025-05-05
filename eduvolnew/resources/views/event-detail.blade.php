@@ -102,7 +102,7 @@
                 <img src="{{ asset('images/EDUVOL LOGO 1.png') }}" alt="Logo EduVolunteer" style="height:40px;">
                 <div style="margin-left:175px;">
                     <div style="display:flex; align-items:center; gap:8px;">
-                        <img src="{{ asset('images/location.png') }}" alt="Location Icon" style="height:18px;">
+                        <img src="{{ asset('images/locationputih.png') }}" alt="Location Icon" style="height:18px;">
                         <span>Bandung, Indonesia</span>
                     </div>
                     <div style="display:flex; align-items:center; gap:8px;">
