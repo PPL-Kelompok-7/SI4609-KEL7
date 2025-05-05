@@ -30,10 +30,12 @@
                         </div>
                         <form action="{{ route('payments.uploadProof', $payment->id) }}" method="POST" enctype="multipart/form-data">
                             @csrf
-                            <div class="upload-button">
+                            <label class="upload-button">
+                                <span class="plus-icon">+</span>
+                                <span>Pilih Foto Bukti Bayar (jpg max.10mb)</span>
                                 <input type="file" name="proof_of_payment" accept="image/jpeg,image/png" required>
-                            </div>
-                            <button type="submit" class="check-status-btn">Upload Bukti Bayar</button>
+                            </label>
+                            <button type="submit" class="check-status-btn">Cek Status Pembayaran</button>
                         </form>
                         @if($payment && $payment->proof_of_payment)
                             <div class="mt-2">
