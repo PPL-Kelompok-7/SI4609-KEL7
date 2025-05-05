@@ -44,7 +44,7 @@
                     <div class="logo-circle">
                         <img src="{{ asset('images/logo-telkom-schools.png') }}" alt="Logo" style="width: 30px; height: 40px;">
                     </div>
-                    <img src="{{ $event->event_photo ? asset('storage/'.$event->event_photo) : asset('images/ngajar-ngoding.jpg') }}" alt="Event Banner" class="event-banner">
+                    <img src="{{ asset($event['image']) }}" alt="Event Banner" class="event-banner">
                 </div>
                 <div class="tab-menu">
                     <span class="active">Deskripsi</span>
@@ -91,7 +91,7 @@
                         <p>Harga</p>
                         <strong>{{ $harga }}</strong>
                     </div>
-                    <button class="btn-join">Ikut Partisipasi</button>
+                    <button class="btn-join" onclick="window.location.href='{{ url('/daftarrelawan/'.$event->id) }}'">Ikut Partisipasi</button>
                 </div>
             </div>
         </div>

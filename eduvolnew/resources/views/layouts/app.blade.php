@@ -137,7 +137,7 @@
                         <a class="nav-link {{ Request::routeIs('home') ? 'active' : '' }}" href="{{ route('home') }}">Beranda</a>
                     </li>
                     <li class="nav-item mx-3">
-                        <a class="nav-link {{ Request::routeIs('agenda') ? 'active' : '' }}" href="{{ route('agenda') }}">Agenda</a>
+                        <a class="nav-link {{ Request::routeIs('events.index') ? 'active' : '' }}" href="{{ route('events.index') }}">Agenda</a>
                     </li>
                     <li class="nav-item mx-3">
                         <a class="nav-link {{ Request::routeIs('partners') ? 'active' : '' }}" href="{{ route('partners') }}">Partner Kami</a>
@@ -150,7 +150,7 @@
                 <!-- Icon dan Profil Kanan -->
                 <div class="d-flex align-items-center">
                     @auth
-                        <a href="#" class="nav-link text-white me-3">
+                        <a href="{{ route('history-kegiatan.index') }}" class="nav-link text-white me-3" title="History Kegiatan">
                             <i class="fas fa-list fa-lg"></i>
                         </a>
                         <a href="#" class="nav-link text-white me-3">
