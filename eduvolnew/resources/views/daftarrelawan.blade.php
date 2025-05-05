@@ -1,3 +1,6 @@
+@extends('layouts.app')
+
+@section('content')
 <!DOCTYPE html>
 <html lang="id">
 
@@ -17,49 +20,46 @@
 
         <div class="event-header">
             <div class="image-mask-group">
-                <img src="{{ asset('Mask group.png') }}" alt="Event Image" class="background-img">
+                <img src="{{ asset($event->event_photo ? 'storage/' . $event->event_photo : 'Mask group.png') }}" alt="Event Image" class="background-img">
 
                 <div class="logo-bulet">
                     <img src="{{ asset('telkom.png') }}" alt="Logo Telkom" class="logo-img">
                 </div>
 
                 <div class="center-text">
-                    NGAJAR NGODING
+                    {{ $event->title }}
                 </div>
             </div>
 
             <!-- Info event dalam box putih -->
             <div class="event-text-box">
-                <h1>Ngajar Ngoding Selasa #6 Dasar Bahasa Pemrograman PHP</h1>
+                <h1>{{ $event->title }}</h1>
                 <ul style="list-style: none; padding: 0; font-size: 15px; line-height: 1.8;">
                     <li>
                         <i class="fas fa-calendar-day" style="color: #4728f0; width: 20px; display: inline-block; text-align: center; transform: translateY(1px);"></i>
-                        22 Oktober 2025
+                        {{ $tanggal }}
                     </li>
                     <li>
                         <i class="fas fa-clock" style="color: #4728f0; width: 20px; display: inline-block; text-align: center; transform: translateY(2px);"></i>
-                        09:00 – 14:00
+                        {{ $jam }}
                     </li>
                     <li>
                         <i class="fas fa-map-marker-alt" style="color: #4728f0; width: 20px; display: inline-block; text-align: center; transform: translateY(4px);"></i>
-                        Ruangan Multimedia SMK Telkom Bandung
+                        {{ $event->location }}
                     </li>
                 </ul>
-
-
             </div>
-
         </div>
 
         <!-- Ticket Box -->
         <div class="ticket-box">
             <div class="ticket-left">
                 <span class="ticket-title">Jenis Tiket</span>
-                <span class="ticket-name">Ngajar Ngoding Selasa #6 Dasar Bahasa Pemrograman PHP</span>
+                <span class="ticket-name">{{ $event->title }}</span>
             </div>
             <div class="ticket-right">
                 <span class="ticket-label">Harga</span>
-                <span class="ticket-price">Rp 210.000</span>
+                <span class="ticket-price">{{ $harga }}</span>
             </div>
         </div>
 
@@ -67,81 +67,75 @@
 
     <!-- Form di luar area ungu -->
     <div class="form-container">
-        <form action="#" method="POST">
+        <form action="{{ route('regist-event.store') }}" method="POST" style="display: flex; gap: 30px; width: 100%;">
             @csrf
-            <h2>Detail Pemesanan</h2>
-            <label>Nama Lengkap <span class="required">*</span></label>
-            <p class="input-hint">Gunakan nama yang tertera di KTP/Paspor</p>
-            <input type="text">
+            <input type="hidden" name="event_id" value="{{ $event->id }}">
+            <!-- KIRI: Form Detail Pemesanan -->
+            <div class="form-left" style="flex:2;">
+                <h2>Detail Pemesanan</h2>
+                <label>Nama Lengkap <span class="required">*</span></label>
+                <input type="text" name="nama_lengkap" value="{{ $user->first_name . ' ' . $user->last_name }}" required readonly>
 
-            <label>Email <span class="required">*</span></label>
-            <p class="input-hint">Salinan E-tiket akan dikirim ke email kamu.</p>
-            <input type="email">
+                <label>Email <span class="required">*</span></label>
+                <input type="email" name="email" value="{{ $user->email }}" required readonly>
 
+                <label>Nomor Handphone <span class="required">*</span></label>
+                <input type="text" name="mobile_phone" placeholder="899-xxxx-xxxx" required>
 
-            <label>Nomor Handphone <span class="required">*</span></label>
-            <div class="phone-input">
-                <span>+62</span>
-                <input type="text" placeholder="899-xxxx-xxxx">
+                <label>Tanggal Lahir <span class="required">*</span></label>
+                <input type="date" name="birth_date" value="{{ $user->birth_date }}" required readonly>
+
+                <label>Apakah Anda Sudah Berkeluarga? <span class="required">*</span></label>
+                <div class="radio-group">
+                    <label><input type="radio" name="keluarga" value="belum" required> Belum berkeluarga</label>
+                    <label><input type="radio" name="keluarga" value="sudah_tanpa_anak"> Sudah berkeluarga dan belum memiliki anak</label>
+                    <label><input type="radio" name="keluarga" value="sudah_dengan_anak"> Sudah berkeluarga dan memiliki anak</label>
+                </div>
+
+                <label>Saya Bersedia Untuk Membaca dan Menaati Handbook? <span class="required">*</span></label>
+                <div class="radio-group">
+                    <label><input type="radio" name="handbook" value="ya" required> Ya, saya bersedia.</label>
+                    <label><input type="radio" name="handbook" value="tidak"> Tidak bersedia</label>
+                </div>
             </div>
+            <!-- KANAN: Sidebar -->
+            <div class="sidebar" style="flex:1;">
+                <div class="promo">
+                    <input type="text" placeholder="Kode Promo">
+                    <button>Terapkan</button>
+                </div>
+                <p class="promo-note">Pilih metode pembayaran terlebih dahulu untuk menggunakan kode promo</p>
 
-            <label>Tanggal Lahir <span class="required">*</span></label>
-            <input type="date">
+                <div class="harga">
+                    <p class="judul">Detail Harga</p>
+                    <div class="harga-item">
+                        <span>Total Harga Tiket</span>
+                        <span>{{ $harga }}</span>
+                    </div>
+                    <div class="harga-item">
+                        <span>Biaya Platform</span>
+                        <span>Rp 0</span>
+                    </div>
+                    <hr class="divider">
 
-            <label>Apakah Anda Sudah Berkeluarga? <span class="required">*</span></label>
-            <div class="radio-group">
-                <label><input type="radio" name="keluarga"> Belum berkeluarga</label>
-                <label><input type="radio" name="keluarga"> Sudah berkeluarga dan belum memiliki anak</label>
-                <label><input type="radio" name="keluarga"> Sudah berkeluarga dan memiliki anak</label>
-            </div>
+                    <div class="harga-item total">
+                        <span>Total Bayar</span>
+                        <span class="total-amount">{{ $harga }}</span>
+                    </div>
 
-            <label>Saya Bersedia Untuk Membaca dan Menaati Handbook? <span class="required">*</span></label>
-            <div class="radio-group">
-                <label><input type="radio" name="handbook"> Ya, saya bersedia.</label>
-                <label><input type="radio" name="handbook"> Tidak bersedia</label>
+                    <hr class="divider">
+                </div>
+                <div class="checkboxes">
+                    <label><input type="checkbox" required> Saya setuju dengan Syarat dan Ketentuan yang berlaku di EduVolunteer.com</label>
+                    <label><input type="checkbox" required> Saya setuju dengan Pemrosesan Data Pribadi yang berlaku di EduVolunteer.com</label>
+
+                    <p class="warning">Syarat & Ketentuan dan Pemrosesan Data Pribadi harus disetujui</p>
+                </div>
+                <button class="submit-btn" type="submit">Ikut Partisipasi</button>
             </div>
         </form>
-
-        <!-- Sidebar Harga -->
-        <div class="sidebar">
-            <div class="promo">
-                <input type="text" placeholder="Kode Promo">
-                <button>Terapkan</button>
-            </div>
-            <p class="promo-note">Pilih metode pembayaran terlebih dahulu untuk menggunakan kode promo</p>
-
-            <div class="harga">
-                <p class="judul">Detail Harga</p>
-                <div class="harga-item">
-                    <span>Total Harga Tiket</span>
-                    <span>Rp 210.000</span>
-                </div>
-                <div class="harga-item">
-                    <span>Biaya Platform</span>
-                    <span>Rp 0</span>
-                </div>
-                <!-- Tambahkan ini sebelum total bayar -->
-                <hr class="divider">
-
-                <div class="harga-item total">
-                    <span>Total Bayar</span>
-                    <span class="total-amount">Rp 210.000</span>
-                </div>
-
-                <!-- Tambahkan ini setelah total bayar -->
-                <hr class="divider">
-
-            </div>
-            <div class="checkboxes">
-                <label><input type="checkbox"> Saya setuju dengan Syarat dan Ketentuan yang berlaku di EduVolunteer.com</label>
-                <label><input type="checkbox"> Saya setuju dengan Pemrosesan Data Pribadi yang berlaku di EduVolunteer.com</label>
-
-                <p class="warning">Syarat & Ketentuan dan Pemrosesan Data Pribadi harus disetujui</p>
-            </div>
-            <button class="submit-btn">Ikut Partisipasi</button>
-        </div>
     </div>
 </body>
 
-
 </html>
+@endsection

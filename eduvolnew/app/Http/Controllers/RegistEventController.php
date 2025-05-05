@@ -31,6 +31,6 @@ class RegistEventController extends Controller
             'status' => 'pending',
             'registration_date' => now(),
         ]);
-        return redirect()->route('event.success');
+        return redirect()->route('pembayaran');
     }
 }

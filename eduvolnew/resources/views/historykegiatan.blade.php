@@ -1,3 +1,8 @@
+@extends('layouts.app')
+@include('layouts.sidebar')
+@section('content')
+
+
 <!DOCTYPE html>
 <html lang="id">
 
@@ -6,7 +11,7 @@
     <title>Event Saya</title>
     <link rel="stylesheet" href="{{ asset('css/historykegiatan.css') }}">
     <style>
-        .detail-btn {
+        .detail-btn {y
             display: flex;
             align-items: center;
             gap: 10px;
@@ -34,8 +39,8 @@
 </head>
 
 <body>
-    <div class="container">
-        <div class="header">
+    <div class="container" style="margin-top: 48px; margin-left: 240px;">
+        <div class="header" style="margin-bottom: 40px;">
             <div class="title-left">
                 <span class="star">★</span>
                 <span class="title-text"><span class="green">Event</span> Saya</span>
@@ -78,29 +83,35 @@
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                    <td><span class="dot coming-soon"></span></td>
-                    <td>Ngajar Ngoding Selasa #6 Dasar Bahasa Pemrograman PHP</td>
-                    <td>
-                        <button class="detail-btn">
-                            <span class="icon-eye">👁</span>
-                            <span>Lihat Detail Event</span>
-                        </button>
-                    </td>
-                </tr>
-                <tr>
-                    <td><span class="dot ended"></span></td>
-                    <td>Ngajar Ngoding Selasa #2</td>
-                    <td>
-                        <button class="detail-btn">
-                            <span class="icon-eye">👁</span>
-                            <span>Lihat Detail Event</span>
-                        </button>
-                    </td>
-                </tr>
+                @foreach($events as $event)
+                    <tr>
+                        <td>
+                            @php
+                                $statusName = strtolower($event->status->name);
+                            @endphp
+                            @if($statusName == 'ongoing')
+                                <span class="dot green"></span>
+                            @elseif($statusName == 'published' || $statusName == 'coming soon')
+                                <span class="dot orange"></span>
+                            @elseif($statusName == 'completed' || $statusName == 'ended')
+                                <span class="dot grey"></span>
+                            @else
+                                <span class="dot"></span>
+                            @endif
+                        </td>
+                        <td>{{ $event->nama_event }}</td>
+                        <td>
+                            <a href="{{ route('history-kegiatan.show', $event->id) }}" class="detail-btn">
+                                <span class="icon-eye">👁</span>
+                                <span>Lihat Detail Event</span>
+                            </a>
+                        </td>
+                    </tr>
+                @endforeach
             </tbody>
         </table>
     </div>
 </body>
 
 </html>
+@endsection
