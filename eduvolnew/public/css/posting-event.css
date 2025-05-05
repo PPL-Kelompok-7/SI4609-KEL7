@@ -1,8 +1,10 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap');
+
 body {
     background-color: #DD0BCE;
-    font-family: 'Arial', sans-serif;
+    font-family: 'Poppins', Arial, sans-serif;
     margin: 0;
-    padding: 2rem;
+    padding: 0;
     color: white;
 }
 
@@ -341,4 +343,184 @@ h1 {
     font-size: 14px;
     color: #2E2564;
     background-color: none; 
+}
+
+/* ===== SIDEBAR & NAVBAR CUSTOM LAYOUT ===== */
+body {
+    margin: 0;
+    padding: 0;
+}
+.main-layout {
+    display: flex;
+    min-height: 100vh;
+}
+.sidebar {
+    width: 270px;
+    background: #B204A6;
+    color: #fff;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 0;
+    min-height: 100vh;
+    position: fixed;
+    left: 0;
+    top: 0;
+    z-index: 100;
+    box-shadow: 2px 0 16px 0 rgba(0,0,0,0.08);
+}
+/* Hapus logo besar dari sidebar, hanya menu */
+.sidebar .logo { display: none; }
+.sidebar .menu {
+    width: 100%;
+    margin-top: 90px;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5px;
+}
+.sidebar .menu-item {
+    padding: 25px 36px;
+    font-size: 1rem;
+    color: #fff;
+    text-decoration: none;
+    display: block;
+    font-weight: 500;
+    border-radius: none;
+    margin-bottom: 8px;
+    transition: background 0.2s, color 0.2s;
+    letter-spacing: 0.5px;
+}
+.sidebar .menu-item.active {
+    background: #FD01EB;
+    color: #fff;
+    font-weight: 200;
+}
+.sidebar .menu-item:not(.active):hover {
+    background: rgba(255,255,255,0.08);
+    color: #fff;
+}
+.navbar-top {
+    position: fixed;
+    left: 0;
+    right: 0;
+    top: 0;
+    height: 90px;
+    background: #B204A6;
+    display: flex;
+    align-items: center;
+    z-index: 101;
+    box-shadow: 0 4px 16px 0 rgba(0,0,0,0.12);
+    padding: 0 48px 0 0;
+}
+.navbar-left {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+    margin-left: 48px;
+}
+.navbar-left img {
+    width: 64px;
+    height: 64px;
+}
+.navbar-left .navbar-title {
+    font-size: 2.2rem;
+    font-weight: 700;
+    letter-spacing: 1px;
+    color: #fff;
+    line-height: 1.1;
+    margin-left: 8px;
+}
+.navbar-top .school {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-left: auto;
+    margin-right: 24px;
+}
+.navbar-top .school img {
+    width: 35px;
+    height: 35px;
+    border-radius: 20%;
+    background: none;
+    object-fit: contain;
+    border: none;
+}
+.navbar-top .school-name {
+    font-size: 1rem;
+    font-weight: 500;
+    color: #fff;
+    font-family: 'Poppins', Arial, sans-serif;
+}
+.navbar-top .logout-btn {
+    background: #fff;
+    color: black;
+    border: none;
+    border-radius: 22px;
+    padding: 12px 38px;
+    font-size: 1rem;
+    font-weight: 400;
+    cursor: pointer;
+    transition: background 0.2s;
+    margin-left: 18px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+}
+.navbar-top .logout-btn:hover {
+    background: #f0f0f0;
+}
+.main-content {
+    margin-left: 270px;
+    margin-top: 90px;
+    padding: 40px 32px 32px 32px;
+    min-height: calc(100vh - 90px);
+    background: linear-gradient(135deg, #DD0BCE 0%, #F72585 100%);
+}
+@media (max-width: 1100px) {
+    .sidebar { width: 70px; }
+    .sidebar .menu-item { font-size: 0; padding: 24px 10px; }
+    .sidebar .menu-item.active::before, .sidebar .menu-item:hover::before { content: ''; display: block; width: 6px; height: 6px; background: #fff; border-radius: 50%; margin: 0 auto; }
+    .main-content { margin-left: 70px; }
+    .navbar-left { margin-left: 70px; }
+}
+@media (max-width: 700px) {
+    .navbar-top, .main-content { padding-left: 10px; padding-right: 10px; }
+    .navbar-left { margin-left: 10px; }
+    .sidebar { width: 56px; }
+    .main-content { margin-left: 56px; }
+}
+
+.eduvol-logo {
+    width: 150px !important;
+    height: 150px !important;
+    max-width: 150px !important;
+    max-height: 150px !important;
+    aspect-ratio: 1/1;
+    object-fit: contain;
+    display: block;
+}
+@media (max-width: 1100px) {
+    .eduvol-logo { width: 40px; height: 40px; max-width: 40px; max-height: 40px; }
+}
+@media (max-width: 700px) {
+    .eduvol-logo { width: 32px; height: 32px; max-width: 32px; max-height: 32px; }
+}
+
+.school-logo-circle {
+    width: 55px;
+    height: 55px;
+    background: #fff !important;
+    border-radius: 50% !important;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 24px 0 rgba(0,0,0,0.18) !important;
+    margin-right: 12px;
+    border: 0 !important;
+}
+.school-logo-circle img {
+    width: 24px;
+    height: 24px;
+    object-fit: contain;
+    display: block;
+    margin: 0;
+    padding: 0;
 }
