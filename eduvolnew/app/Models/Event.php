@@ -25,7 +25,7 @@ class Event extends Model
     // Relationship with EventStatus
     public function status()
     {
-        return $this->belongsTo(EventStatus::class, 'event_status_id');
+        return $this->belongsTo(EventStatus::class, 'status_id');
     }
 
     // Relationship with User (creator)

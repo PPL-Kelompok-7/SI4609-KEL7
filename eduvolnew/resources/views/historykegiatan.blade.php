@@ -62,16 +62,18 @@
         </div>
 
         <div class="filter-box">
-            <div class="filter-left">
-                <span class="filter-label">Filter berdasarkan :</span>
-                <label for="ongoing"><input type="checkbox" id="ongoing" name="status" value="ongoing"> On Going</label>
-                <label for="coming"><input type="checkbox" id="coming" name="status" value="coming"> Coming Soon</label>
-                <label for="ended"><input type="checkbox" id="ended" name="status" value="ended"> Ended</label>
-            </div>
-            <div class="filter-right">
-                <button class="apply">Terapkan</button>
-                <button class="reset">Hapus Filter</button>
-            </div>
+            <form method="GET" action="{{ route('history-kegiatan.index') }}" class="filter-left" style="width:100%;display:flex;align-items:center;justify-content:space-between;">
+                <div style="display:flex;align-items:center;gap:15px;">
+                    <span class="filter-label">Filter berdasarkan :</span>
+                    <label for="ongoing"><input type="checkbox" id="ongoing" name="status[]" value="ongoing" {{ request()->has('status') && in_array('ongoing', (array)request('status')) ? 'checked' : '' }}> On Going</label>
+                    <label for="coming"><input type="checkbox" id="coming" name="status[]" value="coming soon" {{ request()->has('status') && in_array('coming soon', (array)request('status')) ? 'checked' : '' }}> Coming Soon</label>
+                    <label for="ended"><input type="checkbox" id="ended" name="status[]" value="ended" {{ request()->has('status') && in_array('ended', (array)request('status')) ? 'checked' : '' }}> Ended</label>
+                </div>
+                <div class="filter-right">
+                    <button type="submit" class="apply">Terapkan</button>
+                    <a href="{{ route('history-kegiatan.index') }}" class="reset">Hapus Filter</a>
+                </div>
+            </form>
         </div>
 
         <table class="event-table">
@@ -87,7 +89,7 @@
                     <tr>
                         <td>
                             @php
-                                $statusName = strtolower($event->status->name);
+                                $statusName = strtolower(optional($event->status)->name ?? '');
                             @endphp
                             @if($statusName == 'ongoing')
                                 <span class="dot green"></span>
@@ -99,9 +101,9 @@
                                 <span class="dot"></span>
                             @endif
                         </td>
-                        <td>{{ $event->nama_event }}</td>
+                        <td>{{ $event->title }}</td>
                         <td>
-                            <a href="{{ route('history-kegiatan.show', $event->id) }}" class="detail-btn">
+                            <a href="{{ route('event.detail', $event->id) }}" class="detail-btn" style="text-decoration:none;">
                                 <span class="icon-eye">👁</span>
                                 <span>Lihat Detail Event</span>
                             </a>

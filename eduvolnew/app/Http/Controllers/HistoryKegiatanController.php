@@ -20,7 +20,7 @@ class HistoryKegiatanController extends Controller
         $events = Event::with('status')
             ->when($status, function($query) use ($status) {
                 $query->whereHas('status', function($q) use ($status) {
-                    $q->where('title', $status);
+                    $q->whereIn('name', (array)$status);
                 });
             })
             ->get();

@@ -20,14 +20,15 @@ class RegistEventController extends Controller
     {
         $user = auth()->user();
         RegistEvent::create([
-            'user_id' => $user->id,
+            'user_id' => auth()->id(),
             'event_id' => $request->event_id,
-            'first_name' => $user->first_name,
-            'last_name' => $user->last_name,
-            'email' => $user->email,
+            'first_name' => auth()->user()->first_name,
+            'last_name' => auth()->user()->last_name,
+            'email' => auth()->user()->email,
             'mobile_phone' => $request->mobile_phone,
-            'birth_date' => $user->birth_date,
-            'voucher_id' => $request->voucher_id,
+            'birth_date' => auth()->user()->birth_date,
+            'family_status' => $request->keluarga,
+            'handbook_agreement' => $request->handbook,
             'status' => 'pending',
             'registration_date' => now(),
         ]);
