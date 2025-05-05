@@ -37,7 +37,7 @@
             {{-- Event Card --}}
             @foreach ($events as $event)
                 <div class="card">
-                    <img src="{{ asset($event['image']) }}" alt="Event Image" class="event-image">
+                    <img src="{{ !empty($event['event_photo']) ? asset('storage/' . $event['event_photo']) : asset('default-event.png') }}" alt="Event Image" class="event-image">
                     
                     <!-- Logo kecil di pojok kiri atas -->
                     <div class="logo-circle">

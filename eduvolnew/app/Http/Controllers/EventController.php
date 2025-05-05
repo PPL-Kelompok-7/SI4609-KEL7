@@ -100,7 +100,7 @@ class EventController extends Controller
         $events = \App\Models\Event::all()->map(function($event) {
             return [
                 'id'    => $event->id,
-                'image' => $event->event_photo ? 'storage/' . $event->event_photo : 'images/default-event.png',
+                'event_photo' => $event->event_photo,
                 'title' => $event->title,
                 'price' => $event->price > 0 ? 'Rp ' . number_format($event->price,0,',','.') : 'Free',
                 'date'  => \Carbon\Carbon::parse($event->start_date)->translatedFormat('d F Y'),
