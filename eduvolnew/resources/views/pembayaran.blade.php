@@ -35,8 +35,20 @@
                                 <span>Pilih Foto Bukti Bayar (jpg max.10mb)</span>
                                 <input type="file" name="proof_of_payment" accept="image/jpeg,image/png" required>
                             </label>
+                            <div id="file-info" style="margin-top: 8px; color: #333; font-size: 14px;"></div>
                             <button type="submit" class="check-status-btn">Cek Status Pembayaran</button>
                         </form>
+                        <script>
+                        document.querySelector('input[name="proof_of_payment"]').addEventListener('change', function(e) {
+                            const fileInfo = document.getElementById('file-info');
+                            if (this.files && this.files[0]) {
+                                const file = this.files[0];
+                                fileInfo.textContent = `File dipilih: ${file.name} (${file.type})`;
+                            } else {
+                                fileInfo.textContent = '';
+                            }
+                        });
+                        </script>
                         @if($payment && $payment->proof_of_payment)
                             <div class="mt-2">
                                 <span>Bukti sudah diupload:</span>
