@@ -12,8 +12,9 @@ class ProfileController extends Controller
 {
     public function index()
     {
-        $user = Auth::user(); // Get the currently authenticated user
-        return view('profile', compact('user'));
+        $user = \App\Models\User::find(Auth::id()); // Ambil data user terbaru dari database
+        $events = \App\Models\Event::orderBy('start_date', 'desc')->take(2)->get(); // Ambil 2 event terbaru
+        return view('profile', compact('user', 'events'));
     }
 
     public function edit()
@@ -61,6 +62,9 @@ class ProfileController extends Controller
 
             // Update user data
             $user->update($validated);
+
+            // Refresh session user
+            Auth::setUser($user->fresh());
 
             // Log the successful update
             Log::info('Profile updated successfully', [

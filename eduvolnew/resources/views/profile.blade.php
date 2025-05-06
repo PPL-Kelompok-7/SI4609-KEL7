@@ -62,24 +62,30 @@
                 Featured Event <i class="fas fa-pencil-alt"></i>
             </div>
             <div class="row mb-4 px-3 px-md-4">
-                <div class="col-md-6 mb-3">
-                    @include('components.event-card', [
-                        'banner' => 'banner1.png',
-                        'title' => 'Ngajar Ngoding Selasa #2',
-                        'rating' => '5/5',
-                        'date' => '24 Oktober 2024',
-                        'vendor' => 'vendor.png'
-                    ])
-                </div>
-                <div class="col-md-6 mb-3">
-                    @include('components.event-card', [
-                        'banner' => 'banner2.png',
-                        'title' => 'Design 101 #4',
-                        'rating' => '5/5',
-                        'date' => '4 Mei 2024',
-                        'vendor' => 'vendor.png'
-                    ])
-                </div>
+                @forelse($events as $event)
+                    <div class="col-md-6 mb-3">
+                        <div class="card h-100" style="background: rgba(255,255,255,0.05); border: none;">
+                            <img src="{{ $event->event_photo ? Storage::url($event->event_photo) : asset('default-event.png') }}" class="card-img-top" alt="Event Banner" style="height: 180px; object-fit: cover;">
+                            <div class="card-body">
+                                <h5 class="card-title">{{ $event->title }}</h5>
+                                <p class="card-text mb-1">
+                                    <i class="fas fa-calendar-alt me-1"></i> {{ \Carbon\Carbon::parse($event->start_date)->translatedFormat('d F Y') }}
+                                </p>
+                                <p class="card-text mb-1">
+                                    <i class="fas fa-map-marker-alt me-1"></i> {{ $event->location }}
+                                </p>
+                                <!-- Rating jika ada -->
+                                @if(isset($event->rating))
+                                    <span class="badge bg-success">{{ $event->rating }}/5</span>
+                                @endif
+                            </div>
+                        </div>
+                    </div>
+                @empty
+                    <div class="col-12">
+                        <p class="text-white">Belum ada event yang tersedia.</p>
+                    </div>
+                @endforelse
             </div>
         </div>
 
