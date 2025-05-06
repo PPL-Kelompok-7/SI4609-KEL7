@@ -49,7 +49,6 @@ class DaftarRelawanController extends Controller
             // tambahkan field lain yang tidak nullable di sini jika ada
         ]);
 
-        return redirect()->route('daftarrelawan', ['id' => $request->event_id])
-            ->with('success', 'Pendaftaran berhasil!');
+        return redirect()->route('payments.show', $request->event_id);
     }
 }
