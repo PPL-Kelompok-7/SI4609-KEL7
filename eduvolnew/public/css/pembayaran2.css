@@ -9,9 +9,15 @@ body {
     font-family: 'Poppins', sans-serif;
     color: #333;
     line-height: 1.6;
+    background: #5038EB !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    min-height: 100vh;
+    width: 100vw;
+    overflow-x: hidden;
 }
 
-.container {
+.success-container {
     width: 100%;
     max-width: 1200px;
     margin: 0 auto;
@@ -122,11 +128,12 @@ ul {
 
 /* Main Content Styles */
 .main-content {
-    background-color: #4933E8;
+    background-color: #3B21C6;
     min-height: calc(100vh - 170px);
     display: flex;
     align-items: center;
-    padding: 50px 0;
+    padding: 100px 0 50px 0;
+    margin-top: -70px;
 }
 
 .success-content {
@@ -140,6 +147,7 @@ ul {
     flex: 1;
     position: relative;
     height: 450px;
+    margin-top: 30px;
 }
 
 .illustration {
@@ -175,6 +183,7 @@ ul {
     line-height: 1.2;
     margin-bottom: 30px;
     text-align: center; /* Memastikan teks rata tengah */
+    margin-top: 30px;
 }
 
 .success-highlight {
@@ -281,4 +290,24 @@ ul {
         left: 50%;
         transform: translateX(-50%) scale(0.7);
     }
+}
+
+.success-container,
+.success-content,
+.section,
+.hero {
+    background: transparent !important;
+    box-shadow: none !important;
+}
+
+.card, .box {
+    background: transparent !important;
+    box-shadow: none !important;
+}
+
+.success-message {
+    margin-top: 30px;
+}
+.illustration-side {
+    margin-top: 30px;
 }

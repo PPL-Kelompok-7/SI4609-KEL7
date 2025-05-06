@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\RegistEvent;
+use App\Models\Payment;
 
 class RegistEventController extends Controller
 {
@@ -19,7 +20,7 @@ class RegistEventController extends Controller
     public function store(Request $request)
     {
         $user = auth()->user();
-        RegistEvent::create([
+        $registration = RegistEvent::create([
             'user_id' => auth()->id(),
             'event_id' => $request->event_id,
             'first_name' => auth()->user()->first_name,
@@ -32,6 +33,15 @@ class RegistEventController extends Controller
             'status' => 'pending',
             'registration_date' => now(),
         ]);
+
+        Payment::create([
+            'registration_id' => $registration->id,
+            'amount' => $event->price,
+            'payment_method_id' => 1, // atau sesuai input
+            'payment_status_id' => 1, // default Unpaid
+            // kolom lain jika perlu
+        ]);
+
         return redirect()->route('pembayaran');
     }
 }

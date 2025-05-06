@@ -112,11 +112,13 @@ img {
 }
 
 /* Container */
-.container {
+.payment-container {
   max-width: 1200px;
   margin: 30px auto;
   padding: 0 20px;
   margin-top: 160px;
+  padding-bottom: 40px;
+  overflow: visible;
 }
 
 /* Payment Section */
@@ -475,4 +477,32 @@ img {
   .payment-card, .ticket-details-card {
       padding: 15px;
   }
+}
+
+.main-content {
+    padding-top: 100px !important; /* agar tidak tertutup navbar */
+    min-height: 80vh;
+    background: transparent !important; /* biar tidak menimpa warna global */
+    min-height: calc(100vh - 200px); /* 200px kira-kira tinggi navbar+footer */
+    flex: 1 0 auto;
+    overflow: auto;
+}
+@media (max-width: 768px) {
+    .main-content {
+        padding-top: 80px !important;
+    }
+}
+
+/* Pastikan container tidak terlalu mepet atas */
+.payment-container {
+    margin-top: 0 !important;
+}
+
+.main-content .payment-container {
+    margin-top: 40px !important;
+    margin-bottom: 40px !important;
+}
+
+.main-content {
+    min-height: calc(100vh - 200px);
 }
