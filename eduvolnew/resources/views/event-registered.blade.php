@@ -5,8 +5,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Event Terdaftar</title>
     <link rel="stylesheet" href="{{ asset('css/event-registered.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/posting-event.css') }}">
 </head>
 <body>
+    <!-- Navbar Top -->
+    <div class="navbar-top">
+        <div class="navbar-left">
+            <img src="{{ asset('images/EDUVOL LOGO 1.png') }}" alt="EDU Volunteer" class="eduvol-logo">
+        </div>
+    </div>
     <div class="container">
         <div class="left">
             <img src="{{ asset('images/Career progress-pana 1.png') }}" alt="Rocket Man" class="main-image">

@@ -44,7 +44,7 @@
                     <div class="logo-circle">
                         <img src="{{ asset('images/logo-telkom-schools.png') }}" alt="Logo" style="width: 30px; height: 40px;">
                     </div>
-                    <img src="{{ $event->event_photo ? asset('storage/'.$event->event_photo) : asset('images/ngajar-ngoding.jpg') }}" alt="Event Banner" class="event-banner">
+                    <img src="{{ asset($event['image']) }}" alt="Event Banner" class="event-banner">
                 </div>
                 <div class="tab-menu">
                     <span class="active">Deskripsi</span>
@@ -91,7 +91,7 @@
                         <p>Harga</p>
                         <strong>{{ $harga }}</strong>
                     </div>
-                    <button class="btn-join">Ikut Partisipasi</button>
+                    <button class="btn-join" onclick="window.location.href='{{ url('/daftarrelawan/'.$event->id) }}'">Ikut Partisipasi</button>
                 </div>
             </div>
         </div>
@@ -102,7 +102,7 @@
                 <img src="{{ asset('images/EDUVOL LOGO 1.png') }}" alt="Logo EduVolunteer" style="height:40px;">
                 <div style="margin-left:175px;">
                     <div style="display:flex; align-items:center; gap:8px;">
-                        <img src="{{ asset('images/location.png') }}" alt="Location Icon" style="height:18px;">
+                        <img src="{{ asset('images/locationputih.png') }}" alt="Location Icon" style="height:18px;">
                         <span>Bandung, Indonesia</span>
                     </div>
                     <div style="display:flex; align-items:center; gap:8px;">
