@@ -98,7 +98,7 @@
                 </div>
             </div>
         </div>
-        <button class="start-btn" style="background:#69FD8D; color:#000; border:none; border-radius:25px; padding:12px 32px; font-weight:700px; font-size:16px; cursor:pointer;">Mulai Perjalananmu</button>
+        <button class="start-btn" style="background:#69FD8D; color:#fff; border:none; border-radius:25px; padding:12px 32px; font-weight:700px; font-size:16px; cursor:pointer;">Mulai Perjalananmu</button>
     </footer>
 </body>
 </html>
