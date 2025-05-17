@@ -114,7 +114,7 @@
         </table>
     </div>
 
-    <div class="sidebar">
+    <!-- <div class="sidebar">
         <ul class="sidebar-menu">
             <li>
                 <a href="{{ route('history-kegiatan.index') }}">Event Saya</a>
@@ -123,7 +123,7 @@
                 <a href="{{ route('history-pembayaran') }}">History Pembayaran</a>
             </li>
         </ul>
-    </div>
+    </div> -->
 </body>
 
 </html>
