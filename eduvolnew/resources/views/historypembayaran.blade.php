@@ -1,4 +1,4 @@
-@extends('layouts.main')
+@extends('layouts.app')
 
 @section('title', 'History Pembayaran')
 
@@ -9,16 +9,7 @@
 
 @section('content')
     <div class="main-container">
-        <div class="sidebar">
-            <ul class="sidebar-menu">
-                <li>
-                <a href="#">Event Saya</a>
-                </li>
-                <li class="active">
-                <a href="#">History Pembayaran</a>
-                </li>
-            </ul>
-        </div>
+        @include('layouts.sidebar')
         <div class="content">
             <div class="title-area">
                 <span class="star">★</span>

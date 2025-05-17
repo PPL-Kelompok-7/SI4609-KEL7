@@ -17,7 +17,7 @@ return new class extends Migration
             $table->decimal('amount', 10, 2);
             $table->foreignId('payment_method_id')->constrained('payment_methods');
             $table->foreignId('payment_status_id')->constrained('payment_statuses');
-            $table->string('proof_of_payment')->nullable();
+            $table->string('proof_of_payments')->nullable();
             $table->timestamp('payment_date')->nullable();
             $table->timestamps();
         });

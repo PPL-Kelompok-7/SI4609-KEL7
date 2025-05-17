@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\VoucherController;
 use App\Http\Controllers\PaymentController;
 use App\Models\Event;
+use App\Models\Payment;
 use App\Http\Controllers\DaftarRelawanController;
 
 /*
@@ -88,13 +89,18 @@ Route::middleware(['web', 'auth'])->group(function () {
 
     // Payment Routes
     Route::get('pembayaran', function () {
-        return view('pembayaran');
+        $payment = Payment::where('user_id', auth()->id())->first();
+        return view('pembayaran', compact('payment'));
     })->name('pembayaran');
 
     Route::get('pembayaran/berhasil', function () {
         return view('pembayaran2');
     })->name('pembayaran.berhasil');
 
+    // History Pembayaran
+    Route::get('history-pembayaran', function () {
+        return view('historypembayaran');
+    })->name('history.pembayaran');
     Route::get('/history-pembayaran', [PaymentController::class, 'history'])->name('history-pembayaran');
 
     // Voucher Routes
@@ -104,50 +110,49 @@ Route::middleware(['web', 'auth'])->group(function () {
 
     Route::get('/vouchers', [VoucherController::class, 'index'])->name('vouchers.index');
 
+    // Payment Controller Routes
     Route::get('/payments/{registrationId}', [PaymentController::class, 'show'])->name('payments.show');
     Route::post('/payments/{paymentId}/upload-proof', [PaymentController::class, 'uploadProof'])->name('payments.uploadProof');
 
+    // Daftar Relawan
     Route::get('/daftarrelawan/{id}', [DaftarRelawanController::class, 'index'])->name('daftarrelawan');
-
     Route::post('/regist-event/store', [DaftarRelawanController::class, 'store'])->name('regist-event.store');
 });
 
+// Event routes (public)
 Route::get('/events', [EventController::class, 'index'])->name('events.index');
-
 Route::get('/event-detail/{id}', [EventController::class, 'show'])->name('event.detail');
 
+// Posting Event
 Route::get('/posting-event', function () {
     $events = Event::all();
     return view('posting-event', compact('events'));
 });
-
 Route::get('/formposting-event', function () {
     return view('formposting-event');
 });
-
 Route::get('/event-registered', function () {
     return view('event-registered');
 });
 
+// Home, Agenda, Partners, Volunteers
 Route::get('/home', function () {
     return view('home');
 })->name('home');
-
 Route::get('/agenda', function () {
     return view('agenda');
 })->name('agenda');
-
 Route::get('/partners', function () {
     return view('partners');
 })->name('partners');
-
 Route::get('/volunteers', function () {
     return view('volunteers');
 })->name('volunteers');
 
-// Tampilkan form
+// Tampilkan form event
 Route::get('/event/create', [EventController::class, 'create'])->name('event.create');
-// Proses submit form
+// Proses submit form event
 Route::post('/event/store', [EventController::class, 'store'])->name('event.store');
 
+// Tambahan: POST history-kegiatan/store (untuk outside group)
 Route::post('/history-kegiatan/store', [HistoryKegiatanController::class, 'store'])->name('history-kegiatan.store');

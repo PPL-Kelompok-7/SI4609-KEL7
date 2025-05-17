@@ -315,3 +315,24 @@ body {
         margin-top: 10px;
     }
 }
+
+/* --- Tambahan untuk menghindari konten tertutup sidebar/navbar/footer --- */
+@media (min-width: 901px) {
+    .content {
+        margin-left: 220px; /* Lebar sidebar dari sidebar.blade.php */
+    }
+    .main-container {
+        padding-top: 70px; /* Tinggi navbar */
+        padding-bottom: 70px; /* Jika ada footer fixed, sesuaikan jika perlu */
+    }
+}
+
+@media (max-width: 900px) {
+    .content {
+        margin-left: 0;
+    }
+    .main-container {
+        padding-top: 70px;
+        padding-bottom: 70px;
+    }
+}
