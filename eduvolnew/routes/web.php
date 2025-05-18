@@ -13,6 +13,7 @@ use App\Http\Controllers\PaymentController;
 use App\Models\Event;
 use App\Models\Payment;
 use App\Http\Controllers\DaftarRelawanController;
+use App\Http\Controllers\NotifikasiController;
 
 /*
 |--------------------------------------------------------------------------
@@ -103,20 +104,24 @@ Route::middleware(['web', 'auth'])->group(function () {
     })->name('history.pembayaran');
     Route::get('/history-pembayaran', [PaymentController::class, 'history'])->name('history-pembayaran');
 
-    // Voucher Routes
-    Route::get('voucher', function () {
-        return view('voucherpengguna');
-    })->name('voucherpengguna');
+   // Voucher Routes
+   Route::get('voucher', [VoucherController::class, 'index'])->name('voucherpengguna');
 
-    Route::get('/vouchers', [VoucherController::class, 'index'])->name('vouchers.index');
+   Route::get('/vouchers', [VoucherController::class, 'index'])->name('vouchers.index');
+
+   Route::get('/makevouchers', [VoucherController::class, 'create'])->name('makevouchers.create');
+   Route::post('/makevouchers', [VoucherController::class, 'store'])->name('makevouchers.store');
 
     // Payment Controller Routes
-    Route::get('/payments/{registrationId}', [PaymentController::class, 'show'])->name('payments.show');
-    Route::post('/payments/{paymentId}/upload-proof', [PaymentController::class, 'uploadProof'])->name('payments.uploadProof');
+    Route::get('/payments/{event}', [PaymentController::class, 'show'])->name('payments.show');
+    Route::post('/payments/{event}/upload-proof', [PaymentController::class, 'uploadProof'])->name('payments.uploadProof');
 
     // Daftar Relawan
     Route::get('/daftarrelawan/{id}', [DaftarRelawanController::class, 'index'])->name('daftarrelawan');
     Route::post('/regist-event/store', [DaftarRelawanController::class, 'store'])->name('regist-event.store');
+
+    // Notifikasi untuk mitra (event owner)
+    Route::get('/notifikasi', [NotifikasiController::class, 'index'])->name('notifikasi');
 });
 
 // Event routes (public)
@@ -156,3 +161,7 @@ Route::post('/event/store', [EventController::class, 'store'])->name('event.stor
 
 // Tambahan: POST history-kegiatan/store (untuk outside group)
 Route::post('/history-kegiatan/store', [HistoryKegiatanController::class, 'store'])->name('history-kegiatan.store');
+
+Route::get('/wishlist', function () {
+    return view('wishlist');
+})->name('wishlist');
