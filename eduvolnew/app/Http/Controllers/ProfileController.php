@@ -7,14 +7,29 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Log;
+use App\Models\TeachingSession;
 
 class ProfileController extends Controller
 {
     public function index()
     {
-        $user = \App\Models\User::find(Auth::id()); // Ambil data user terbaru dari database
-        $events = \App\Models\Event::orderBy('start_date', 'desc')->take(2)->get(); // Ambil 2 event terbaru
-        return view('profile', compact('user', 'events'));
+        $user = \App\Models\User::find(Auth::id());
+        $events = \App\Models\Event::orderBy('start_date', 'desc')->take(2)->get();
+
+        // Milestone data
+        $targetHours = $user->target_hours;
+        $totalSessions = $user->teachingSessions()->count();
+        $totalHours = $user->teachingSessions()->sum('duration');
+
+        // Badge logic
+        if ($totalHours >= 101) $badge = 'gold';
+        elseif ($totalHours >= 51) $badge = 'silver';
+        elseif ($totalHours >= 1) $badge = 'bronze';
+        else $badge = null;
+
+        return view('profile', compact(
+            'user', 'events', 'targetHours', 'totalSessions', 'totalHours', 'badge'
+        ));
     }
 
     public function edit()
@@ -152,5 +167,42 @@ class ProfileController extends Controller
                 'message' => 'Gagal mengupload foto profil: ' . $e->getMessage()
             ], 500);
         }
+    }
+
+    public function show()
+    {
+        $user = Auth::user();
+        $targetHours = $user->target_hours;
+        $totalSessions = $user->teachingSessions()->count();
+        $totalHours = $user->teachingSessions()->sum('duration');
+
+        // Badge logic
+        if ($totalHours >= 101) $badge = 'gold';
+        elseif ($totalHours >= 51) $badge = 'silver';
+        elseif ($totalHours >= 1) $badge = 'bronze';
+        else $badge = null;
+
+        return view('profile', compact(
+            'user', 'targetHours', 'totalSessions', 'totalHours', 'badge'
+        ));
+    }
+
+    public function editTarget()
+    {
+        $user = Auth::user();
+        $targetHours = $user->target_hours;
+        return view('profile.edit_target', compact('targetHours'));
+    }
+
+    public function updateTarget(Request $request)
+    {
+        $request->validate([
+            'target_hours' => 'required|integer|min:1'
+        ]);
+        $user = Auth::user();
+        $user->target_hours = $request->target_hours;
+        $user->save();
+
+        return redirect()->route('profile')->with('success', 'Target hours updated!');
     }
 } 

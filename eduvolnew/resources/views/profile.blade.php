@@ -97,7 +97,78 @@
         {{-- Milestone --}}
         <div class="tab-pane fade" id="milestone" role="tabpanel" aria-labelledby="milestone-tab">
             <div class="px-3 px-md-4">
-                @include('components.profile-milestone')
+                {{-- Milestone Preview --}}
+                <div class="card p-4 my-4" style="background: transparent; color: #fff; border-radius: 16px; border: 1px solid #fff;">
+                    <h4 class="mb-3">Milestone</h4>
+                    {{-- Target Hours & Progress --}}
+                    <div class="mb-3 p-3" style="background: transparent; border-radius: 12px; border: 1px solid #fff; width: 100%;">
+                        <div class="d-flex align-items-center mb-2" style="gap: 10px;">
+                            <span style="font-size: 1.1em;">Target Hours : <b>{{ $targetHours }}</b></span>
+                            <a href="{{ route('profile.editTarget') }}" class="btn btn-outline-light btn-sm ms-2">
+                                <i class="bi bi-pencil"></i> Edit Target
+                            </a>
+                        </div>
+                        <div class="progress" style="height: 20px; background: #e0e0e0;">
+                            <div class="progress-bar" role="progressbar"
+                                style="width: {{ min(100, ($totalHours/$targetHours)*100) }}%; background: #7CFC00;">
+                            </div>
+                        </div>
+                        <div class="mt-2" style="font-size: 1.1em;">
+                            {{ $totalHours }} hours of {{ $targetHours }} ({{ round(($totalHours/$targetHours)*100) }}%)
+                        </div>
+                    </div>
+
+                    {{-- Completed Session --}}
+                    <div class="mb-3 row text-center" style="gap: 0;">
+                        <div class="col-6 p-3" style="background: transparent; border-radius: 12px; border: 1px solid #fff;">
+                            <div class="fw-bold" style="font-size: 1.1em;">Total Sessions :</div>
+                            <div style="font-size: 1.5em;">{{ $totalSessions }}</div>
+                        </div>
+                        <div class="col-6 p-3" style="background: transparent; border-radius: 12px; border: 1px solid #fff;">
+                            <div class="fw-bold" style="font-size: 1.1em;">Total Hours :</div>
+                            <div style="font-size: 1.5em;">{{ $totalHours }}</div>
+                        </div>
+                    </div>
+                    <div class="row mt-3">
+                        <div class="col-12 p-3" style="background: transparent; border-radius: 12px; border: 1px solid #fff;">
+                            {{-- Badges --}}
+                            <h5 class="mb-3">Badges</h5>
+                            <div class="d-flex justify-content-between align-items-end mb-3" style="padding: 0 10px;">
+                                <div class="text-center flex-fill">
+                                    <img src="{{ asset('img/bronze.png') }}" width="100" style="filter: {{ $badge == 'bronze' ? 'none' : 'grayscale(1)' }};">
+                                    <div class="fw-bold mt-2" style="color: #cd7f32;">BRONZE (1-50)</div>
+                                </div>
+                                <div class="text-center flex-fill">
+                                    <img src="{{ asset('img/silver.png') }}" width="100" style="filter: {{ $badge == 'silver' ? 'none' : 'grayscale(1)' }};">
+                                    <div class="fw-bold mt-2" style="color: #b0b0b0;">SILVER (51-100)</div>
+                                </div>
+                                <div class="text-center flex-fill">
+                                    <img src="{{ asset('img/gold.png') }}" width="100" style="filter: {{ $badge == 'gold' ? 'none' : 'grayscale(1)' }};">
+                                    <div class="fw-bold mt-2" style="color: #ffd700;">GOLD (101-150&gt;)</div>
+                                </div>
+                            </div>
+                            @php
+                                $progress = min(100, ($totalHours/150)*100);
+                                $badgeLeft = max(0, min(100, $progress)) - 7;
+                            @endphp
+                            <div class="progress" style="height: 12px; background: #e0e0e0; position: relative;">
+                                <div class="progress-bar" style="width: {{ $progress }}%; background: #FF00C8;"></div>
+                                <span
+                                    class="badge rounded-pill"
+                                    style="
+                                        background: #FF00C8;
+                                        font-size: 1.1em;
+                                        position: absolute;
+                                        top: -22px;
+                                        left: calc({{ $badgeLeft }}% - 22px);
+                                        transition: left 0.3s;
+                                        z-index: 2;
+                                    "
+                                >{{ $totalHours }}</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
