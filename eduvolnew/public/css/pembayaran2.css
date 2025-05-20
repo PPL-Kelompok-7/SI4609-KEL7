@@ -6,7 +6,7 @@
 }
 
 body {
-    font-family: 'Poppins', sans-serif;
+    font-family: 'Poppins', sans-serif !important;
     color: #333;
     line-height: 1.6;
     background: #5038EB !important;
@@ -184,6 +184,8 @@ ul {
     margin-bottom: 30px;
     text-align: center; /* Memastikan teks rata tengah */
     margin-top: 30px;
+    font-weight: 700; /* Adding bold font weight */
+    font-family: 'Poppins', sans-serif !important; /* Adding Poppins font */
 }
 
 .success-highlight {

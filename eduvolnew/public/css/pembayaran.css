@@ -135,7 +135,7 @@ img {
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
   flex: 1;
   min-width: 300px;
-  padding: 25px;
+  padding: 20px;
 }
 
 /* Payment Card with side-by-side layout */
@@ -166,7 +166,7 @@ img {
 
 .payment-title h2 {
   margin: 0;
-  font-size: 22px; /* sebelumnya 20px */
+  font-size: 20px;
   color: var(--dark);
   font-weight: 700;
   line-height: 1.2;
@@ -174,7 +174,7 @@ img {
 
 .payment-title p {
   margin: 5px 0 0;
-  font-size: 18px; /* sebelumnya 16px */
+  font-size: 16px;
   color: #555;
   line-height: 1.4;
   font-weight: 500;
@@ -202,21 +202,21 @@ img {
 .bank-info {
   background-color: var(--light-gray);
   border-radius: 12px;
-  padding: 20px;
+  padding: 15px;
   text-align: center;
-  margin-bottom: 20px;
+  margin-bottom: 15px;
 }
 
 .bank-info h3 {
   margin: 0;
-  font-size: 18px;
+  font-size: 16px;
   font-weight: 600;
   color: var(--dark);
 }
 
 .bank-info h2 {
-  margin: 8px 0;
-  font-size: 22px;
+  margin: 6px 0;
+  font-size: 20px;
   font-weight: 700;
 }
 
@@ -325,20 +325,20 @@ img {
 
 /* Ticket Details Card */
 .ticket-details-card h2 {
-  margin: 0 0 20px;
-  font-size: 22px;
+  margin: 0 0 15px;
+  font-size: 20px;
   color: var(--dark);
   font-weight: 600;
-  text-align: center; /* Changed from left to center */
+  text-align: center;
 }
 
 .event-title {
-  font-size: 22px; /* Increased from 18px */
-  margin: 0 0 20px;
+  font-size: 20px;
+  margin: 0 0 15px;
   line-height: 1.4;
   color: var(--dark);
-  font-weight: 700; /* Increased from 600 to make it bolder */
-  text-align: left; /* Already changed from center to left as requested earlier */
+  font-weight: 700;
+  text-align: left;
 }
 
 .event-info {
