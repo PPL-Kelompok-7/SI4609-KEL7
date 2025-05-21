@@ -1,0 +1,165 @@
+/* Reset dan styling dasar */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Arial', sans-serif;
+}
+
+body {
+    background-color: #e600cc; /* Warna magenta/ungu yang serupa dengan gambar */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding: 20px;
+}
+
+.container {
+    width: 100%;
+    max-width: 1000px;
+}
+
+/* Styling untuk tabel rating */
+.rating-table {
+    background-color: #f2f2f2;
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+/* Header tabel */
+.table-header {
+    display: flex;
+    background-color: #f2f2f2;
+    padding: 15px 20px;
+    font-weight: bold;
+    color: #5137b7;
+    border-bottom: 2px solid #d8d8d8;
+}
+
+.header-status {
+    width: 15%;
+}
+
+.header-nama {
+    width: 20%;
+}
+
+.header-event {
+    width: 40%;
+}
+
+.header-aksi {
+    width: 25%;
+    text-align: center;
+}
+
+/* Baris tabel */
+.table-row {
+    display: flex;
+    padding: 15px 20px;
+    background-color: #f2f2f2;
+    border-bottom: 1px solid #e0e0e0;
+    align-items: center;
+}
+
+.status {
+    width: 15%;
+    font-size: 14px;
+}
+
+.belum-dinilai {
+    color: #444;
+}
+
+.sudah-dinilai {
+    color: #444;
+}
+
+.nama-relawan {
+    width: 20%;
+    font-weight: bold;
+    color: #32337a;
+}
+
+.nama-event {
+    width: 40%;
+    font-size: 14px;
+    color: #444;
+}
+
+.aksi {
+    width: 25%;
+    display: flex;
+    justify-content: space-between;
+    gap: 5px;
+}
+
+/* Button styling */
+.btn-rating, .btn-profile {
+    padding: 8px 10px;
+    border: none;
+    border-radius: 6px;
+    font-size: 14px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    color: white;
+    transition: all 0.2s ease;
+}
+
+.btn-rating {
+    background-color: #e600cc;
+}
+
+.btn-rating:hover {
+    background-color: #c800b3;
+}
+
+.btn-rating.disabled {
+    background-color: #9e9e9e;
+    cursor: not-allowed;
+}
+
+.btn-profile {
+    background-color: #5137b7;
+}
+
+.btn-profile:hover {
+    background-color: #4029a0;
+}
+
+/* Responsif untuk layar kecil */
+@media screen and (max-width: 768px) {
+    .table-header, .table-row {
+        flex-direction: column;
+        padding: 15px;
+    }
+    
+    .header-status, .header-nama, .header-event, .header-aksi,
+    .status, .nama-relawan, .nama-event, .aksi {
+        width: 100%;
+        margin-bottom: 10px;
+    }
+    
+    .aksi {
+        flex-direction: column;
+        gap: 10px;
+    }
+    
+    .btn-rating, .btn-profile {
+        width: 100%;
+        justify-content: center;
+    }
+    
+    .table-header {
+        display: none;
+    }
+    
+    .table-row {
+        margin-bottom: 15px;
+        border-radius: 10px;
+    }
+}

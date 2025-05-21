@@ -6279,6 +6279,7 @@ return array(
     'Tests\\Browser\\PaymentTest' => $baseDir . '/tests/Browser/PaymentTest.php',
     'Tests\\Browser\\RegisterTest' => $baseDir . '/tests/Browser/RegisterTest.php',
     'Tests\\DuskTestCase' => $baseDir . '/tests/DuskTestCase.php',
+    'Tests\\Browser\\EventTest' => $baseDir . '/tests/Browser/EventTest.php',
     'Tests\\Feature\\ExampleTest' => $baseDir . '/tests/Feature/ExampleTest.php',
     'Tests\\TestCase' => $baseDir . '/tests/TestCase.php',
     'Tests\\Unit\\ExampleTest' => $baseDir . '/tests/Unit/ExampleTest.php',

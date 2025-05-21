@@ -6800,6 +6800,7 @@ class ComposerStaticInit88970a0117c062eed55fa8728fc43833
         'Tests\\Browser\\PaymentTest' => __DIR__ . '/../..' . '/tests/Browser/PaymentTest.php',
         'Tests\\Browser\\RegisterTest' => __DIR__ . '/../..' . '/tests/Browser/RegisterTest.php',
         'Tests\\DuskTestCase' => __DIR__ . '/../..' . '/tests/DuskTestCase.php',
+        'Tests\\Browser\\EventTest' => __DIR__ . '/../..' . '/tests/Browser/EventTest.php',
         'Tests\\Feature\\ExampleTest' => __DIR__ . '/../..' . '/tests/Feature/ExampleTest.php',
         'Tests\\TestCase' => __DIR__ . '/../..' . '/tests/TestCase.php',
         'Tests\\Unit\\ExampleTest' => __DIR__ . '/../..' . '/tests/Unit/ExampleTest.php',
