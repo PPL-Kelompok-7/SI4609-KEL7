@@ -13,7 +13,7 @@
             <img src="/EDUVOL LOGO 1.png" alt="EDU Volunteer Logo" class="logo" style="height:40px;margin-right:10px;">
         </div>
         <div class="navbar-right">
-            <span style="color:white;font-size:16px;">Hi, Admin <b>Selsya</b></span>
+            <span style="color:white;font-size:16px;">Hi, Admin <b>{{ Auth::user()->first_name }}</b></span>
             <button class="logout-btn">Log Out</button>
         </div>
     </nav>
