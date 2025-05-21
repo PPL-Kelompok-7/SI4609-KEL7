@@ -40,17 +40,39 @@ class PaymentController extends Controller
         // Simpan file ke storage/app/public/proofs
         $path = $request->file('proof_of_payment')->store('proofs', 'public');
 
-        // Temukan payment yang sesuai (misal berdasarkan user & event)
-        $payment = Payment::where('user_id', auth()->id())
-                          ->where('registration_id', $eventId)
-                          ->first();
-
-        if ($payment) {
-            $payment->proof_of_payment = $path;
-            $payment->save();
+        // Cari registration_id untuk user dan event
+        $registration = \App\Models\RegistEvent::where('user_id', auth()->id())
+            ->where('event_id', $eventId)
+            ->first();
+        if (!$registration) {
+            return redirect()->back()->withErrors(['msg' => 'Registrasi event tidak ditemukan.']);
         }
 
-        return redirect()->back()->with('success', 'Bukti pembayaran berhasil diupload!');
+        // Ambil status "On Verification" dari tabel payment_statuses
+        $status = \App\Models\PaymentStatus::where('name', 'On Verification')->first();
+        if (!$status) {
+            return redirect()->back()->withErrors(['msg' => 'Status pembayaran tidak ditemukan.']);
+        }
+
+        // Ambil payment_method_id default (atau bisa dari input/form jika ada)
+        $paymentMethod = \App\Models\PaymentMethod::first();
+
+        // Simpan ke tabel payments
+        $payment = \App\Models\Payment::updateOrCreate(
+            [
+                'registration_id' => $registration->id,
+                'user_id' => auth()->id(),
+            ],
+            [
+                'amount' => $request->input('amount', 0),
+                'payment_method_id' => $paymentMethod ? $paymentMethod->id : 1,
+                'payment_status_id' => $status->id,
+                'proof_of_payment' => $path,
+                'payment_date' => now(),
+            ]
+        );
+
+        return redirect('/pembayaran/berhasil')->with('success', 'Bukti pembayaran berhasil diupload!');
     }
 
     // History pembayaran user

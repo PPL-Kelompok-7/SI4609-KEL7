@@ -3,7 +3,7 @@
 @section('title', 'Landing Page')
 
 @section('css')
-    <link rel="stylesheet" href="{{ asset('css/pembayaran2.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/checkpembayaran.css') }}">
 @endsection
 
 @section('content')
@@ -20,10 +20,10 @@
             <div class="message-side">
                 <h1 class="success-message">
                     Pembayaran<br>
-                    Kamu <span class="success-highlight">Sedang Ditinjau!</span>
+                    Kamu <span class="success-highlight">Sedang Ditinjau Admin</span>
                 </h1>
                 <div class="action-button">
-                    <a href="{{ url('/history-pembayaran') }}" class="btn-view-event">Lihat Status Pembayaran</a>
+                    <a href="{{ route('history-kegiatan.index') }}" class="btn-view-event">Lihat Status Pembayaran</a>
                 </div>
             </div>
         </div>
