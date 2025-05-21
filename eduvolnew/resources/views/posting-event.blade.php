@@ -14,6 +14,7 @@
             <div class="menu">
                 <a href="#" class="menu-item">Dashboard</a>
                 <a href="#" class="menu-item active">Event Saya</a>
+                <a href="{{ url('/notifikasi') }}" class="menu-item">Notifikasi</a>
             </div>
         </div>
         <!-- Main Content Area -->
@@ -40,7 +41,7 @@
                 <div class="container">
                     <div class="header">
                         <div class="title-left">
-                            <span class="star">★</span>
+                        <img src="{{ asset('images/star.png') }}" alt="Star Icon" style="width: 32px; height: 32px;">
                             <span class="title-text"><span class="green">Event</span> Saya</span>
                         </div>
                         <div class="status-summary">

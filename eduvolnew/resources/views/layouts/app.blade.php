@@ -4,19 +4,30 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Edu Volunteer</title>
+    <!-- Google Fonts - Poppins -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
     <!-- Font Awesome CSS (ikon) -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <!-- Custom CSS -->
     <link rel="stylesheet" href="{{ asset('css/profile.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/sidebar.css') }}">
+    @yield('css')
     <!-- jQuery -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <style>
+        html, body {
+            height: 100%;
+            min-height: 100%;
+            width: 100%;
+            overflow-x: hidden;
+        }
+
         body {
+            display: block !important;
             min-height: 100vh;
-            display: flex;
-            flex-direction: column;
+            height: auto !important;
         }
 
         .main-content {
@@ -26,22 +37,28 @@
 
         .footer-navbar {
             background-color: #0E100F;
-            padding: 1.5rem 0;
-            margin-top: 5rem;
+            padding: 0.7rem 0;
+            margin-top: 2rem;
             color: #FFFFFF;
         }
         
         .footer-navbar img {
             filter: brightness(0) invert(1);
             height: 32px;
+            margin-bottom: 0 !important;
+        }
+        
+        .footer-navbar .location-container {
+            padding-left: 0;
+            padding-right: 0;
+            align-items: flex-start;
+            justify-content: flex-start;
+            margin: 0;
         }
         
         .footer-navbar .location-info {
-            color: #FFFFFF;
-            font-size: 0.9rem;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
+            margin-bottom: 0 !important;
+            margin-top: 0 !important;
         }
         
         .footer-navbar .btn-start {
@@ -92,17 +109,23 @@
         }
         .navbar {
             background-color: #4E36E9;
-            padding: 1rem 0;
+            padding-top: 0.2rem !important;
+            padding-bottom: 0.2rem !important;
             position: fixed;
             top: 0;
             right: 0;
             left: 0;
             z-index: 1030;
+            min-height: 64px;
+            display: flex;
+            align-items: center;
         }
         .navbar-nav .nav-link {
             color: white !important;
             font-weight: 500;
             transition: all 0.3s ease;
+            padding-top: 4px !important;
+            padding-bottom: 4px !important;
         }
         .navbar-nav .nav-link:hover {
             color: rgba(255, 255, 255, 0.8) !important;
@@ -112,6 +135,30 @@
         }
         .navbar-toggler-icon {
             background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba(255, 255, 255, 0.8)' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
+        }
+        .footer-navbar,
+        .footer-navbar .location-info,
+        .footer-navbar .btn-start,
+        .footer-navbar span,
+        .footer-navbar a {
+            color: #fff !important;
+        }
+        .navbar .navbar-nav .nav-link,
+        .navbar .navbar-brand,
+        .navbar .d-flex.align-items-center {
+            padding-top: 6px;
+            padding-bottom: 6px;
+        }
+        .footer-navbar .row.align-items-center {
+            align-items: flex-end !important;
+        }
+        .footer-navbar .location-info,
+        .footer-navbar .btn-start {
+            margin-top: 6px;
+            margin-bottom: 6px;
+        }
+        .footer-navbar .location-container {
+            gap: 2px !important;
         }
     </style>
 </head>
@@ -193,23 +240,23 @@
     <!-- FOOTER -->
     <footer class="footer-navbar">
         <div class="container">
-            <div class="row align-items-center">
-                <div class="col-md-4 col-lg-3">
-                    <img src="{{ asset('logo0.png') }}" alt="Logo EduVolunteer">
+            <div class="row align-items-center" style="height: 70px;">
+                <div class="col-md-4 col-lg-3 d-flex align-items-center justify-content-center h-100">
+                    <img src="{{ asset('logo0.png') }}" alt="Logo EduVolunteer" style="height:40px;">
                 </div>
-                <div class="col-md-4 col-lg-6">
-                    <div class="location-container d-flex flex-column gap-2">
-                        <div class="location-info">
+                <div class="col-md-4 col-lg-6 d-flex align-items-center justify-content-center h-100">
+                    <div class="location-container d-flex flex-column" style="gap: 2px;">
+                        <div class="location-info" style="margin-bottom:0;">
                             <i class="fas fa-map-marker-alt"></i>
                             <span>Bandung, Indonesia</span>
                         </div>
-                        <div class="location-info">
+                        <div class="location-info" style="margin-top:0;">
                             <i class="fas fa-phone"></i>
                             <span>0821-1234-5678</span>
                         </div>
                     </div>
                 </div>
-                <div class="col-md-4 col-lg-3 text-md-end text-center">
+                <div class="col-md-4 col-lg-3 text-md-end text-center d-flex align-items-center justify-content-center h-100">
                     <a href="{{ route('register') }}" class="btn-start">
                         Mulai Perjalananmu
                     </a>

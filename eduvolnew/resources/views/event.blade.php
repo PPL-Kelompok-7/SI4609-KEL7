@@ -45,7 +45,15 @@
                     </div>
 
                     <div class="card-content">
-                        <a href="{{ url('/event-detail/'.$event['id']) }}" class="participate-btn" style="text-decoration:none;display:inline-block;">Ikut Partisipasi</a>
+                        <div class="event-action-row" style="display: flex; align-items: center; gap: 12px;">
+                            <span class="event-love">
+                                <svg width="40" height="40" viewBox="0 0 40 40" fill="none">
+                                    <circle cx="20" cy="20" r="20" fill="white"/>
+                                    <path d="M20 30C19.47 30 18.93 29.83 18.51 29.48C15.41 26.29 8 20.91 8 15.67C8 12.24 10.91 9.33 14.33 9.33C16.16 9.33 17.89 10.24 18.83 11.73C19.77 10.24 21.5 9.33 23.33 9.33C26.75 9.33 29.66 12.24 29.66 15.67C29.66 20.91 22.25 26.29 19.15 29.48C18.73 29.83 18.19 30 17.67 30H20Z" fill="#F44336"/>
+                                </svg>
+                            </span>
+                            <a href="{{ route('event.detail', $event['id']) }}" class="btn-partisipasi">Ikut Partisipasi</a>
+                        </div>
                         <div class="card-details">
                             <h3>{{ $event['title'] }}</h3>
                             <div class="event-info">
@@ -98,7 +106,7 @@
                 </div>
             </div>
         </div>
-        <button class="start-btn" style="background:#69FD8D; color:#000; border:none; border-radius:25px; padding:12px 32px; font-weight:700px; font-size:16px; cursor:pointer;">Mulai Perjalananmu</button>
+        <button class="start-btn" style="background:#69FD8D; color:#fff; border:none; border-radius:25px; padding:12px 32px; font-weight:700px; font-size:16px; cursor:pointer;">Mulai Perjalananmu</button>
     </footer>
 </body>
 </html>

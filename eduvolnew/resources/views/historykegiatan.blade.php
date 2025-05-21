@@ -113,6 +113,17 @@
             </tbody>
         </table>
     </div>
+
+    <!-- <div class="sidebar">
+        <ul class="sidebar-menu">
+            <li>
+                <a href="{{ route('history-kegiatan.index') }}">Event Saya</a>
+            </li>
+            <li>
+                <a href="{{ route('history-pembayaran') }}">History Pembayaran</a>
+            </li>
+        </ul>
+    </div> -->
 </body>
 
 </html>
