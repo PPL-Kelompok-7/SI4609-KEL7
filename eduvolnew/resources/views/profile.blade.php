@@ -29,7 +29,7 @@
             <div class="d-flex gap-5">
                 <div class="text-center">
                     <div class="fs-3 fw-bold text-white">Partisipasi</div>
-                    <div class="fs-1 fw-bold" style="color: #69FD8D;">0</div>
+                    <div class="fs-1 fw-bold" style="color: #69FD8D;">{{ $totalSessions }}</div>
                 </div>
                 <div class="text-center">
                     <div class="fs-3 fw-bold text-white">Rating</div>
@@ -129,43 +129,59 @@
                             <div style="font-size: 1.5em;">{{ $totalHours }}</div>
                         </div>
                     </div>
-                    <div class="row mt-3">
-                        <div class="col-12 p-3" style="background: transparent; border-radius: 12px; border: 1px solid #fff;">
-                            {{-- Badges --}}
-                            <h5 class="mb-3">Badges</h5>
-                            <div class="d-flex justify-content-between align-items-end mb-3" style="padding: 0 10px;">
-                                <div class="text-center flex-fill">
-                                    <img src="{{ asset('img/bronze.png') }}" width="100" style="filter: {{ $badge == 'bronze' ? 'none' : 'grayscale(1)' }};">
-                                    <div class="fw-bold mt-2" style="color: #cd7f32;">BRONZE (1-50)</div>
+                    @php
+                        $bronzeMin = 1; $bronzeMax = 500;
+                        $silverMin = 501; $silverMax = 1000;
+                        $goldMin = 1001; $goldMax = 5000;
+
+                        if ($totalHours >= $goldMin) {
+                            $badgeProgress = min(100, max(0, ($totalHours - $goldMin) / ($goldMax - $goldMin) * 100));
+                            $badgeLabel = 'gold';
+                        } elseif ($totalHours >= $silverMin) {
+                            $badgeProgress = min(100, max(0, ($totalHours - $silverMin) / ($silverMax - $silverMin) * 100));
+                            $badgeLabel = 'silver';
+                        } elseif ($totalHours >= $bronzeMin) {
+                            $badgeProgress = min(100, max(0, ($totalHours - $bronzeMin) / ($bronzeMax - $bronzeMin) * 100));
+                            $badgeLabel = 'bronze';
+                        } else {
+                            $badgeProgress = 0;
+                            $badgeLabel = null;
+                        }
+                    @endphp
+                    <h5 class="mb-3">Badges</h5>
+                    <div class="d-flex justify-content-between align-items-end mb-3" style="padding: 0 10px;">
+                        <div class="text-center flex-fill">
+                            <img src="{{ asset('img/bronze.png') }}" width="100" style="filter: {{ $badge == 'bronze' ? 'none' : 'grayscale(1)' }};">
+                            <div class="fw-bold mt-2" style="color: #cd7f32;">BRONZE (1-500)</div>
+                            @if($badgeLabel == 'bronze')
+                                <div class="progress" style="height: 12px; background: #e0e0e0; max-width: 100px; margin: 0 auto;">
+                                    <div class="progress-bar" style="width: {{ $badgeProgress }}%; background: #FF00C8;">
+                                        {{ round($badgeProgress) }}%
+                                    </div>
                                 </div>
-                                <div class="text-center flex-fill">
-                                    <img src="{{ asset('img/silver.png') }}" width="100" style="filter: {{ $badge == 'silver' ? 'none' : 'grayscale(1)' }};">
-                                    <div class="fw-bold mt-2" style="color: #b0b0b0;">SILVER (51-100)</div>
+                            @endif
+                        </div>
+                        <div class="text-center flex-fill">
+                            <img src="{{ asset('img/silver.png') }}" width="100" style="filter: {{ $badge == 'silver' ? 'none' : 'grayscale(1)' }};">
+                            <div class="fw-bold mt-2" style="color: #b0b0b0;">SILVER (501-1000)</div>
+                            @if($badgeLabel == 'silver')
+                                <div class="progress" style="height: 12px; background: #e0e0e0; max-width: 100px; margin: 0 auto;">
+                                    <div class="progress-bar" style="width: {{ $badgeProgress }}%; background: #FF00C8;">
+                                        {{ round($badgeProgress) }}%
+                                    </div>
                                 </div>
-                                <div class="text-center flex-fill">
-                                    <img src="{{ asset('img/gold.png') }}" width="100" style="filter: {{ $badge == 'gold' ? 'none' : 'grayscale(1)' }};">
-                                    <div class="fw-bold mt-2" style="color: #ffd700;">GOLD (101-150&gt;)</div>
+                            @endif
+                        </div>
+                        <div class="text-center flex-fill">
+                            <img src="{{ asset('img/gold.png') }}" width="100" style="filter: {{ $badge == 'gold' ? 'none' : 'grayscale(1)' }};">
+                            <div class="fw-bold mt-2" style="color: #ffd700;">GOLD (1001-5000)</div>
+                            @if($badgeLabel == 'gold')
+                                <div class="progress" style="height: 12px; background: #e0e0e0; max-width: 100px; margin: 0 auto;">
+                                    <div class="progress-bar" style="width: {{ $badgeProgress }}%; background: #FF00C8;">
+                                        {{ round($badgeProgress) }}%
+                                    </div>
                                 </div>
-                            </div>
-                            @php
-                                $progress = min(100, ($totalHours/150)*100);
-                                $badgeLeft = max(0, min(100, $progress)) - 7;
-                            @endphp
-                            <div class="progress" style="height: 12px; background: #e0e0e0; position: relative;">
-                                <div class="progress-bar" style="width: {{ $progress }}%; background: #FF00C8;"></div>
-                                <span
-                                    class="badge rounded-pill"
-                                    style="
-                                        background: #FF00C8;
-                                        font-size: 1.1em;
-                                        position: absolute;
-                                        top: -22px;
-                                        left: calc({{ $badgeLeft }}% - 22px);
-                                        transition: left 0.3s;
-                                        z-index: 2;
-                                    "
-                                >{{ $totalHours }}</span>
-                            </div>
+                            @endif
                         </div>
                     </div>
                 </div>
