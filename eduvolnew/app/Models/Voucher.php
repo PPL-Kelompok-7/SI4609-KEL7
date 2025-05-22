@@ -2,46 +2,42 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Carbon\Carbon;
 
 class Voucher extends Model
 {
     use HasFactory;
 
+    protected $table = 'vouchers';
+
     protected $fillable = [
-        'code',
-        'discount_amount',
-        'valid_from',
-        'valid_until',
-        'is_active',
-        'max_uses',
-        'current_uses'
+        'voucher_type_id', 'code', 'is_active',
     ];
 
-    protected $casts = [
-        'valid_from' => 'datetime',
-        'valid_until' => 'datetime',
-        'is_active' => 'boolean',
-        'discount_amount' => 'decimal:2'
+    protected $dates = [
+        'created_at', 'updated_at'
     ];
 
-    // Relationship with Payments
-    public function payments()
+    // Relasi ke VoucherType supaya bisa ambil discount_amount, valid_until, dll
+    public function voucherType()
     {
-        return $this->hasMany(Payment::class);
+        return $this->belongsTo(VoucherType::class);
     }
 
-    public function isValid()
+    // Akses attribute discount_amount langsung dari voucherType
+    public function getDiscountAmountAttribute()
     {
-        $now = now();
-        return $this->is_active &&
-               $now->between($this->valid_from, $this->valid_until) &&
-               ($this->max_uses === null || $this->current_uses < $this->max_uses);
+        return $this->voucherType ? $this->voucherType->discount_amount : null;
     }
 
-    public function registEvents()
+    // Akses valid_until dari voucherType, dikonversi ke objek Carbon
+    public function getValidUntilAttribute()
     {
-        return $this->hasMany(RegistEvent::class);
+        if ($this->voucherType && $this->voucherType->valid_until) {
+            return Carbon::parse($this->voucherType->valid_until);
+        }
+        return null;
     }
 }
