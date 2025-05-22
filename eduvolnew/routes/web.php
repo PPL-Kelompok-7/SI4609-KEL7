@@ -9,6 +9,7 @@ use App\Http\Controllers\RelawanController;
 use App\Http\Controllers\HistoryKegiatanController;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\VoucherController;
+use App\Http\Controllers\VoucherUserController;
 use App\Http\Controllers\PaymentController;
 use App\Models\Event;
 use App\Models\Payment;
@@ -133,12 +134,18 @@ Route::middleware(['web', 'auth'])->group(function () {
     })->name('history.pembayaran');
     Route::get('/history-pembayaran', [PaymentController::class, 'history'])->name('history-pembayaran');
 
-    // Voucher Routes
-    Route::get('voucher', [VoucherController::class, 'index'])->name('voucherpengguna');
-    Route::get('/vouchers', [VoucherController::class, 'index'])->name('vouchers.index');
-    Route::get('/makevouchers', [VoucherController::class, 'create'])->name('makevouchers.create');
-    Route::post('/makevouchers', [VoucherController::class, 'store'])->name('makevouchers.store');
+   // Voucher Routes
 
+    //    Route::get('/vouchers', [VoucherController::class, 'index'])->name('vouchers.index');
+
+    //    Route::get('/makevouchers', [VoucherController::class, 'create'])->name('makevouchers.create');
+    //    Route::post('/makevouchers', [VoucherController::class, 'store'])->name('makevouchers.store');
+    Route::get('/vouchers/create', [VoucherController::class, 'create'])->name('vouchers.create');
+    Route::post('/vouchers', [VoucherController::class, 'store'])->name('vouchers.store');
+    Route::get('/voucherpengguna', [VoucherUserController::class, 'index'])->name('voucherpengguna.index');
+    Route::get('/voucher/{id}/use', [VoucherController::class, 'useVoucher'])->name('voucher.use');
+    Route::get('/voucherall', [VoucherUserController::class, 'voucherAll'])->name('voucherall.index');
+    
     // Payment Controller Routes
     Route::get('/payments/{event}', [PaymentController::class, 'show'])->name('payments.show');
     Route::post('/payments/{event}/upload-proof', [PaymentController::class, 'uploadProof'])->name('payments.uploadProof');

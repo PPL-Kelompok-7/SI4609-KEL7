@@ -3343,3 +3343,5 @@
 #67 /Users/cherylregar/Downloads/SI4609-KEL7/eduvolnew/vendor/laravel/framework/src/Illuminate/Foundation/resources/server.php(23): require_once('/Users/cherylre...')
 #68 {main}
 "} 
+[2025-05-22 14:32:44] local.INFO: Login attempt {"email":"john.doe@example.com","password_length":11} 
+[2025-05-22 14:32:44] local.INFO: User logged in successfully {"user_id":1,"email":"john.doe@example.com"} 
