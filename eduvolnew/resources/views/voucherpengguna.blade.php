@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Voucher Pelanggan</title>
-    <link rel="stylesheet" href="{{ asset('css/voucher.css') }}">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ asset('css/voucher.css') }}" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
 </head>
 <body>
     <div class="container">
@@ -23,15 +23,21 @@
                 <div class="voucher-card {{ $voucher->discount_amount >= 50 ? 'green' : 'pink' }}">
                     <div class="voucher-content">
                         <div class="voucher-title">
-                            {{ strtoupper($voucher->code) }}<br/>
+                            {{ strtoupper($voucher->code) }}<br />
                             POTONGAN {{ $voucher->discount_amount }}% UNTUK EVENT
                         </div>
                         <div class="voucher-validity">
                             Valid sampai : {{ $voucher->valid_until ? $voucher->valid_until->format('d/m/Y') : '-' }}
                         </div>
-                        <button class="voucher-button {{ $voucher->is_active ? '' : 'disabled' }}">
-                            {{ $voucher->is_active ? 'Gunakan Voucher' : 'Tidak Aktif' }}
-                        </button>
+                        @if($voucher->is_active)
+                            <a href="{{ route('voucher.use', $voucher->id) }}" class="voucher-button">
+                                Gunakan Voucher
+                            </a>
+                        @else
+                            <button class="voucher-button disabled" disabled>
+                                Tidak Aktif
+                            </button>
+                        @endif
                     </div>
                 </div>
             @endforeach
