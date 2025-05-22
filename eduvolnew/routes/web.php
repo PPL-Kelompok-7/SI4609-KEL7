@@ -14,6 +14,8 @@ use App\Models\Event;
 use App\Models\Payment;
 use App\Http\Controllers\DaftarRelawanController;
 use App\Http\Controllers\NotifikasiController;
+use App\Http\Controllers\MilestoneController;
+use App\Http\Controllers\AdminAuthController;
 
 /*
 |--------------------------------------------------------------------------
@@ -34,6 +36,25 @@ Route::get('/', function () {
 Route::get('/welcome', function () {
     return view('welcome');
 })->name('welcome');
+
+// Tambahan: route login admin (frontend)
+Route::get('/loginadmin', function () {
+    return view('loginadmin');
+})->name('loginadmin');
+
+// Partner Routes
+Route::get('/loginmitra', function () {
+    return view('loginmitra');
+})->name('loginmitra');
+
+Route::get('/registermitra', function () {
+    return view('registermitra');
+})->name('registermitra');
+
+// Admin Authentication Routes (backend)
+Route::get('/admin/login', [AdminAuthController::class, 'showLoginForm'])->name('admin.login');
+Route::post('/admin/login', [AdminAuthController::class, 'login']);
+Route::post('/admin/logout', [AdminAuthController::class, 'logout'])->name('admin.logout');
 
 // Authentication Routes
 Route::middleware('web')->group(function () {
@@ -56,7 +77,15 @@ Route::middleware(['web', 'auth'])->group(function () {
         Route::put('/update-avatar', [ProfileController::class, 'updateAvatar'])->name('profile.update-avatar');
         Route::get('/history', [ProfileController::class, 'history'])->name('profile.history');
         Route::get('/settings', [ProfileController::class, 'settings'])->name('profile.settings');
+        Route::get('/edit-target', [ProfileController::class, 'editTarget'])->name('profile.editTarget');
+        Route::post('/update-target', [ProfileController::class, 'updateTarget'])->name('profile.updateTarget');
     });
+
+    // VerifBayar Route
+    Route::get('/verifbayar', function () {
+        $verifications = []; // array kosong, supaya tidak error
+        return view('verifbayar', compact('verifications'));
+    })->name('verifbayar');
 
     // Event Routes
     Route::prefix('events')->group(function () {
@@ -104,13 +133,11 @@ Route::middleware(['web', 'auth'])->group(function () {
     })->name('history.pembayaran');
     Route::get('/history-pembayaran', [PaymentController::class, 'history'])->name('history-pembayaran');
 
-   // Voucher Routes
-   Route::get('voucher', [VoucherController::class, 'index'])->name('voucherpengguna');
-
-   Route::get('/vouchers', [VoucherController::class, 'index'])->name('vouchers.index');
-
-   Route::get('/makevouchers', [VoucherController::class, 'create'])->name('makevouchers.create');
-   Route::post('/makevouchers', [VoucherController::class, 'store'])->name('makevouchers.store');
+    // Voucher Routes
+    Route::get('voucher', [VoucherController::class, 'index'])->name('voucherpengguna');
+    Route::get('/vouchers', [VoucherController::class, 'index'])->name('vouchers.index');
+    Route::get('/makevouchers', [VoucherController::class, 'create'])->name('makevouchers.create');
+    Route::post('/makevouchers', [VoucherController::class, 'store'])->name('makevouchers.store');
 
     // Payment Controller Routes
     Route::get('/payments/{event}', [PaymentController::class, 'show'])->name('payments.show');
@@ -165,3 +192,5 @@ Route::post('/history-kegiatan/store', [HistoryKegiatanController::class, 'store
 Route::get('/wishlist', function () {
     return view('wishlist');
 })->name('wishlist');
+
+Route::post('/profile/milestone/update-target', [ProfileController::class, 'updateTarget'])->name('profile.milestone.updateTarget');
