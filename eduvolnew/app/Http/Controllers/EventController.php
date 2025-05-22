@@ -159,4 +159,48 @@ class EventController extends Controller
             'statusCounts' => $statusCounts
         ]);
     }
+
+    // Menampilkan daftar event yang perlu diverifikasi (untuk admin)
+    public function verificationIndex(Request $request)
+    {
+        // Ambil status filter dari request
+        $selectedStatuses = $request->input('status', []);
+
+        // Query event dengan relasi status
+        $events = \App\Models\Event::with('status')
+            ->orderBy('created_at', 'desc');
+
+        // Terapkan filter berdasarkan status jika ada yang dipilih (selain 'all')
+        if (!empty($selectedStatuses) && !in_array('all', $selectedStatuses)) {
+            $events->whereHas('status', function ($query) use ($selectedStatuses) {
+                $query->whereIn('name', $selectedStatuses);
+            });
+        }
+
+        $events = $events->get();
+
+        return view('verifevent', compact('events', 'selectedStatuses')); // Kirim juga status yang dipilih ke view
+    }
+
+    // Setujui Event (Admin)
+    public function acceptEvent(Event $event)
+    {
+        // Temukan status 'Sudah Dikonfirmasi' atau status yang sesuai
+        $approvedStatus = \App\Models\EventStatus::where('name', 'Sudah Dikonfirmasi')->first(); // Sesuaikan nama status approved Anda
+
+        // Debugging: Periksa apakah status ditemukan
+        // dd($approvedStatus);
+
+        if (!$approvedStatus) {
+            // Jika status 'Sudah Dikonfirmasi' tidak ditemukan
+            return redirect()->back()->withErrors(['msg' => 'Status event "Sudah Dikonfirmasi" tidak ditemukan. Harap periksa tabel event_statuses.']);
+        }
+
+        // Perbarui status event
+        $event->status_id = $approvedStatus->id;
+        $event->save();
+
+        // Redirect kembali ke halaman verifikasi dengan pesan sukses
+        return redirect()->route('verification.event.index')->with('success', 'Event berhasil disetujui!');
+    }
 } 
