@@ -22,8 +22,8 @@ class ProfileController extends Controller
         $totalHours = $user->teachingSessions()->sum('duration');
 
         // Badge logic
-        if ($totalHours >= 101) $badge = 'gold';
-        elseif ($totalHours >= 51) $badge = 'silver';
+        if ($totalHours >= 1001) $badge = 'gold';
+        elseif ($totalHours >= 501) $badge = 'silver';
         elseif ($totalHours >= 1) $badge = 'bronze';
         else $badge = null;
 
@@ -51,6 +51,9 @@ class ProfileController extends Controller
                 'mobile_phone' => 'nullable|string|max:20',
                 'profile_photo' => 'nullable|image|mimes:jpeg,png,jpg|max:2048'
             ]);
+
+            // Pastikan email tidak diubah
+            unset($validated['email']);
 
             // Handle photo upload
             if ($request->hasFile('profile_photo')) {
@@ -177,8 +180,8 @@ class ProfileController extends Controller
         $totalHours = $user->teachingSessions()->sum('duration');
 
         // Badge logic
-        if ($totalHours >= 101) $badge = 'gold';
-        elseif ($totalHours >= 51) $badge = 'silver';
+        if ($totalHours >= 1001) $badge = 'gold';
+        elseif ($totalHours >= 501) $badge = 'silver';
         elseif ($totalHours >= 1) $badge = 'bronze';
         else $badge = null;
 
@@ -197,7 +200,7 @@ class ProfileController extends Controller
     public function updateTarget(Request $request)
     {
         $request->validate([
-            'target_hours' => 'required|integer|min:1'
+            'target_hours' => 'required|integer|min:1|max:5000'
         ]);
         $user = Auth::user();
         $user->target_hours = $request->target_hours;
