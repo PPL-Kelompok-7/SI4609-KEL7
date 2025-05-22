@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Voucher Pelanggan</title>
+    <title>Voucher All</title>
     <link rel="stylesheet" href="{{ asset('css/voucher.css') }}" />
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
 </head>
@@ -24,7 +24,7 @@
                     <div class="voucher-content">
                         <div class="voucher-title">
                             {{ strtoupper($voucher->code) }}<br />
-                                POTONGAN Rp{{ number_format($voucher->discount_amount, 0, ',', '.') }} UNTUK EVENT
+                            POTONGAN Rp{{ number_format($voucher->discount_amount, 0, ',', '.') }} UNTUK EVENT
                         </div>
                         <div class="voucher-validity">
                             Valid sampai : {{ $voucher->valid_until ? $voucher->valid_until->format('d/m/Y') : '-' }}
@@ -41,45 +41,6 @@
                     </div>
                 </div>
             @endforeach
-        </div>
-
-        <div class="table-container">
-            <table class="voucher-table">
-                <thead>
-                    <tr>
-                        <th>Status</th>
-                        <th>Nama Event</th>
-                        <th>Tanggal<br/>Berlaku</th>
-                        <th>Tanggal<br/>Penggunaan</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td><span class="status-badge unused">Belum Digunakan</span></td>
-                        <td class="event-name">FREE 1x TICKET EVENT VOLUNTEER DI JABAR</td>
-                        <td>04/06/2025</td>
-                        <td></td>
-                    </tr>
-                    <tr>
-                        <td><span class="status-badge milestone">Milestone <span class="sub-status">Belum Mencukupi</span></span></td>
-                        <td class="event-name">POTONGAN 50% UNTUK EVENT</td>
-                        <td>22/04/2025</td>
-                        <td></td>
-                    </tr>
-                    <tr>
-                        <td><span class="status-badge used">Sudah Digunakan</span></td>
-                        <td class="event-name">FREE 1x TICKET EVENT VOLUNTEER DI SULAWESI UTARA</td>
-                        <td>22/01/2025</td>
-                        <td>18/01/2025</td>
-                    </tr>
-                    <tr>
-                        <td><span class="status-badge expired">Expired</span></td>
-                        <td class="event-name">POTONGAN 10% UNTUK BELANJA DI INDOMARET</td>
-                        <td>03/11/2025</td>
-                        <td></td>
-                    </tr>
-                </tbody>
-            </table>
         </div>
     </div>
 </body>
