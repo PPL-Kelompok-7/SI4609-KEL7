@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('payments', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('registration_id')->constrained('registrations');
+            $table->foreignId('registration_id')->constrained('regist_event');
             $table->decimal('amount', 10, 2);
             $table->foreignId('payment_method_id')->constrained('payment_methods');
             $table->foreignId('payment_status_id')->constrained('payment_statuses');
