@@ -43,10 +43,10 @@
                         <div class="row g-4">
                             <div class="col-12 col-md-6">
                                 <div class="form-group">
-                                    <label class="text-white-50 mb-2">Nama Depan</label>
+                                    <label class="text-white-50 mb-2">Nama Depan <span style="color: #ff6b6b;">*</span></label>
                                     <input type="text" class="form-control bg-transparent text-white @error('first_name') is-invalid @enderror" 
                                            name="first_name" value="{{ old('first_name', $user->first_name) }}"
-                                           style="border: 1px solid rgba(255,255,255,0.2);">
+                                           style="border: 1px solid rgba(255,255,255,0.2);" required>
                                     @error('first_name')
                                         <span class="invalid-feedback">{{ $message }}</span>
                                     @enderror
@@ -54,10 +54,10 @@
                             </div>
                             <div class="col-12 col-md-6">
                                 <div class="form-group">
-                                    <label class="text-white-50 mb-2">Nama Belakang</label>
+                                    <label class="text-white-50 mb-2">Nama Belakang <span style="color: #ff6b6b;">*</span></label>
                                     <input type="text" class="form-control bg-transparent text-white @error('last_name') is-invalid @enderror" 
                                            name="last_name" value="{{ old('last_name', $user->last_name) }}"
-                                           style="border: 1px solid rgba(255,255,255,0.2);">
+                                           style="border: 1px solid rgba(255,255,255,0.2);" required>
                                     @error('last_name')
                                         <span class="invalid-feedback">{{ $message }}</span>
                                     @enderror
@@ -65,10 +65,10 @@
                             </div>
                             <div class="col-12 col-md-6">
                                 <div class="form-group">
-                                    <label class="text-white-50 mb-2">Email</label>
+                                    <label class="text-white-50 mb-2">Email <span style="color: #ff6b6b;">*</span></label>
                                     <input type="email" class="form-control bg-transparent text-white @error('email') is-invalid @enderror" 
                                            name="email" value="{{ old('email', $user->email) }}"
-                                           style="border: 1px solid rgba(255,255,255,0.2);">
+                                           style="border: 1px solid rgba(255,255,255,0.2);" disabled required>
                                     @error('email')
                                         <span class="invalid-feedback">{{ $message }}</span>
                                     @enderror
@@ -87,10 +87,10 @@
                             </div>
                             <div class="col-12 col-md-6">
                                 <div class="form-group">
-                                    <label class="text-white-50 mb-2">Profesi</label>
+                                    <label class="text-white-50 mb-2">Profesi <span style="color: #ff6b6b;">*</span></label>
                                     <input type="text" class="form-control bg-transparent text-white @error('profession') is-invalid @enderror" 
                                            name="profession" value="{{ old('profession', $user->profession) }}"
-                                           style="border: 1px solid rgba(255,255,255,0.2);">
+                                           style="border: 1px solid rgba(255,255,255,0.2);" required>
                                     @error('profession')
                                         <span class="invalid-feedback">{{ $message }}</span>
                                     @enderror
@@ -98,10 +98,10 @@
                             </div>
                             <div class="col-12 col-md-6">
                                 <div class="form-group">
-                                    <label class="text-white-50 mb-2">Domisili</label>
+                                    <label class="text-white-50 mb-2">Domisili <span style="color: #ff6b6b;">*</span></label>
                                     <input type="text" class="form-control bg-transparent text-white @error('domicile') is-invalid @enderror" 
                                            name="domicile" value="{{ old('domicile', $user->domicile) }}"
-                                           style="border: 1px solid rgba(255,255,255,0.2);">
+                                           style="border: 1px solid rgba(255,255,255,0.2);" required>
                                     @error('domicile')
                                         <span class="invalid-feedback">{{ $message }}</span>
                                     @enderror
