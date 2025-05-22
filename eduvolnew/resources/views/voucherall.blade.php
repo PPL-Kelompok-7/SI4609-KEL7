@@ -23,7 +23,6 @@
                 <div class="voucher-card {{ $voucher->discount_amount >= 50 ? 'green' : 'pink' }}">
                     <div class="voucher-content">
                         <div class="voucher-title">
-                            {{ strtoupper($voucher->code) }}<br />
                             POTONGAN Rp{{ number_format($voucher->discount_amount, 0, ',', '.') }} UNTUK EVENT
                         </div>
                         <div class="voucher-validity">
