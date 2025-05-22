@@ -18,31 +18,7 @@
             <h1 class="header-title">Voucher Saya</h1>
         </div>
 
-        <div class="voucher-container">
-            @foreach($vouchers as $voucher)
-                <div class="voucher-card {{ $voucher->discount_amount >= 50 ? 'green' : 'pink' }}">
-                    <div class="voucher-content">
-                        <div class="voucher-title">
-                            {{ strtoupper($voucher->code) }}<br />
-                                POTONGAN Rp{{ number_format($voucher->discount_amount, 0, ',', '.') }} UNTUK EVENT
-                        </div>
-                        <div class="voucher-validity">
-                            Valid sampai : {{ $voucher->valid_until ? $voucher->valid_until->format('d/m/Y') : '-' }}
-                        </div>
-                        @if($voucher->is_active)
-                            <a href="{{ route('voucher.use', $voucher->id) }}" class="voucher-button">
-                                Gunakan Voucher
-                            </a>
-                        @else
-                            <button class="voucher-button disabled" disabled>
-                                Tidak Aktif
-                            </button>
-                        @endif
-                    </div>
-                </div>
-            @endforeach
-        </div>
-
+     
         <div class="table-container">
             <table class="voucher-table">
                 <thead>
