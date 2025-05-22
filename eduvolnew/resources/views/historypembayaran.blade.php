@@ -39,7 +39,7 @@
                     @foreach($payments as $payment)
                         <tr>
                             <td>{{ $payment->status_label }}</td>
-                            <td>{{ $payment->registration->event->name ?? '-' }}</td>
+                            <td>{{ $payment->registration->event->title ?? '-' }}</td>
                             <td>
                                 @if($payment->status_label === 'Unpaid')
                                     <a href="{{ route('payments.show', $payment->registration_id) }}" class="detail-btn">
@@ -47,7 +47,7 @@
                                         <span>Lanjutkan Bayar</span>
                                     </a>
                                 @else
-                                    <a href="{{ route('payments.show', $payment->registration_id) }}" class="detail-btn">
+                                    <a href="{{ route('payments.showProof', $payment->id) }}" class="detail-btn">
                                         <span class="icon-eye"><i class="fas fa-eye"></i></span>
                                         <span>Lihat Detail Bayar</span>
                                     </a>

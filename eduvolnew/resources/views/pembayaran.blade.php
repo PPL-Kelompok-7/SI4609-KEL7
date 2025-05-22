@@ -30,7 +30,8 @@
                         </div>
 
                         <!-- Form hanya untuk upload dan preview -->
-                        <form enctype="multipart/form-data">
+                        <form method="POST" action="{{ route('payments.uploadProof', $event->id) }}" enctype="multipart/form-data">
+                            @csrf
                             <label class="upload-button">
                                 <span class="plus-icon">+</span>
                                 <span>Pilih Foto Bukti Bayar (jpg max.10mb)</span>
@@ -38,29 +39,8 @@
                             </label>
                             <div id="file-info" style="margin-top: 8px; color: #333; font-size: 14px;"></div>
                             <a id="lihat-bukti" href="#" target="_blank" style="display:none; color: #007bff; text-decoration:underline; margin-top:8px;">Lihat Bukti</a>
+                            <button type="submit" class="check-status-btn" style="display:inline-block;text-align:center;">Konfirmasi Pembayaran</button>
                         </form>
-
-                        <!-- Tombol redirect -->
-                        <a href="{{ url('/pembayaran/berhasil') }}" class="check-status-btn" style="display:inline-block;text-align:center;">
-                            Cek Status Pembayaran
-                        </a>
-
-                        <script>
-                        document.querySelector('input[name="proof_of_payment"]').addEventListener('change', function(e) {
-                            const fileInfo = document.getElementById('file-info');
-                            const lihatBukti = document.getElementById('lihat-bukti');
-                            if (this.files && this.files[0]) {
-                                const file = this.files[0];
-                                fileInfo.textContent = `File dipilih: ${file.name} (${file.type})`;
-                                const url = URL.createObjectURL(file);
-                                lihatBukti.href = url;
-                                lihatBukti.style.display = 'inline';
-                            } else {
-                                fileInfo.textContent = '';
-                                lihatBukti.style.display = 'none';
-                            }
-                        });
-                        </script>
 
                         @if($payment && $payment->proof_of_payment)
                             <div class="mt-2">
@@ -105,4 +85,20 @@
         </div>
     </div>
 </div>
+<script>
+document.querySelector('input[name="proof_of_payment"]').addEventListener('change', function(e) {
+    const fileInfo = document.getElementById('file-info');
+    const lihatBukti = document.getElementById('lihat-bukti');
+    if (this.files && this.files[0]) {
+        const file = this.files[0];
+        fileInfo.textContent = `File dipilih: ${file.name} (${file.type})`;
+        const url = URL.createObjectURL(file);
+        lihatBukti.href = url;
+        lihatBukti.style.display = 'inline';
+    } else {
+        fileInfo.textContent = '';
+        lihatBukti.style.display = 'none';
+    }
+});
+</script>
 @endsection

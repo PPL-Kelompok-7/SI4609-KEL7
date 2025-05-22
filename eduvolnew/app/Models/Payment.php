@@ -16,7 +16,12 @@ class Payment extends Model
         'payment_status_id',
         'user_id',
         'proof_of_payment',
-        'payment_date',
+        'payment_date'
+    ];
+
+    protected $casts = [
+        'payment_date' => 'datetime',
+        'amount' => 'decimal:2'
     ];
 
     public function registration()
@@ -32,6 +37,12 @@ class Payment extends Model
     public function paymentStatus()
     {
         return $this->belongsTo(PaymentStatus::class);
+    }
+
+    // Relasi dengan User
+    public function user()
+    {
+        return $this->belongsTo(\App\Models\User::class);
     }
 
     // Accessor untuk status mapping (opsional)

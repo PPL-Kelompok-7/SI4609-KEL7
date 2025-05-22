@@ -1,0 +1,30 @@
+/* payment-details.css */
+
+.container {
+    max-width: 800px; /* Atur lebar maksimum container */
+    margin: 40px auto; /* Atur margin atas/bawah dan pusatkan */
+    padding: 0 15px; /* Tambahkan padding horizontal */
+}
+
+.container h1 {
+    font-size: 24px; /* Atur ukuran font judul utama */
+    margin-bottom: 20px; /* Atur margin bawah judul */
+}
+
+.card {
+    margin-top: 20px; /* Atur margin atas card */
+    /* Anda bisa tambahkan styling card lainnya di sini jika perlu */
+}
+
+.card-body p {
+    margin-bottom: 10px; /* Atur margin bawah setiap paragraf detail */
+}
+
+.card-body h3 {
+     margin-top: 20px; /* Atur margin atas judul bukti pembayaran */
+     margin-bottom: 10px; /* Atur margin bawah judul bukti pembayaran */
+}
+
+.btn-secondary {
+    margin-top: 20px; /* Atur margin atas tombol kembali */
+} 
