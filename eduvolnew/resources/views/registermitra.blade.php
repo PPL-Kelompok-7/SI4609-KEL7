@@ -16,6 +16,7 @@
             <p>Silahkan isi data untuk registrasi</p>
             <form action="{{ route('registermitra') }}" method="POST">
                 @csrf
+                <input type="hidden" name="role_id" value="4">
                 @if ($errors->any())
                     <div class="alert alert-danger">
                         <ul>

@@ -1,40 +1,23 @@
-<!DOCTYPE html>
-<html lang="id">
+posting-event.blade.php :
 
-<head>
-    <meta charset="UTF-8">
-    <title>Event Saya</title>
+@extends('layouts.mitra')
+
+@section('title', 'Event Saya')
+
+@section('css')
     <link rel="stylesheet" href="{{ asset('css/posting-event.css') }}">
-</head>
+@endsection
+
+@section('content')
+
 
 <body>
     <div class="main-layout">
-        <!-- Sidebar -->
-        <div class="sidebar">
-            <div class="menu">
-                <a href="#" class="menu-item">Dashboard</a>
-                <a href="#" class="menu-item active">Event Saya</a>
-                <a href="{{ url('/notifikasi') }}" class="menu-item">Notifikasi</a>
-            </div>
-        </div>
+        
         <!-- Main Content Area -->
         <div style="flex:1;">
-            <!-- Navbar Top -->
-            <div class="navbar-top">
-                <div class="navbar-left">
-                    <img src="{{ asset('images/EDUVOL LOGO 1.png') }}" alt="EDU Volunteer" class="eduvol-logo">
-                </div>
-                <div class="school">
-                    <div class="school-logo-circle">
-                        <img src="{{ asset('images\logo-telkom-schools.png') }}" alt="SMK Telkom Bandung">
-                    </div>
-                    <span class="school-name">SMK Telkom Bandung</span>
-                </div>
-                <form action="{{ url('/logout') }}" method="POST">
-                    @csrf
-                    <button type="submit" class="logout-btn">Log Out</button>
-                </form>
-            </div>
+           
+
             <!-- Main Content (existing) -->
             <div class="main-content">
                 <!-- Existing content starts here -->
@@ -77,11 +60,13 @@
                         <tbody>
                             @foreach($events as $event)
                             <tr>
-                                <td><span class="dot coming-soon"></span></td>
-                                <td>{{ $event->title }}</td>
                                 <td>
-                                    <span class="confirmation pending">
-                                        {{ $event->status_id == 1 ? 'Belum Dikonfirmasi' : 'Sudah Dikonfirmasi' }}
+                                    <span class="dot {{ $event['status'] }}"></span>
+                                </td>
+                                <td>{{ $event['title'] }}</td>
+                                <td>
+                                    <span class="confirmation {{ $event['status_id'] == 7 ? 'confirmed' : 'pending' }}">
+                                        {{ $event['status_id'] == 7 ? 'Sudah Dikonfirmasi' : 'Belum Dikonfirmasi' }}
                                     </span>
                                 </td>
                                 <td>

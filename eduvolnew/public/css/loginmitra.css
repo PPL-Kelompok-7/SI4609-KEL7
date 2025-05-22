@@ -318,7 +318,7 @@
       width: 100%;
       padding: 12px;
       background-color: #dedeee;
-      color: #217440;
+      color: #583756;
       border: none;
       border-radius: 20px;
       font-weight: bold;
@@ -328,7 +328,7 @@
     }
     
     button:hover {
-      background-color: #4dd789;
+      background-color: #87598b;
     }
     
     .signup-text {

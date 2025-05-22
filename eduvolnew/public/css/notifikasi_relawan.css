@@ -1,0 +1,130 @@
+/* SI4609-KEL7/eduvolnew/public/css/notifikasi_relawan.css */
+
+/* Reset some default browser styles */
+body {
+    margin: 0;
+    padding: 0;
+    font-family: sans-serif; /* Or the specific font used in the image if known */
+}
+
+/* Style for the main content area */
+.main-content {
+    margin-top: 30px;
+    padding: 30px 20px; /* Increased padding based on image */
+    background-color: #4E36E9; /* Deep purple background color */
+    color: #fff; /* Default text color white */
+    min-height: calc(100vh - 120px); /* Adjust based on header/footer height */
+}
+
+/* Style for the notification header */
+.notif-header {
+    display: flex;
+    align-items: center;
+    gap: 15px; /* Adjusted gap */
+    margin-bottom: 30px; /* Increased margin */
+}
+
+.notif-header svg {
+    width: 40px; /* Adjust size of the bell icon */
+    height: 40px;
+    fill: #fff; /* White color for the bell icon */
+}
+
+.notif-title {
+    font-size: 2.5rem; /* Larger font size for the title */
+    font-weight: bold;
+    color: #69FD8D; /* White color for the title */
+}
+
+.notif-title span {
+    font-weight: normal; /* Make "Saya" not bold */
+    color:#fff;
+    opacity: 0.9; /* Slightly less prominent */
+}
+
+
+/* Style for the tabs */
+.notif-tabs {
+    display: flex;
+    gap: 30px; /* Increased space between tabs */
+    margin-bottom: 30px; /* Increased margin */
+    border-bottom: 1px solid rgba(255, 255, 255, 0.4); /* Slightly thicker/more visible border below tabs */
+    padding-bottom: 15px; /* Increased padding */
+}
+
+.notif-tabs span {
+    font-size: 1.2rem; /* Adjusted font size */
+    cursor: pointer;
+    padding-bottom: 10px; /* Padding to make underline appear below text */
+    opacity: 0.8; /* Make inactive tabs slightly faded */
+    transition: opacity 0.3s ease;
+}
+
+.notif-tabs span.active {
+    opacity: 1; /* Active tab is fully opaque */
+    font-weight: bold;
+    border-bottom: 2px solid #fff; /* White underline for the active tab */
+}
+
+.notif-tabs span:hover {
+    opacity: 1; /* Full opacity on hover */
+}
+
+
+/* Style for the list of notifications */
+.notif-list {
+    display: flex;
+    flex-direction: column;
+    gap: 20px; /* Space between notification cards */
+}
+
+/* Style for individual notification cards */
+.notif-card {
+    background-color: rgba(255, 255, 255, 0.15); /* More opaque semi-transparent white background */
+    border: 1px solid rgba(255, 255, 255, 0.3); /* Slightly thicker/more visible light border */
+    border-radius: 10px; /* Slightly more rounded corners */
+    padding: 20px 25px; /* Increased padding inside the card */
+    backdrop-filter: blur(5px); /* Optional: Adds a slight blur effect */
+}
+
+.notif-card .notif-title {
+    font-size: 1.4rem; /* Larger title inside card */
+    font-weight: bold;
+    margin-bottom: 8px; /* Adjusted margin */
+    color: #fff; /* White title color */
+}
+
+.notif-card .notif-desc {
+    font-size: 1.1rem; /* Adjusted font size */
+    margin-bottom: 15px; /* Increased margin */
+    color: rgba(255, 255, 255, 0.95); /* Almost fully opaque white */
+}
+
+.notif-card .notif-meta {
+    font-size: 1rem; /* Adjusted font size */
+    color: rgba(255, 255, 255, 0.8); /* Less transparent white for meta info */
+    display: flex;
+    align-items: center;
+    justify-content: space-between; /* Space out date/time and link */
+}
+
+.notif-card .notif-date-time {
+    margin-right: 20px; /* Add space between date/time and link */
+}
+
+.notif-card .notif-detail {
+    color: #ffffff; /* White link color based on image */
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.notif-card .notif-detail:hover {
+    text-decoration: underline;
+}
+
+/* Style for the message when there are no notifications */
+.notif-list > div[style*="color:#fff;opacity:0.7;"] {
+    font-size: 1.1rem; /* Adjusted font size */
+    text-align: center;
+    margin-top: 30px; /* Increased margin */
+} 
