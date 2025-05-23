@@ -6,7 +6,9 @@
     <div class="row d-flex align-items-center">
         <div class="col-auto">
             <div class="position-relative">
-                <img src="{{ $user->profile_photo ? Storage::url($user->profile_photo) : asset('profile1.png') }}" 
+                <img src="{{ (!empty($user->profile_photo) && file_exists(public_path('storage/' . $user->profile_photo)))
+                    ? Storage::url($user->profile_photo)
+                    : asset('profile2.png') }}"
                      alt="Foto Profil" 
                      class="profile-header-photo"
                      style="width: 150px; height: 150px; object-fit: cover; border-radius: 50%;">
