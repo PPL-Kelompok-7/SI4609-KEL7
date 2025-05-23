@@ -97,15 +97,20 @@ class EventController extends Controller
 
     public function index()
     {
-        $events = \App\Models\Event::where('status_id', 7)->get()->map(function($event) {
-            return [
-                'id'    => $event->id,
-                'event_photo' => $event->event_photo,
-                'title' => $event->title,
-                'price' => $event->price > 0 ? 'Rp ' . number_format($event->price,0,',','.') : 'Free',
-                'date'  => \Carbon\Carbon::parse($event->start_date)->translatedFormat('d F Y'),
-            ];
-        });
+        $now = now();
+        $events = \App\Models\Event::where('status_id', 7)
+            ->where('end_date', '>=', $now)
+            ->orderBy('start_date', 'asc')
+            ->get()
+            ->map(function($event) {
+                return [
+                    'id'    => $event->id,
+                    'event_photo' => $event->event_photo,
+                    'title' => $event->title,
+                    'price' => $event->price > 0 ? 'Rp ' . number_format($event->price,0,',','.') : 'Free',
+                    'date'  => \Carbon\Carbon::parse($event->start_date)->translatedFormat('d F Y'),
+                ];
+            });
         return view('event', ['events' => $events]);
     }
 
@@ -122,5 +127,85 @@ class EventController extends Controller
             'jam' => $jam,
             'harga' => $harga
         ]);
+    }
+
+    public function postingEvent()
+    {
+        $now = now();
+        $events = Event::all()
+            ->map(function($event) use ($now) {
+                $status = 'coming-soon';
+                if ($event->status_id == 7) { // If event is confirmed
+                    if ($now->between($event->start_date, $event->end_date)) {
+                        $status = 'on-going';
+                    } elseif ($now->gt($event->end_date)) {
+                        $status = 'ended';
+                    }
+                }
+                return [
+                    'id' => $event->id,
+                    'title' => $event->title,
+                    'status_id' => $event->status_id,
+                    'status' => $status,
+                    'start_date' => $event->start_date,
+                    'end_date' => $event->end_date
+                ];
+            });
+
+        // Count events by status
+        $statusCounts = [
+            'on-going' => $events->where('status', 'on-going')->count(),
+            'coming-soon' => $events->where('status', 'coming-soon')->count(),
+            'ended' => $events->where('status', 'ended')->count()
+        ];
+
+        return view('posting-event', [
+            'events' => $events,
+            'statusCounts' => $statusCounts
+        ]);
+    }
+
+    // Menampilkan daftar event yang perlu diverifikasi (untuk admin)
+    public function verificationIndex(Request $request)
+    {
+        // Ambil status filter dari request
+        $selectedStatuses = $request->input('status', []);
+
+        // Query event dengan relasi status
+        $events = \App\Models\Event::with('status')
+            ->orderBy('created_at', 'desc');
+
+        // Terapkan filter berdasarkan status jika ada yang dipilih (selain 'all')
+        if (!empty($selectedStatuses) && !in_array('all', $selectedStatuses)) {
+            $events->whereHas('status', function ($query) use ($selectedStatuses) {
+                $query->whereIn('name', $selectedStatuses);
+            });
+        }
+
+        $events = $events->get();
+
+        return view('verifevent', compact('events', 'selectedStatuses')); // Kirim juga status yang dipilih ke view
+    }
+
+    // Setujui Event (Admin)
+    public function acceptEvent(Event $event)
+    {
+        // Temukan status 'Sudah Dikonfirmasi' atau status yang sesuai
+        $approvedStatus = \App\Models\EventStatus::where('name', 'Sudah Dikonfirmasi')->first(); // Sesuaikan nama status approved Anda
+
+        // Debugging: Periksa apakah status ditemukan
+        // dd($approvedStatus);
+
+        if (!$approvedStatus) {
+            // Jika status 'Sudah Dikonfirmasi' tidak ditemukan
+            return redirect()->back()->withErrors(['msg' => 'Status event "Sudah Dikonfirmasi" tidak ditemukan. Harap periksa tabel event_statuses.']);
+        }
+
+        // Perbarui status event
+        $event->status_id = $approvedStatus->id;
+        $event->save();
+
+        // Redirect kembali ke halaman verifikasi dengan pesan sukses
+        return redirect()->route('verification.event.index')->with('success', 'Event berhasil disetujui!');
     }
 }

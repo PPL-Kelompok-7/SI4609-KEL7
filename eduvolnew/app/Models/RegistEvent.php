@@ -42,4 +42,9 @@ class RegistEvent extends Model
     {
         return $this->belongsTo(Voucher::class);
     }
+
+    public function payment()
+    {
+        return $this->hasOne(Payment::class, 'registration_id');
+    }
 } 

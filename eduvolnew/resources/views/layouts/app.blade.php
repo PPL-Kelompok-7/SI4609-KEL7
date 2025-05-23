@@ -200,7 +200,7 @@
                         <a href="{{ route('history-kegiatan.index') }}" class="nav-link text-white me-3" title="History Kegiatan">
                             <i class="fas fa-list fa-lg"></i>
                         </a>
-                        <a href="#" class="nav-link text-white me-3">
+                        <a href="{{ route('notifikasi.relawan') }}" class="nav-link text-white me-3" title="Notifikasi">
                             <i class="fas fa-bell fa-lg"></i>
                         </a>
                         <div class="dropdown">

@@ -1,37 +1,11 @@
-<!DOCTYPE html>
-<html lang="id">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Detail Event - Ngajar Ngoding</title>
+@extends('layouts.app')
+
+@section('css')
     <link rel="stylesheet" href="{{ asset('css/event-detail.css') }}">
-</head>
-<body>
-    <nav class="navbar-eduv" style="background:#462FD8;display:flex;align-items:center;justify-content:space-between;padding:0 60px;height:70px;position:fixed;top:0;left:0;right:0;z-index:1000;">
-    <div style="display:flex;align-items:center;gap:32px;">
-            <img src="{{ asset('images/EDUVOL LOGO 1.png') }}" alt="EDU Volunteer" style="height:45px;margin-top:10px;margin: bottom 10px;">
-        </div>
-        <div style="display:flex;align-items:center;gap:56px;flex:1;justify-content:center;">
-            <a href="#" style="color:white;text-decoration:none;font-size:15px;font-weight:bold;">Beranda</a>
-            <a href="{{ url('/events') }}" style="color:#38E25D;text-decoration:none;font-size:15px;font-weight:bold;">Agenda</a>
-            <a href="#" style="color:white;text-decoration:none;font-size:15px;font-weight:bold;">Partner Kami</a>
-            <a href="#" style="color:white;text-decoration:none;font-size:15px;font-weight:bold;">Relawan Kami</a>
-        </div>
-        <div style="display:flex;align-items:center;gap:24px;">
-            <img src="{{ asset('images/activity.png') }}" alt="Task" style="height:28px;">
-            <img src="{{ asset('images/notification.png') }}" alt="Notifikasi" style="height:28px;">
-            @auth
-                <a href="{{ url('/profile') }}" style="display:flex;align-items:center;text-decoration:none;">
-                    <img src="{{ Auth::user()->profile_photo ? asset('storage/' . Auth::user()->profile_photo) : asset('profile1.png') }}" alt="Profil" style="height:38px;width:38px;border-radius:50%;object-fit:cover;border:2px solid #4E36E9;">
-                    <span style="color:white;font-size:16px;margin-left:6px;">{{ Auth::user()->first_name }}</span>
-                </a>
-            @else
-                <img src="{{ asset('profile1.png') }}" alt="Profil" style="height:38px;width:38px;border-radius:50%;object-fit:cover;">
-                <span style="color:white;font-size:16px;margin-left:6px;">Profil</span>
-            @endauth
-        </div>
-    </nav>
-    <div class="event-detail-container" style="padding-top:90px;">
+@endsection
+
+@section('content')
+    <div class="event-detail-container" style="padding-top:30px;">
         <div class="breadcrumb">
             <a href="#">Beranda</a>
             <a href="{{ url('/events') }}">Agenda</a> 
@@ -95,47 +69,30 @@
                 </div>
             </div>
         </div>
-
-        <!-- Footer -->
-        <footer class="footer" style="background:#000; color:white; display:flex; justify-content:space-between; align-items:center; padding:20px 60px; position:fixed; left:0; right:0; bottom:0; z-index:1000;">
-            <div style="display:flex; align-items:center; gap:16px;">
-                <img src="{{ asset('images/EDUVOL LOGO 1.png') }}" alt="Logo EduVolunteer" style="height:40px;">
-                <div style="margin-left:175px;">
-                    <div style="display:flex; align-items:center; gap:8px;">
-                        <img src="{{ asset('images/locationputih.png') }}" alt="Location Icon" style="height:18px;">
-                        <span>Bandung, Indonesia</span>
-                    </div>
-                    <div style="display:flex; align-items:center; gap:8px;">
-                        <img src="{{ asset('images/viber.png') }}" alt="Phone Icon" style="height:18px;">
-                        <span>0821-1234-5678</span>
-                    </div>
-                </div>
-            </div>
-            <button class="start-btn" style="background:#69FD8D; color:#000; border:none; border-radius:25px; padding:12px 32px; font-weight:700px; font-size:16px; cursor:pointer;">Mulai Perjalananmu</button>
-        </footer>
     </div>
+@endsection
 
-    <script>
-        const tabDeskripsi = document.querySelector('.tab-menu span:nth-child(1)');
-        const tabSyarat = document.querySelector('.tab-menu span:nth-child(2)');
-        const contentDeskripsi = document.getElementById('tab-deskripsi');
-        const contentSyarat = document.getElementById('tab-syarat');
+@push('scripts')
+<script>
+    const tabDeskripsi = document.querySelector('.tab-menu span:nth-child(1)');
+    const tabSyarat = document.querySelector('.tab-menu span:nth-child(2)');
+    const contentDeskripsi = document.getElementById('tab-deskripsi');
+    const contentSyarat = document.getElementById('tab-syarat');
 
-        // Fungsi untuk menangani klik pada tab "Deskripsi"
-        tabDeskripsi.addEventListener('click', () => {
-            tabDeskripsi.classList.add('active'); // Memberikan kelas 'active' pada tab Deskripsi
-            tabSyarat.classList.remove('active'); // Menghapus kelas 'active' dari tab Syarat
-            contentDeskripsi.style.display = 'block'; // Menampilkan konten Deskripsi
-            contentSyarat.style.display = 'none'; // Menyembunyikan konten Syarat & Ketentuan
-        });
+    // Fungsi untuk menangani klik pada tab "Deskripsi"
+    tabDeskripsi.addEventListener('click', () => {
+        tabDeskripsi.classList.add('active'); // Memberikan kelas 'active' pada tab Deskripsi
+        tabSyarat.classList.remove('active'); // Menghapus kelas 'active' dari tab Syarat
+        contentDeskripsi.style.display = 'block'; // Menampilkan konten Deskripsi
+        contentSyarat.style.display = 'none'; // Menyembunyikan konten Syarat & Ketentuan
+    });
 
-        // Fungsi untuk menangani klik pada tab "Syarat & Ketentuan"
-        tabSyarat.addEventListener('click', () => {
-            tabSyarat.classList.add('active'); // Memberikan kelas 'active' pada tab Syarat & Ketentuan
-            tabDeskripsi.classList.remove('active'); // Menghapus kelas 'active' dari tab Deskripsi
-            contentDeskripsi.style.display = 'none'; // Menyembunyikan konten Deskripsi
-            contentSyarat.style.display = 'block'; // Menampilkan konten Syarat & Ketentuan
-        });
-    </script>
-</body>
-</html>
+    // Fungsi untuk menangani klik pada tab "Syarat & Ketentuan"
+    tabSyarat.addEventListener('click', () => {
+        tabSyarat.classList.add('active'); // Memberikan kelas 'active' pada tab Syarat & Ketentuan
+        tabDeskripsi.classList.remove('active'); // Menghapus kelas 'active' dari tab Deskripsi
+        contentDeskripsi.style.display = 'none'; // Menyembunyikan konten Deskripsi
+        contentSyarat.style.display = 'block'; // Menampilkan konten Syarat & Ketentuan
+    });
+</script>
+@endpush
