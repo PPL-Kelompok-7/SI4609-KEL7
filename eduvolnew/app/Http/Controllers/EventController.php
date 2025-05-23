@@ -208,4 +208,4 @@ class EventController extends Controller
         // Redirect kembali ke halaman verifikasi dengan pesan sukses
         return redirect()->route('verification.event.index')->with('success', 'Event berhasil disetujui!');
     }
-} 
+}
