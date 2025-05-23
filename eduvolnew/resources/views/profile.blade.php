@@ -98,10 +98,11 @@
 
         {{-- Milestone --}}
         <div class="tab-pane fade" id="milestone" role="tabpanel" aria-labelledby="milestone-tab">
-            <div class="px-3 px-md-4">
+            <div class="px-3 px-md-4" dusk="milestone-preview">
                 {{-- Milestone Preview --}}
                 <div class="card p-4 my-4" style="background: transparent; color: #fff; border-radius: 16px; border: 1px solid #fff;">
                     <h4 class="mb-3">Milestone</h4>
+                    
                     {{-- Target Hours & Progress --}}
                     <div class="mb-3 p-3" style="background: transparent; border-radius: 12px; border: 1px solid #fff; width: 100%;">
                         <div class="d-flex align-items-center mb-2" style="gap: 10px;">
@@ -111,7 +112,7 @@
                             </a>
                         </div>
                         <div class="progress" style="height: 20px; background: #e0e0e0;">
-                            <div class="progress-bar" role="progressbar"
+                            <div class="progress-bar" dusk="milestone-progress-bar" role="progressbar"
                                 style="width: {{ min(100, ($totalHours/$targetHours)*100) }}%; background: #7CFC00;">
                             </div>
                         </div>
@@ -131,6 +132,14 @@
                             <div style="font-size: 1.5em;">{{ $totalHours }}</div>
                         </div>
                     </div>
+                    {{-- Teks fallback jika tidak ada sesi --}}
+                    @if($totalSessions == 0)
+                        <div class="text-center text-white mt-2">
+                            Belum ada event yang diikuti, Mulai berkontribusi sekarang!
+                        </div>
+                    @endif
+
+                    {{-- Badge Logic --}}
                     @php
                         $bronzeMin = 1; $bronzeMax = 500;
                         $silverMin = 501; $silverMax = 1000;
@@ -150,10 +159,13 @@
                             $badgeLabel = null;
                         }
                     @endphp
+                    
+                    {{--Badge Display--}}
                     <h5 class="mb-3">Badges</h5>
                     <div class="d-flex justify-content-between align-items-end mb-3" style="padding: 0 10px;">
+                        {{--Bronze Badge--}}
                         <div class="text-center flex-fill">
-                            <img src="{{ asset('img/bronze.png') }}" width="100" style="filter: {{ $badge == 'bronze' ? 'none' : 'grayscale(1)' }};">
+                            <img src="{{ asset('img/bronze.png') }}" width="100" class="{{ $badgeLabel !== 'bronze' ? 'inactive' : '' }}"style="filter: {{ $badge == 'bronze' ? 'none' : 'grayscale(1)' }};">
                             <div class="fw-bold mt-2" style="color: #cd7f32;">BRONZE (1-500)</div>
                             @if($badgeLabel == 'bronze')
                                 <div class="progress" style="height: 12px; background: #e0e0e0; max-width: 100px; margin: 0 auto;">
@@ -163,8 +175,11 @@
                                 </div>
                             @endif
                         </div>
+
+                        {{--Silver Badge--}}
                         <div class="text-center flex-fill">
-                            <img src="{{ asset('img/silver.png') }}" width="100" style="filter: {{ $badge == 'silver' ? 'none' : 'grayscale(1)' }};">
+                            <img src="{{ asset('img/silver.png') }}" 
+                            width="100" class="{{ $badgeLabel !== 'silver' ? 'inactive' : '' }}" style="filter: {{ $badge == 'silver' ? 'none' : 'grayscale(1)' }};">
                             <div class="fw-bold mt-2" style="color: #b0b0b0;">SILVER (501-1000)</div>
                             @if($badgeLabel == 'silver')
                                 <div class="progress" style="height: 12px; background: #e0e0e0; max-width: 100px; margin: 0 auto;">
@@ -174,8 +189,11 @@
                                 </div>
                             @endif
                         </div>
+
+                        {{--Gold Badge--}}
                         <div class="text-center flex-fill">
-                            <img src="{{ asset('img/gold.png') }}" width="100" style="filter: {{ $badge == 'gold' ? 'none' : 'grayscale(1)' }};">
+                            <img src="{{ asset('img/gold.png') }}" 
+                            width="100" class="{{ $badgeLabel !== 'gold' ? 'inactive' : '' }}" style="filter: {{ $badge == 'gold' ? 'none' : 'grayscale(1)' }};">
                             <div class="fw-bold mt-2" style="color: #ffd700;">GOLD (1001-5000)</div>
                             @if($badgeLabel == 'gold')
                                 <div class="progress" style="height: 12px; background: #e0e0e0; max-width: 100px; margin: 0 auto;">
