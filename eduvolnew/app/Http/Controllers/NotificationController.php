@@ -15,7 +15,7 @@ class NotificationController extends Controller
         $payments = Payment::where('user_id', auth()->id())
                            ->with(['registration.event'])
                            // Filter by payment_status_id for 'Terverifikasi'
-                           ->where('payment_status_id', 2) // Assuming 2 is the ID for 'Terverifikasi'
+                           ->where('payment_status_id', 3) // Assuming 3 is the ID for 'Terverifikasi'
                            ->orderBy('payment_date', 'desc') // Or updated_at
                            ->get();
 
