@@ -5,6 +5,8 @@ body {
     margin: 0;
     padding: 0;
     font-family: sans-serif; /* Or the specific font used in the image if known */
+    background-color: #4E36E9; /* Background color matching the image */
+    color: white; /* Default text color */
 }
 
 /* Style for the main content area */
@@ -42,34 +44,78 @@ body {
     opacity: 0.9; /* Slightly less prominent */
 }
 
+/* Style for the container */
+.container {
+    margin-top: 20px;
+}
 
-/* Style for the tabs */
-.notif-tabs {
+h1 {
+    color: white;
+    margin-bottom: 20px;
+    font-size: 2.5rem;
+}
+
+/* Style for the notification tabs */
+.notification-tabs {
     display: flex;
-    gap: 30px; /* Increased space between tabs */
-    margin-bottom: 30px; /* Increased margin */
-    border-bottom: 1px solid rgba(255, 255, 255, 0.4); /* Slightly thicker/more visible border below tabs */
-    padding-bottom: 15px; /* Increased padding */
+    margin-bottom: 20px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.3);
 }
 
-.notif-tabs span {
-    font-size: 1.2rem; /* Adjusted font size */
+.notification-tab {
+    padding: 10px 20px;
     cursor: pointer;
-    padding-bottom: 10px; /* Padding to make underline appear below text */
-    opacity: 0.8; /* Make inactive tabs slightly faded */
-    transition: opacity 0.3s ease;
+    border-bottom: 2px solid transparent;
+    transition: all 0.3s ease;
 }
 
-.notif-tabs span.active {
-    opacity: 1; /* Active tab is fully opaque */
+.notification-tab.active {
+    border-bottom-color: white;
     font-weight: bold;
-    border-bottom: 2px solid #fff; /* White underline for the active tab */
 }
 
-.notif-tabs span:hover {
-    opacity: 1; /* Full opacity on hover */
+/* Style for the notification item */
+.notification-item {
+    background-color: #4E36E9; /* Slightly transparent white background */
+    border-radius: 15px;
+    padding: 15px;
+    margin-bottom: 15px;
+    border: 1px solid white; /* Subtle border */
 }
 
+.notification-item h5 {
+    color: white;
+    margin-bottom: 5px;
+}
+
+.notification-item p {
+    color: rgba(255, 255, 255, 0.8); /* Lighter text color for description */
+    margin-bottom: 10px;
+}
+
+.notification-meta {
+    display: flex;
+    align-items: center;
+    font-size: 0.9rem;
+    color: rgba(255, 255, 255, 0.6); /* Even lighter text for meta */
+    gap: 10px; /* Add a small gap between the date/time and link */
+}
+
+.notification-meta a {
+    color: #fff; /* Link color */
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.notification-meta a:hover {
+    text-decoration: underline;
+}
+
+/* Style for the green text */
+.text-green {
+    color: #69FD8D; /* Green color */
+    font-weight: bold;
+}
 
 /* Style for the list of notifications */
 .notif-list {
@@ -80,7 +126,7 @@ body {
 
 /* Style for individual notification cards */
 .notif-card {
-    background-color: rgba(255, 255, 255, 0.15); /* More opaque semi-transparent white background */
+    background-color: #4E36E9; /* More opaque semi-transparent white background */
     border: 1px solid rgba(255, 255, 255, 0.3); /* Slightly thicker/more visible light border */
     border-radius: 10px; /* Slightly more rounded corners */
     padding: 20px 25px; /* Increased padding inside the card */
