@@ -3345,3 +3345,5 @@
 "} 
 [2025-05-22 14:32:44] local.INFO: Login attempt {"email":"john.doe@example.com","password_length":11} 
 [2025-05-22 14:32:44] local.INFO: User logged in successfully {"user_id":1,"email":"john.doe@example.com"} 
+[2025-05-22 16:33:20] local.INFO: Login attempt {"email":"halolalulola@gmail.com","password_length":11} 
+[2025-05-22 16:33:21] local.INFO: User logged in successfully {"user_id":5,"email":"halolalulola@gmail.com"} 

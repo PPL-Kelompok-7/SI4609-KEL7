@@ -1,0 +1,176 @@
+body {
+    font-family: sans-serif;
+    margin: 0;
+    background-color: #4b0082; /* Indigo */
+    color: #fff;
+}
+
+.container {
+    width: 80%;
+    margin: 0 auto;
+}
+
+header {
+    background-color: #6a5acd; /* SlateBlue */
+    padding: 15px 0;
+}
+
+header .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+header .logo {
+    font-size: 24px;
+    font-weight: bold;
+}
+
+header nav ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+}
+
+header nav ul li {
+    margin-left: 20px;
+}
+
+header nav ul li a {
+    color: #fff;
+    text-decoration: none;
+}
+
+header .icons i {
+    margin-left: 20px;
+    font-size: 18px;
+}
+
+header .icons img {
+    vertical-align: middle;
+    border-radius: 50%;
+    margin-left: 20px;
+}
+
+header .icons span {
+    margin-left: 5px;
+}
+
+main {
+    padding: 40px 0;
+}
+
+.notification-section h2 {
+    font-size: 28px;
+    margin-bottom: 20px;
+    color: #69FD8D; /* Bright Green color */
+}
+
+.notification-section h2 i {
+    margin-right: 10px;
+}
+
+.notification-card {
+    background-color: #5c35c4; /* Darker purple */
+    padding: 20px;
+    border-radius: 10px;
+    margin-bottom: 20px;
+}
+
+.notification-card .status {
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.notification-card .event-details {
+    background-color: #ff00ff; /* Magenta */
+    padding: 15px;
+    border-radius: 8px;
+    margin: 15px 0;
+}
+
+.notification-card .event-details h3 {
+    margin-top: 0;
+    margin-bottom: 10px;
+}
+
+.notification-card .event-details .info {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.notification-card .event-details .info span {
+    margin-right: 20px;
+}
+
+.notification-card .event-details .info span i {
+    margin-right: 5px;
+}
+
+.notification-card .event-details .transaction-code {
+    background-color: #fff;
+    color: #ff00ff; /* Magenta */
+    padding: 5px 10px;
+    border-radius: 5px;
+    font-weight: bold;
+}
+
+.notification-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 15px;
+    font-size: 14px;
+    color: rgba(255, 255, 255, 0.7);
+}
+
+.close-detail-btn {
+    background-color: transparent;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+footer {
+    background-color: #000;
+    padding: 20px 0;
+}
+
+footer .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+footer .footer-left .logo {
+     font-size: 20px;
+     font-weight: bold;
+     margin-bottom: 10px;
+}
+
+footer .footer-left .contact-info p {
+    margin: 5px 0;
+    font-size: 14px;
+}
+
+footer .footer-left .contact-info i {
+    margin-right: 5px;
+}
+
+.start-journey-btn {
+    background-color: #32cd32; /* LimeGreen */
+    color: #000;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 20px;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.start-journey-btn i {
+    margin-right: 5px;
+} 

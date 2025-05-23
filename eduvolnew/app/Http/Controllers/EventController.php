@@ -97,15 +97,20 @@ class EventController extends Controller
 
     public function index()
     {
-        $events = \App\Models\Event::where('status_id', 7)->get()->map(function($event) {
-            return [
-                'id'    => $event->id,
-                'event_photo' => $event->event_photo,
-                'title' => $event->title,
-                'price' => $event->price > 0 ? 'Rp ' . number_format($event->price,0,',','.') : 'Free',
-                'date'  => \Carbon\Carbon::parse($event->start_date)->translatedFormat('d F Y'),
-            ];
-        });
+        $now = now();
+        $events = \App\Models\Event::where('status_id', 7)
+            ->where('end_date', '>=', $now)
+            ->orderBy('start_date', 'asc')
+            ->get()
+            ->map(function($event) {
+                return [
+                    'id'    => $event->id,
+                    'event_photo' => $event->event_photo,
+                    'title' => $event->title,
+                    'price' => $event->price > 0 ? 'Rp ' . number_format($event->price,0,',','.') : 'Free',
+                    'date'  => \Carbon\Carbon::parse($event->start_date)->translatedFormat('d F Y'),
+                ];
+            });
         return view('event', ['events' => $events]);
     }
 

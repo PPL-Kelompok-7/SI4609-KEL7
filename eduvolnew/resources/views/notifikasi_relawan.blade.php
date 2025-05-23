@@ -26,18 +26,23 @@
     {{-- Keep specific JS for this page --}}
     <script>
         document.addEventListener('DOMContentLoaded', function () {
-            fetch('{{ route('notifikasi.relawan') }}')
+            fetch('/api/notifikasi/relawan')
                 .then(response => response.json())
                 .then(data => {
                     const notifList = document.getElementById('volunteer-notif-list');
+                    notifList.innerHTML = ''; // Clear previous content
                     if (data.length === 0) {
                         notifList.innerHTML = '<div style="color:#fff;opacity:0.7;">Belum ada notifikasi pembayaran terverifikasi.</div>';
                     } else {
                         data.forEach(notif => {
                             const notifCard = document.createElement('div');
                             notifCard.classList.add('notif-card');
-                            // Assuming the payment object has registration and event relationships loaded
+                            
+                            // Check if registration and event exist before accessing properties
                             const eventTitle = notif.registration && notif.registration.event ? notif.registration.event.title : 'Unknown Event';
+                            
+                            // Use notif.payment_date if that's the correct field for payment completion date
+                            // Assuming updated_at is the completion timestamp for now based on screenshot
                             const notificationDate = new Date(notif.updated_at).toLocaleDateString('id-ID', { day: 'numeric', month: 'long', year: 'numeric' });
                             const notificationTime = new Date(notif.updated_at).toLocaleTimeString('id-ID', { hour: '2-digit', minute: '2-digit' });
 
