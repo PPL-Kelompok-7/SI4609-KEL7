@@ -31,5 +31,21 @@ class NotificationController extends Controller
         return view('notifikasi_relawan', compact('payments'));
     }
 
+    /**
+     * Display the details of a specific volunteer payment notification.
+     *
+     * @param  int  $id The ID of the payment.
+     * @return \Illuminate\View\View
+     */
+    public function showDetail($id)
+    {
+        // Fetch the specific payment with required relationships
+        $payment = Payment::where('id', $id)
+                           ->with(['registration.event'])
+                           ->firstOrFail(); // Use firstOrFail to show 404 if not found
+
+        return view('detail_notifikasi', compact('payment'));
+    }
+
     // You might also need a method to mark notifications as read, but that's beyond the current scope.
 } 

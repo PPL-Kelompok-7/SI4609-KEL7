@@ -22,7 +22,7 @@
             <p>Pembayaran untuk Event {{ $payment->registration->event->title }} sudah diverifikasi.</p>
             <div class="notification-meta">
                 <span>{{ \Carbon\Carbon::parse($payment->payment_date)->format('d Mei Y | H.i') }}</span>
-                <a href="{{ route('payments.show', $payment->id) }}">Lihat Detail</a>
+                <a href="{{ route('detail.notifikasi', $payment->id) }}">Lihat Detail</a>
             </div>
         </div>
         @empty
