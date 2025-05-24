@@ -74,6 +74,15 @@ posting-event.blade.php :
                                         <span class="icon-eye">👁</span>
                                         <span>Lihat Detail Event</span>
                                     </button>
+                                    {{-- Tombol Hapus (Muncul di setiap event) --}}
+                                    <form action="{{ route('posting-event.destroy', $event['id']) }}" method="POST" onsubmit="return confirm('Apakah Anda yakin ingin menghapus event ini?');">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit" class="delete-btn">
+                                            <img src="{{ asset('images/filled-trash.png') }}" alt="Trash Icon" class="icon-trash-img">
+                                            <span>Hapus Event</span>
+                                        </button>
+                                    </form>
                                 </td>
                             </tr>
                             @endforeach

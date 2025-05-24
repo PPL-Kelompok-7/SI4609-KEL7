@@ -18,7 +18,7 @@
                     <div class="logo-circle">
                         <img src="{{ asset('images/logo-telkom-schools.png') }}" alt="Logo" style="width: 30px; height: 40px;">
                     </div>
-                    <img src="{{ asset($event['image']) }}" alt="Event Banner" class="event-banner">
+                    <img src="{{ !empty($event['event_photo']) ? asset('storage/' . $event['event_photo']) : asset('default-event.png') }}" alt="Event Banner" class="event-banner">
                 </div>
                 <div class="tab-menu">
                     <span class="active">Deskripsi</span>

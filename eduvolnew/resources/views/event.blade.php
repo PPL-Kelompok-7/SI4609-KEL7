@@ -2,6 +2,7 @@
 
 @section('head')
     <title>Event Volunteer</title>
+    <!-- Google Fonts - Poppins -->
 @endsection
 
 @section('css')
@@ -9,6 +10,7 @@
 @endsection
 
 @section('content')
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
 <div class="container">
     <h2 style="margin-top:25px;"><span>Menampilkan</span> <strong>Event Volunteer</strong><br>yang dapat kamu ikuti</h2>
 

@@ -246,6 +246,47 @@ h1 {
     font-size: 16px;
 }
 
+/* Style untuk tombol hapus */
+.delete-btn {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 14px;
+    color: #ff4d4d; /* Warna teks merah */
+    padding: 6px 0;
+    outline: none;
+    margin-top: 5px; /* Beri sedikit jarak dari tombol detail */
+}
+
+.delete-btn:hover {
+    background: none;
+}
+
+/* Style untuk ikon sampah gambar */
+.icon-trash-img {
+    background-color: #ff4d4d; /* Warna latar belakang merah */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    border-radius: 8px;
+    padding: 6px; /* Beri padding agar ikon tidak terlalu mepet */
+    /* Filter untuk mengubah warna gambar jika gambar sumbernya hitam/putih dan transparan */
+    /* filter: invert(36%) sepia(78%) saturate(2584%) hue-rotate(326deg) brightness(102%) contrast(97%); */
+}
+
+.icon-trash-img img {
+    display: block; /* Pastikan gambar mengisi kontainer */
+    width: 100%;
+    height: 100%;
+    object-fit: contain; /* Pertahankan rasio aspek gambar */
+}
+
 .detail-btn::before {
     font-size: 16px;
 }
