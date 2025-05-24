@@ -5,18 +5,19 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\VoucherType;
 use App\Models\Voucher;
+use App\Models\User;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\DB;
 
 class VoucherController extends Controller
 {
-    // Show form to create voucher type and codes
+    // Tampilkan form untuk membuat voucher type dan generate kode voucher
     public function create()
     {
         return view('buatvoucher');
     }
 
-    // Handle form submission, validate & store vouchers
+    // Proses simpan voucher type dan generate kode voucher
     public function store(Request $request)
     {
         $request->validate([
@@ -30,7 +31,6 @@ class VoucherController extends Controller
         DB::beginTransaction();
 
         try {
-            // Create VoucherType
             $voucherType = VoucherType::create([
                 'name' => $request->name,
                 'description' => $request->description,
@@ -38,7 +38,6 @@ class VoucherController extends Controller
                 'valid_until' => $request->valid_until,
             ]);
 
-            // Generate unique voucher codes
             $count = $request->generate_count;
 
             for ($i = 0; $i < $count; $i++) {
@@ -61,7 +60,7 @@ class VoucherController extends Controller
         }
     }
 
-    // Generate unique random code
+    // Fungsi generate kode voucher unik
     private function generateUniqueCode($length = 10)
     {
         do {
@@ -71,11 +70,28 @@ class VoucherController extends Controller
         return $code;
     }
 
-   public function useVoucher($id)
+    // Tampilkan form untuk memberikan voucher ke user tertentu
+    public function useVoucher($id)
     {
-    $voucher = Voucher::findOrFail($id);
-    return view('use', compact('voucher')); // pastikan 'use' bukan 'voucher.use'
+        $voucher = Voucher::findOrFail($id);
+        $users = User::select('id', 'first_name')->get();
+
+        return view('use', compact('voucher', 'users'));
     }
 
+    // Proses pemberian voucher ke user yang dipilih
+    public function assignVoucher(Request $request, $id)
+    {
+        $request->validate([
+            'user_id' => 'required|exists:users,id',
+        ]);
 
+        $voucher = Voucher::findOrFail($id);
+        $voucher->user_id = $request->user_id;
+        $voucher->is_active = 0; // misalnya voucher sudah diberikan, jadi tidak aktif lagi
+        $voucher->save();
+
+        return redirect()->route('voucherall')->with('success', 'Voucher berhasil diberikan kepada user.');
+    }
+    
 }
