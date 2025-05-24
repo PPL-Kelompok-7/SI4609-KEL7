@@ -111,7 +111,7 @@ h2 strong {
 /* Tombol ikut partisipasi */
 .participate-btn {
     background-color: #69FD8D;
-    border: 2px solid white;
+    border: none;
     color: #4E36E9;
     padding: 8px 16px;
     border-radius: 12px;
@@ -124,7 +124,7 @@ h2 strong {
     display: flex;
     align-items: center;
     justify-content: center;
-    height: 17px;
+    height: 40px;
     text-align: center;
     text-decoration: none;
 }

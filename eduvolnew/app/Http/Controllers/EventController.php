@@ -7,6 +7,7 @@ use App\Models\EventStatus;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Carbon; // Import Carbon untuk perbandingan tanggal
 
 class EventController extends Controller
 {
@@ -98,8 +99,16 @@ class EventController extends Controller
     public function index()
     {
         $now = now();
+        $oneDayAfter = $now->copy()->addDay();
+        
         $events = \App\Models\Event::where('status_id', 7)
-            ->where('end_date', '>=', $now)
+            ->where(function($query) use ($now, $oneDayAfter) {
+                $query->where('end_date', '>=', $now)
+                      ->orWhere(function($q) use ($now, $oneDayAfter) {
+                          $q->where('end_date', '>=', $now->copy()->subDay())
+                            ->where('end_date', '<=', $oneDayAfter);
+                      });
+            })
             ->orderBy('start_date', 'asc')
             ->get()
             ->map(function($event) {
@@ -129,28 +138,36 @@ class EventController extends Controller
         ]);
     }
 
-    public function postingEvent()
+    public function postingEventIndex()
     {
-        $now = now();
-        $events = Event::all()
-            ->map(function($event) use ($now) {
-                $status = 'coming-soon';
-                if ($event->status_id == 7) { // If event is confirmed
-                    if ($now->between($event->start_date, $event->end_date)) {
-                        $status = 'on-going';
-                    } elseif ($now->gt($event->end_date)) {
-                        $status = 'ended';
-                    }
+        $events = Event::all()->map(function($event) {
+            // Menggunakan Carbon untuk perbandingan tanggal
+            $now = Carbon::now();
+            $eventEndDate = Carbon::parse($event->end_date);
+
+            $status = 'coming-soon';
+            // Periksa status_id terlebih dahulu untuk event yang dikonfirmasi
+            if ($event->status_id == 7) { // If event is confirmed
+                 // Menggunakan betweenInclusive jika perlu mencakup tanggal mulai dan berakhir
+                if ($now->between($event->start_date, $event->end_date)) {
+                    $status = 'on-going';
+                } elseif ($now->gt($eventEndDate)) { // Menggunakan gt untuk tanggal yang sudah lewat
+                    $status = 'ended';
+                } else { // Jika sudah dikonfirmasi tapi belum on-going atau ended, berarti coming-soon
+                    $status = 'coming-soon';
                 }
-                return [
-                    'id' => $event->id,
-                    'title' => $event->title,
-                    'status_id' => $event->status_id,
-                    'status' => $status,
-                    'start_date' => $event->start_date,
-                    'end_date' => $event->end_date
-                ];
-            });
+            } else { // Jika belum dikonfirmasi, selalu coming-soon di halaman posting event
+                 $status = 'coming-soon';
+            }
+
+            return [
+                'id' => $event->id,
+                'title' => $event->title,
+                'status_id' => $event->status_id, // Tetap sertakan status_id
+                'status' => $status,
+                'date' => $event->end_date // Sertakan end_date untuk perbandingan di view
+            ];
+        });
 
         // Count events by status
         $statusCounts = [
@@ -207,5 +224,19 @@ class EventController extends Controller
 
         // Redirect kembali ke halaman verifikasi dengan pesan sukses
         return redirect()->route('verification.event.index')->with('success', 'Event berhasil disetujui!');
+    }
+
+    public function destroy($id)
+    {
+        $event = Event::findOrFail($id);
+        
+        // Optional: Hapus juga event photo dari storage jika ada
+        if ($event->event_photo && Storage::disk('public')->exists($event->event_photo)) {
+            Storage::disk('public')->delete($event->event_photo);
+        }
+
+        $event->delete();
+
+        return redirect()->route('posting-event.index')->with('success', 'Event berhasil dihapus.');
     }
 }

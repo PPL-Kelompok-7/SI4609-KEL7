@@ -2,6 +2,7 @@
 
 @section('head')
     <title>Event Volunteer</title>
+    <!-- Google Fonts - Poppins -->
 @endsection
 
 @section('css')
@@ -9,6 +10,7 @@
 @endsection
 
 @section('content')
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
 <div class="container">
     <h2 style="margin-top:25px;"><span>Menampilkan</span> <strong>Event Volunteer</strong><br>yang dapat kamu ikuti</h2>
 
@@ -31,7 +33,7 @@
                                 <path d="M20 30C19.47 30 18.93 29.83 18.51 29.48C15.41 26.29 8 20.91 8 15.67C8 12.24 10.91 9.33 14.33 9.33C16.16 9.33 17.89 10.24 18.83 11.73C19.77 10.24 21.5 9.33 23.33 9.33C26.75 9.33 29.66 12.24 29.66 15.67C29.66 20.91 22.25 26.29 19.15 29.48C18.73 29.83 18.19 30 17.67 30H20Z" fill="#F44336"/>
                             </svg>
                         </span>
-                        <a href="{{ route('event.detail', $event['id']) }}" class="btn-partisipasi">Ikut Partisipasi</a>
+                        <a href="{{ route('event.detail', $event['id']) }}" class="participate-btn">Ikut Partisipasi</a>
                     </div>
                     <div class="card-details">
                         <h3>{{ $event['title'] }}</h3>

@@ -206,9 +206,7 @@
                         <div class="dropdown">
                             <a href="#" class="d-flex align-items-center text-decoration-none dropdown-toggle" 
                                data-bs-toggle="dropdown" aria-expanded="false">
-                                <img src="{{ (!empty($user->profile_photo) && file_exists(public_path('storage/' . $user->profile_photo)))
-                                    ? Storage::url($user->profile_photo)
-                                    : asset('profile2.png') }}"
+                                <img src="{{ Auth::user()->profile_photo ? asset('storage/' . Auth::user()->profile_photo) : asset('profile1.png') }}" 
                                      alt="Foto Profil"
                                      class="rounded-circle nav-profile-photo me-2">
                                 <span class="text-white fw-semibold">{{ Auth::user()->first_name }}</span>

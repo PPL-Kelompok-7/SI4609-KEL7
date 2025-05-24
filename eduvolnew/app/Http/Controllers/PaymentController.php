@@ -93,12 +93,25 @@ class PaymentController extends Controller
     }
 
     // History pembayaran user
-    public function history()
+    public function history(Request $request)
     {
         $user = Auth::user();
-        $payments = Payment::whereHas('registration', function($q) use ($user) {
+        $query = Payment::whereHas('registration', function($q) use ($user) {
             $q->where('user_id', $user->id);
-        })->with(['registration.event', 'paymentStatus'])->get();
+        })->with(['registration.event', 'paymentStatus']);
+
+        // Ambil status filter dari request
+        $selectedStatuses = $request->input('status', []);
+
+        // Terapkan filter berdasarkan status jika ada yang dipilih
+        if (!empty($selectedStatuses)) {
+            $query->whereHas('paymentStatus', function ($query) use ($selectedStatuses) {
+                $query->whereIn('name', $selectedStatuses);
+            });
+        }
+
+        $payments = $query->get();
+
         return view('historypembayaran', compact('payments'));
     }
 
@@ -142,36 +155,4 @@ class PaymentController extends Controller
         // Redirect kembali ke halaman verifikasi dengan pesan sukses
         return redirect()->route('verifbayar')->with('success', 'Pembayaran berhasil disetujui!');
     }
-
-    // Setujui Event (Admin)
-    public function acceptEvent(Event $event)
-    {
-        // Temukan status 'Sudah Dikonfirmasi' atau status yang sesuai
-        $approvedStatus = \App\Models\EventStatus::where('name', 'Sudah Dikonfirmasi')->first(); // Sesuaikan nama status approved Anda
-
-        // Debugging: Periksa apakah status ditemukan
-        // dd($approvedStatus);
-
-        if (!$approvedStatus) {
-            // Jika status 'Sudah Dikonfirmasi' tidak ditemukan
-            return redirect()->back()->withErrors(['msg' => 'Status event "Sudah Dikonfirmasi" tidak ditemukan. Harap periksa tabel event_statuses.']);
-        }
-
-        // Perbarui status event
-        $event->status_id = $approvedStatus->id;
-        $event->save();
-
-        // Redirect kembali ke halaman verifikasi dengan pesan sukses
-        return redirect()->route('verification.event.index')->with('success', 'Event berhasil disetujui!');
-    }
-
-    // Notifikasi untuk relawan (verified payments)
-    public function getVolunteerNotifications()
-    {
-        $verifiedPayments = Payment::with('registration.event') // Eager load relationships
-                                   ->orderBy('updated_at', 'desc') // Order by latest update
-                                   ->get(); // Get all payments
-
-        return response()->json($verifiedPayments);
-    }
-} 
+}
