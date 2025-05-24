@@ -24,8 +24,7 @@
                         <div class="text-center mb-5">
                             <div class="position-relative d-inline-block">
                                 <div class="rounded-circle overflow-hidden" style="width: 160px; height: 160px; background: rgba(255, 255, 255, 0.1); border: 2px solid rgba(255, 255, 255, 0.2);">
-                                    <img id="profile-preview" 
-                                         src="{{ $user->profile_photo_url }}" 
+                                    <img id="profile-preview" src="{{ (!empty($user->profile_photo) && file_exists(public_path('storage/' . $user->profile_photo))) ? Storage::url($user->profile_photo) : asset('profile2.png') }}"
                                          alt="Profile Photo" 
                                          style="width: 100%; height: 100%; object-fit: cover; display: block;">
                                 </div>
