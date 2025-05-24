@@ -93,12 +93,25 @@ class PaymentController extends Controller
     }
 
     // History pembayaran user
-    public function history()
+    public function history(Request $request)
     {
         $user = Auth::user();
-        $payments = Payment::whereHas('registration', function($q) use ($user) {
+        $query = Payment::whereHas('registration', function($q) use ($user) {
             $q->where('user_id', $user->id);
-        })->with(['registration.event', 'paymentStatus'])->get();
+        })->with(['registration.event', 'paymentStatus']);
+
+        // Ambil status filter dari request
+        $selectedStatuses = $request->input('status', []);
+
+        // Terapkan filter berdasarkan status jika ada yang dipilih
+        if (!empty($selectedStatuses)) {
+            $query->whereHas('paymentStatus', function ($query) use ($selectedStatuses) {
+                $query->whereIn('name', $selectedStatuses);
+            });
+        }
+
+        $payments = $query->get();
+
         return view('historypembayaran', compact('payments'));
     }
 
