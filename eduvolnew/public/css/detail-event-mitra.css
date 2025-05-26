@@ -1,0 +1,194 @@
+/* SI4609-KEL7/eduvolnew/public/css/detail-event-mitra.css */
+
+body {
+    background-color: #DD0BCE; /* Warna ungu */
+    color: #fff; /* Ubah warna teks default menjadi putih agar terlihat di latar ungu */
+    font-family: 'Poppins', sans-serif; /* Pastikan menggunakan font Poppins */
+    margin: 0; /* Hilangkan margin default body */
+    padding: 0; /* Hilangkan padding default body */
+}
+
+.container {
+    max-width: 960px; /* Sesuaikan jika perlu */
+    margin: 20px auto; /* Sesuaikan margin top */
+    padding: 0 15px;
+}
+
+.breadcrumb {
+    font-size: 14px;
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.breadcrumb a {
+    color: white;
+    text-decoration: none;
+    margin-right: 8px;
+}
+.breadcrumb span {
+    font-weight: bold;
+}
+
+.breadcrumb a::after {
+    content: ">";
+    margin-left: 8px;
+    margin-right: 2px;
+    color: white;
+}
+
+.breadcrumb span::before {
+    content: "";
+    margin-left: 2px;
+}
+
+.event-detail-container {
+    display: flex;
+    flex-wrap: wrap; /* Agar responsif */
+    gap: 30px;
+    margin-bottom: 30px;
+}
+
+.event-image-section {
+    flex: 2; /* Mengambil lebih banyak ruang */
+    min-width: 300px; /* Lebar minimum */
+    position: relative;
+    overflow: hidden;
+    border-radius: 10px;
+}
+
+.event-main-image {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+.event-image-overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0));
+    padding: 20px;
+    color: white;
+}
+
+.event-title-overlay {
+    margin: 0;
+    font-size: 1.8rem;
+}
+
+.event-info-section {
+    flex: 1; /* Mengambil sisa ruang */
+    min-width: 250px; /* Lebar minimum */
+}
+
+.event-info-card {
+    background-color: rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+    padding: 20px;
+    color: white;
+}
+
+.event-info-card h3 {
+    margin-top: 0;
+    font-size: 1.4rem;
+    margin-bottom: 15px;
+}
+
+.event-info-card p {
+    margin-bottom: 10px;
+    font-size: 1rem;
+    display: flex;
+    align-items: center;
+}
+
+.event-info-card p i {
+    margin-right: 10px;
+    color: #00ff85; /* Warna ikon */
+}
+
+.organized-by {
+    margin-top: 20px;
+    padding-top: 15px;
+    border-top: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.organized-by p {
+    margin-bottom: 5px;
+    font-size: 0.9rem;
+    color: rgba(255, 255, 255, 0.8);
+}
+
+.organizer-info {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.organizer-logo {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.event-description-section {
+    background-color: rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+    padding: 20px;
+    color: white;
+}
+
+.tabs {
+    display: flex;
+    margin-bottom: 20px;
+    border-bottom: 2px solid rgba(255, 255, 255, 0.2);
+}
+
+.tab-link {
+    background: none;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    font-size: 1.1rem;
+    color: rgba(255, 255, 255, 0.7);
+    transition: color 0.3s, border-bottom 0.3s;
+}
+
+.tab-link.active {
+    color: #ffffff;
+    border-bottom: 2px solid #00ff85;
+    font-weight: bold;
+}
+
+.tab-content {
+    /* Gaya untuk konten tab */
+}
+
+.tab-pane {
+    display: none; /* Sembunyikan semua tab pane secara default */
+}
+
+.tab-pane.active {
+    display: block; /* Tampilkan tab pane yang aktif */
+}
+
+/* Media Queries for responsiveness */
+@media (max-width: 768px) {
+    .event-detail-container {
+        flex-direction: column;
+    }
+    .event-image-section, .event-info-section {
+        flex: none;
+        width: 100%;
+    }
+    .event-info-card h3 {
+        font-size: 1.2rem;
+    }
+    .tab-link {
+        font-size: 1rem;
+        padding: 10px 15px;
+    }
+} 
