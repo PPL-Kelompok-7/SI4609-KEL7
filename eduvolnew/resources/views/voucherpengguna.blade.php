@@ -18,42 +18,27 @@
             <h1 class="header-title">Voucher Saya</h1>
         </div>
 
-     
         <div class="table-container">
             <table class="voucher-table">
                 <thead>
                     <tr>
-                        <th>Status</th>
-                        <th>Nama Event</th>
-                        <th>Tanggal<br/>Berlaku</th>
-                        <th>Tanggal<br/>Penggunaan</th>
+                        <th>Kode Voucher</th>
+                        <th>Nama Voucher</th>
+                        <th>Tanggal Berlaku</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td><span class="status-badge unused">Belum Digunakan</span></td>
-                        <td class="event-name">FREE 1x TICKET EVENT VOLUNTEER DI JABAR</td>
-                        <td>04/06/2025</td>
-                        <td></td>
-                    </tr>
-                    <tr>
-                        <td><span class="status-badge milestone">Milestone <span class="sub-status">Belum Mencukupi</span></span></td>
-                        <td class="event-name">POTONGAN 50% UNTUK EVENT</td>
-                        <td>22/04/2025</td>
-                        <td></td>
-                    </tr>
-                    <tr>
-                        <td><span class="status-badge used">Sudah Digunakan</span></td>
-                        <td class="event-name">FREE 1x TICKET EVENT VOLUNTEER DI SULAWESI UTARA</td>
-                        <td>22/01/2025</td>
-                        <td>18/01/2025</td>
-                    </tr>
-                    <tr>
-                        <td><span class="status-badge expired">Expired</span></td>
-                        <td class="event-name">POTONGAN 10% UNTUK BELANJA DI INDOMARET</td>
-                        <td>03/11/2025</td>
-                        <td></td>
-                    </tr>
+                    @forelse($vouchers as $voucher)
+                        <tr>
+                            <td>{{ $voucher->kode_voucher }}</td>
+                            <td>{{ $voucher->nama_voucher }}</td>
+                            <td>{{ \Carbon\Carbon::parse($voucher->tanggal_berlaku)->format('d/m/Y') }}</td>
+                        </tr>
+                    @empty
+                        <tr>
+                            <td colspan="3">Tidak ada voucher yang tersedia.</td>
+                        </tr>
+                    @endforelse
                 </tbody>
             </table>
         </div>

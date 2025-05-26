@@ -6,7 +6,9 @@
     <div class="row d-flex align-items-center">
         <div class="col-auto">
             <div class="position-relative">
-                <img src="{{ $user->profile_photo ? Storage::url($user->profile_photo) : asset('profile1.png') }}" 
+                <img src="{{ (!empty($user->profile_photo) && file_exists(public_path('storage/' . $user->profile_photo)))
+                    ? Storage::url($user->profile_photo)
+                    : asset('profile2.png') }}"
                      alt="Foto Profil" 
                      class="profile-header-photo"
                      style="width: 150px; height: 150px; object-fit: cover; border-radius: 50%;">
@@ -110,7 +112,7 @@
                         </div>
                         <div class="progress" style="height: 20px; background: #e0e0e0;">
                             <div class="progress-bar" role="progressbar"
-                                style="width: {{ min(100, ($totalHours/$targetHours)*100) }}%; background: #7CFC00;">
+                                style="width: {{ min(100, ($totalHours/$targetHours)*100) }}%; background-color: #7CFC00;"
                             </div>
                         </div>
                         <div class="mt-2" style="font-size: 1.1em;">

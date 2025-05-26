@@ -1,5 +1,3 @@
-posting-event.blade.php :
-
 @extends('layouts.mitra')
 
 @section('title', 'Event Saya')

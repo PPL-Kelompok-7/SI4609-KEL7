@@ -45,6 +45,19 @@ class Payment extends Model
         return $this->belongsTo(\App\Models\User::class);
     }
 
+    // Relasi dengan Event melalui RegistEvent
+    public function event()
+    {
+        return $this->hasOneThrough(
+            \App\Models\Event::class,
+            \App\Models\RegistEvent::class,
+            'id', // Foreign key on RegistEvent table...
+            'id', // Foreign key on Event table...
+            'registration_id', // Local key on Payment table...
+            'event_id' // Local key on RegistEvent table...
+        );
+    }
+
     // Accessor untuk status mapping (opsional)
     public function getStatusLabelAttribute()
     {

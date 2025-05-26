@@ -40,4 +40,12 @@ class Voucher extends Model
         }
         return null;
     }
+
+    // App\Models\Voucher.php
+
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'user_id');
+    }
+
 }

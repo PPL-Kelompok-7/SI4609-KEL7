@@ -1,12 +1,14 @@
-<!DOCTYPE html>
-<html lang="id">
-<head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Voucher All</title>
-    <link rel="stylesheet" href="{{ asset('css/voucher.css') }}" />
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
-</head>
+
+@extends('layouts.admin')
+
+@section('title', 'Voucher All for Admin')
+
+@section('css')
+    <link rel="stylesheet" href="{{ asset('css/landingpage.css') }}">
+@endsection
+
+@section('content')
+
 <body>
     <div class="container">
         <div class="header">
@@ -19,28 +21,85 @@
         </div>
 
         <div class="voucher-container">
-            @foreach($vouchers as $voucher)
-                <div class="voucher-card {{ $voucher->discount_amount >= 50 ? 'green' : 'pink' }}">
-                    <div class="voucher-content">
-                        <div class="voucher-title">
-                            POTONGAN Rp{{ number_format($voucher->discount_amount, 0, ',', '.') }} UNTUK EVENT
-                        </div>
-                        <div class="voucher-validity">
-                            Valid sampai : {{ $voucher->valid_until ? $voucher->valid_until->format('d/m/Y') : '-' }}
-                        </div>
-                        @if($voucher->is_active)
-                            <a href="{{ route('voucher.use', $voucher->id) }}" class="voucher-button">
-                                Gunakan Voucher
-                            </a>
-                        @else
-                            <button class="voucher-button disabled" disabled>
-                                Tidak Aktif
-                            </button>
-                        @endif
-                    </div>
-                </div>
-            @endforeach
+            
+        @foreach($vouchers as $voucher)
+    <div class="voucher-card {{ $voucher->discount_amount >= 50 ? 'green' : 'pink' }}">
+        <div class="voucher-content">
+            <div class="voucher-title">
+                POTONGAN Rp{{ number_format($voucher->discount_amount, 0, ',', '.') }} UNTUK EVENT
+            </div>
+            <div class="voucher-validity">
+                Valid sampai : {{ $voucher->valid_until ? $voucher->valid_until->format('d/m/Y') : '-' }}
+            </div>
+
+            <div style="display: flex; gap: 10px; flex-wrap: wrap; margin-top: 10px;">
+                @if($voucher->is_active)
+                    <a href="{{ route('voucher.use', $voucher->id) }}" class="voucher-button">
+                        Berikan Voucher
+                    </a>
+                @else
+                    <button class="voucher-button disabled" disabled>
+                        Sudah Diberikan
+                    </button>
+                @endif
+
+                {{-- Button informasi pemberian voucher --}}
+                @if($voucher->user)
+                    <button class="voucher-button info" style="background-color: #4CAF50; color: white;">
+                        Diberikan pada {{ $voucher->user->first_name }}
+                    </button>
+                @else
+                    <button class="voucher-button info" style="background-color: #9E9E9E; color: white;">
+                        Belum Diberikan
+                    </button>
+                @endif
+            </div>
         </div>
     </div>
+    @endforeach
+
+
+        </div>
+    </div>
+
+    <!-- Tabel Detail Voucher -->
+        <h2 class="header-title" style="margin-top: 40px;">Detail Semua Voucher</h2>
+
+        <div class="table-wrapper">
+            <table class="voucher-table">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Voucher Type ID</th>
+                        <th>Code</th>
+                        <th>Discount Amount</th>
+                        <th>Is Active</th>
+                        <th>Valid Until</th>
+                        <th>Is Redeemed</th>
+                        <th>Redeemed By</th>
+                        <th>Redeemed At</th>
+                        <th>User ID</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach($vouchers as $voucher)
+                        <tr>
+                            <td>{{ $voucher->id }}</td>
+                            <td>{{ $voucher->voucher_type_id }}</td>
+                            <td>{{ $voucher->code }}</td>
+                            <td>Rp{{ number_format($voucher->discount_amount, 0, ',', '.') }}</td>
+                            <td>{{ $voucher->is_active ? 'Ya' : 'Tidak' }}</td>
+                            <td>{{ $voucher->valid_until ? $voucher->valid_until->format('d/m/Y') : '-' }}</td>
+                            <td>{{ $voucher->is_redeemed ? 'Ya' : 'Tidak' }}</td>
+                            <td>{{ $voucher->redeemed_by ?? '-' }}</td>
+                            <td>{{ $voucher->redeemed_at ? \Carbon\Carbon::parse($voucher->redeemed_at)->format('d/m/Y H:i') : '-' }}</td>
+                            <td>{{ $voucher->user_id ?? '-' }}</td>
+                        </tr>
+                    @endforeach
+                </tbody>
+            </table>
+        </div>
+
+
 </body>
 </html>

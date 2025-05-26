@@ -15,18 +15,27 @@
                 <span class="star">★</span>
                 <span class="title-text"><span class="green">History</span> Pembayaran Saya</span>
             </div>
-            <div class="filter-box">
+            <form action="{{ route('history-pembayaran') }}" method="GET" class="filter-box">
                 <div class="filter-left">
                     <span class="filter-label">Filter berdasarkan :</span>
-                    <label for="paid"><input type="checkbox" id="paid" name="status" value="Paid"> Paid</label>
-                    <label for="unpaid"><input type="checkbox" id="unpaid" name="status" value="Unpaid"> Unpaid</label>
-                    <label for="verification"><input type="checkbox" id="verification" name="status" value="On Verification"> On Verification</label>
+                    <label for="paid">
+                        <input type="checkbox" id="paid" name="status[]" value="Paid" {{ in_array('Paid', request('status', [])) ? 'checked' : '' }}>
+                        Paid
+                    </label>
+                    <label for="unpaid">
+                        <input type="checkbox" id="unpaid" name="status[]" value="Unpaid" {{ in_array('Unpaid', request('status', [])) ? 'checked' : '' }}>
+                        Unpaid
+                    </label>
+                    <label for="verification">
+                        <input type="checkbox" id="verification" name="status[]" value="On Verification" {{ in_array('On Verification', request('status', [])) ? 'checked' : '' }}>
+                        On Verification
+                    </label>
                 </div>
                 <div class="filter-right">
-                    <button class="apply">Terapkan</button>
-                    <button class="reset">Hapus Filter</button>
+                    <button type="submit" class="apply">Terapkan</button>
+                    <a href="{{ route('history-pembayaran') }}" class="reset">Hapus Filter</a>
                 </div>
-            </div>
+            </form>
             <table class="event-table">
                 <thead>
                     <tr>
