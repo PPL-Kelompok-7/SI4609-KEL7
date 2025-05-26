@@ -19,6 +19,7 @@ use App\Http\Controllers\MilestoneController;
 use App\Http\Controllers\AdminAuthController;
 use App\Http\Controllers\WishlistController;
 use App\Http\Controllers\NotificationController;
+use Illuminate\Http\Request;
 
 /*
 |--------------------------------------------------------------------------
@@ -169,6 +170,14 @@ Route::middleware(['web', 'auth'])->group(function () {
     
     Route::get('/voucher/{id}/use', [VoucherController::class, 'useVoucher'])->name('voucher.use');
     Route::post('/voucher/{id}/assign', [VoucherController::class, 'assignVoucher'])->name('voucher.assign');
+
+    Route::match(['get', 'post'], '/voucher/confirm', function (Request $request) {
+    $kode = $request->kode;
+    $user_id = $request->user_id;
+    $nama = $request->nama;
+
+    return view('confirmgivevoucher', compact('kode', 'user_id', 'nama'));
+    })->name('voucher.confirm');
 
     // Payment Controller Routes
     Route::get('/payments/{event}', [PaymentController::class, 'show'])->name('payments.show');
