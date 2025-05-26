@@ -156,7 +156,7 @@ Route::middleware(['web', 'auth'])->group(function () {
     })->name('history.pembayaran');
     Route::get('/history-pembayaran', [PaymentController::class, 'history'])->name('history-pembayaran');
 
-     // Voucher Routes
+    // Voucher Routes
 
     //    Route::get('/vouchers', [VoucherController::class, 'index'])->name('vouchers.index');
 
@@ -165,10 +165,10 @@ Route::middleware(['web', 'auth'])->group(function () {
     Route::get('/vouchers/create', [VoucherController::class, 'create'])->name('vouchers.create');
     Route::post('/vouchers', [VoucherController::class, 'store'])->name('vouchers.store');
     Route::get('/voucherpengguna', [VoucherUserController::class, 'index'])->name('voucherpengguna.index');
-    Route::get('/voucher/{id}/use', [VoucherController::class, 'useVoucher'])->name('voucher.use');
     Route::get('/voucherall', [VoucherUserController::class, 'voucherAll'])->name('voucherall.index');
     
-
+    Route::get('/voucher/{id}/use', [VoucherController::class, 'useVoucher'])->name('voucher.use');
+    Route::post('/voucher/{id}/assign', [VoucherController::class, 'assignVoucher'])->name('voucher.assign');
 
     // Payment Controller Routes
     Route::get('/payments/{event}', [PaymentController::class, 'show'])->name('payments.show');
@@ -196,10 +196,9 @@ Route::get('/events', [EventController::class, 'index'])->name('events.index');
 Route::get('/event-detail/{id}', [EventController::class, 'show'])->name('event.detail');
 
 // Posting Event
-Route::get('/posting-event', function () {
-    $events = Event::all();
-    return view('posting-event', compact('events'));
-});
+Route::get('/posting-event', [App\Http\Controllers\EventController::class, 'postingEventIndex'])->name('posting-event.index');
+Route::delete('/posting-event/{id}', [App\Http\Controllers\EventController::class, 'destroy'])->name('posting-event.destroy');
+
 Route::get('/formposting-event', function () {
     return view('formposting-event');
 });
