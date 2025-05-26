@@ -1,12 +1,14 @@
-<!DOCTYPE html>
-<html lang="id">
-<head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Voucher All</title>
-    <link rel="stylesheet" href="{{ asset('css/voucher.css') }}" />
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
-</head>
+
+@extends('layouts.admin')
+
+@section('title', 'Voucher All for Admin')
+
+@section('css')
+    <link rel="stylesheet" href="{{ asset('css/landingpage.css') }}">
+@endsection
+
+@section('content')
+
 <body>
     <div class="container">
         <div class="header">
@@ -43,11 +45,11 @@
 
                 {{-- Button informasi pemberian voucher --}}
                 @if($voucher->user)
-                    <button class="voucher-button info" style="background-color: #4CAF50;">
+                    <button class="voucher-button info" style="background-color: #4CAF50; color: white;">
                         Diberikan pada {{ $voucher->user->first_name }}
                     </button>
                 @else
-                    <button class="voucher-button info" style="background-color: #9E9E9E;">
+                    <button class="voucher-button info" style="background-color: #9E9E9E; color: white;">
                         Belum Diberikan
                     </button>
                 @endif
