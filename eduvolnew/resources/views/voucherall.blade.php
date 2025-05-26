@@ -37,7 +37,7 @@
                     </a>
                 @else
                     <button class="voucher-button disabled" disabled>
-                        Tidak Aktif
+                        Sudah Diberikan
                     </button>
                 @endif
 
@@ -59,5 +59,45 @@
 
         </div>
     </div>
+
+    <!-- Tabel Detail Voucher -->
+        <h2 class="header-title" style="margin-top: 40px;">Detail Semua Voucher</h2>
+
+        <div class="table-wrapper">
+            <table class="voucher-table">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Voucher Type ID</th>
+                        <th>Code</th>
+                        <th>Discount Amount</th>
+                        <th>Is Active</th>
+                        <th>Valid Until</th>
+                        <th>Is Redeemed</th>
+                        <th>Redeemed By</th>
+                        <th>Redeemed At</th>
+                        <th>User ID</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach($vouchers as $voucher)
+                        <tr>
+                            <td>{{ $voucher->id }}</td>
+                            <td>{{ $voucher->voucher_type_id }}</td>
+                            <td>{{ $voucher->code }}</td>
+                            <td>Rp{{ number_format($voucher->discount_amount, 0, ',', '.') }}</td>
+                            <td>{{ $voucher->is_active ? 'Ya' : 'Tidak' }}</td>
+                            <td>{{ $voucher->valid_until ? $voucher->valid_until->format('d/m/Y') : '-' }}</td>
+                            <td>{{ $voucher->is_redeemed ? 'Ya' : 'Tidak' }}</td>
+                            <td>{{ $voucher->redeemed_by ?? '-' }}</td>
+                            <td>{{ $voucher->redeemed_at ? \Carbon\Carbon::parse($voucher->redeemed_at)->format('d/m/Y H:i') : '-' }}</td>
+                            <td>{{ $voucher->user_id ?? '-' }}</td>
+                        </tr>
+                    @endforeach
+                </tbody>
+            </table>
+        </div>
+
+
 </body>
 </html>
