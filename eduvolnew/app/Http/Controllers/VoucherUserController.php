@@ -17,7 +17,7 @@ class VoucherUserController extends Controller
      public function voucherAll()
     {
         // Menampilkan halaman voucherall
-        $vouchers = Voucher::with('voucherType')->where('is_active', 1)->get();
+        $vouchers = Voucher::with(['voucherType', 'user'])->get();
         return view('voucherall', compact('vouchers'));
     }
 }

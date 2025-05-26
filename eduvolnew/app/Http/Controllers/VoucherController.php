@@ -80,18 +80,26 @@ class VoucherController extends Controller
     }
 
     // Proses pemberian voucher ke user yang dipilih
-    public function assignVoucher(Request $request, $id)
+   public function assignVoucher(Request $request, $id)
     {
-        $request->validate([
-            'user_id' => 'required|exists:users,id',
-        ]);
+    $request->validate([
+        'user_id' => 'required|exists:users,id',
+    ]);
 
-        $voucher = Voucher::findOrFail($id);
-        $voucher->user_id = $request->user_id;
-        $voucher->is_active = 0; // misalnya voucher sudah diberikan, jadi tidak aktif lagi
-        $voucher->save();
+    $voucher = Voucher::findOrFail($id);
+    $user = User::findOrFail($request->user_id);
 
-        return redirect()->route('voucherall')->with('success', 'Voucher berhasil diberikan kepada user.');
+    $voucher->user_id = $request->user_id;
+    $voucher->is_active = 0;
+    $voucher->save();
+
+    // Redirect ke halaman konfirmasi dengan data voucher dan user
+    return redirect()->route('voucher.confirm', [
+        'kode' => $voucher->code,
+        'user_id' => $user->id,
+        'nama' => $user->first_name
+    ]);
     }
+
     
 }
