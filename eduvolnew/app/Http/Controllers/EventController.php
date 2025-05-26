@@ -138,6 +138,22 @@ class EventController extends Controller
         ]);
     }
 
+    // Method untuk menampilkan detail event untuk mitra
+    public function showMitra($id)
+    {
+        $event = Event::findOrFail($id);
+        // Format tanggal dan jam
+        $tanggal = \Carbon\Carbon::parse($event->start_date)->translatedFormat('d F Y');
+        $jam = $event->start_time . ' - ' . $event->end_time;
+        $harga = $event->price > 0 ? 'Rp' . number_format($event->price,0,',','.') : 'Gratis';
+        return view('detailevent_mitra', [
+            'event' => $event,
+            'tanggal' => $tanggal,
+            'jam' => $jam,
+            'harga' => $harga
+        ]);
+    }
+
     public function postingEventIndex()
     {
         $events = Event::all()->map(function($event) {

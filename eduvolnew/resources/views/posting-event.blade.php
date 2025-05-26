@@ -68,10 +68,13 @@
                                     </span>
                                 </td>
                                 <td>
-                                    <button class="detail-btn">
-                                        <span class="icon-eye">👁</span>
-                                        <span>Lihat Detail Event</span>
-                                    </button>
+                                    {{-- Bungkus tombol dengan tag anchor --}}
+                                    <a href="{{ route('event.detail.mitra', $event['id']) }}" style="text-decoration: none;"> 
+                                        <button class="detail-btn">
+                                            <span class="icon-eye">👁</span>
+                                            <span>Lihat Detail Event</span>
+                                        </button>
+                                    </a> 
                                     {{-- Tombol Hapus (Muncul di setiap event) --}}
                                     <form action="{{ route('posting-event.destroy', $event['id']) }}" method="POST" onsubmit="return confirm('Apakah Anda yakin ingin menghapus event ini?');">
                                         @csrf
