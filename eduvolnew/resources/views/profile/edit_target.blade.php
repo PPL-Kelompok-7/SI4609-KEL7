@@ -8,11 +8,11 @@
             @csrf
             <div class="mb-3">
                 <label for="target_hours" class="form-label" style="font-size: 1.1em;">Target Hours :</label>
-                <input type="number" name="target_hours" id="target_hours" value="{{ old('target_hours', $targetHours) }}" min="1" max="5000" class="form-control w-auto d-inline-block" style="width: 100px; display: inline-block;" required>
+                <input type="number" name="target_hours" id="target_hours" value="{{ old('target_hours', $targetHours) }}" min="1" max="5000" class="form-control w-auto d-inline-block" style="width: 100px; display: inline-block;" required dusk="target-hours-input">
             </div>
             <div class="d-flex gap-2 mt-3">
                 <a href="{{ route('profile') }}" class="btn btn-outline-light">Cancel</a>
-                <button type="submit" class="btn" style="background: #69FD8D; color: #222;">Save</button>
+                <button type="submit" class="btn" style="background: #69FD8D; color: #222;" dusk="save-target-btn">Save</button>
             </div>
         </form>
     </div>
