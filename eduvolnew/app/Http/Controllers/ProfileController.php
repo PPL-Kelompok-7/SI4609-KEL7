@@ -8,13 +8,29 @@ use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Log;
 use App\Models\TeachingSession;
+use App\Models\Event;
+use Illuminate\Support\Facades\DB;
 
 class ProfileController extends Controller
 {
     public function index()
     {
-        $user = \App\Models\User::find(Auth::id());
-        $events = \App\Models\Event::orderBy('start_date', 'desc')->take(2)->get();
+        $user = Auth::user();
+
+        // Ambil event_id dari regist_event yang sudah dibayar (payment_status_id = 3) dan event sudah ended (event_status_id = 9)
+        $completedEventIds = DB::table('regist_event')
+            ->join('payments', 'regist_event.id', '=', 'payments.registration_id')
+            ->join('events', 'regist_event.event_id', '=', 'events.id')
+            ->where('regist_event.user_id', $user->id)
+            ->where('payments.payment_status_id', 3) // Sudah dibayar/lunas
+            ->where('events.status_id', 9)           // Event sudah ended (ganti sesuai nama kolom)
+            ->pluck('regist_event.event_id');
+
+        // Ambil detail event, urutkan dari terbaru ke lama (misal: end_date DESC), maksimal 10 event
+        $featuredEvents = Event::whereIn('id', $completedEventIds)
+            ->orderByDesc('end_date')
+            ->take(10)
+            ->get();
 
         // Milestone data
         $targetHours = $user->target_hours;
@@ -28,7 +44,7 @@ class ProfileController extends Controller
         else $badge = null;
 
         return view('profile', compact(
-            'user', 'events', 'targetHours', 'totalSessions', 'totalHours', 'badge'
+            'user', 'featuredEvents', 'targetHours', 'totalSessions', 'totalHours', 'badge'
         ));
     }
 

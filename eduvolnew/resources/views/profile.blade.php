@@ -64,16 +64,16 @@
                 Featured Event <i class="fas fa-pencil-alt"></i>
             </div>
             <div class="row mb-4 px-3 px-md-4">
-                @forelse($events as $event)
+                @forelse($featuredEvents as $event)
                     <div class="col-md-6 mb-3">
                         <div class="card h-100" style="background: rgba(255,255,255,0.05); border: none;">
                             <img src="{{ $event->event_photo ? Storage::url($event->event_photo) : asset('default-event.png') }}" class="card-img-top" alt="Event Banner" style="height: 180px; object-fit: cover;">
                             <div class="card-body">
-                                <h5 class="card-title">{{ $event->title }}</h5>
-                                <p class="card-text mb-1">
+                                <h5 class="card-title text-white">{{ $event->title }}</h5>
+                                <p class="card-text mb-1 text-white">
                                     <i class="fas fa-calendar-alt me-1"></i> {{ \Carbon\Carbon::parse($event->start_date)->translatedFormat('d F Y') }}
                                 </p>
-                                <p class="card-text mb-1">
+                                <p class="card-text mb-1 text-white">
                                     <i class="fas fa-map-marker-alt me-1"></i> {{ $event->location }}
                                 </p>
                                 <!-- Rating jika ada -->
@@ -85,7 +85,7 @@
                     </div>
                 @empty
                     <div class="col-12">
-                        <p class="text-white">Belum ada event yang tersedia.</p>
+                        <p class="text-white">Belum ada event yang selesai diikuti.</p>
                     </div>
                 @endforelse
             </div>
@@ -110,9 +110,9 @@
                                 <i class="bi bi-pencil"></i> Edit Target
                             </a>
                         </div>
-                        <div class="progress" style="height: 20px; background: #e0e0e0;">
+                        <div class="progress mb-4" style="height: 20px; background: #e0e0e0;">
                             <div class="progress-bar" role="progressbar"
-                                style="width: {{ min(100, ($totalHours/$targetHours)*100) }}%; background-color: #7CFC00;"
+                                style="width: {{ min(100, ($totalHours/$targetHours)*100) }}%; background-color: #7CFC00;">
                             </div>
                         </div>
                         <div class="mt-2" style="font-size: 1.1em;">
