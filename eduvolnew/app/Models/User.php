@@ -67,4 +67,11 @@ class User extends Authenticatable
         }
         return asset('profile2.png');
     }
+
+    public function completedEvents()
+    {
+        return $this->belongsToMany(Event::class, 'regist_event', 'user_id', 'event_id')
+            ->wherePivot('status', 'completed')
+            ->orderByDesc('end_date'); // atau 'start_date'
+    }
 }
