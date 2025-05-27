@@ -18,7 +18,7 @@
             <div class="d-flex flex-column gap-2 mt-3">
                 <div class="fs-3 fw-bold text-white">Relawan</div>
                 <div class="fs-2 fw-bold" style="color: #69FD8D;">{{ $user->first_name }} {{ $user->last_name }}</div>
-                <a href="{{ route('profile.edit') }}" class="btn btn-light btn-sm fw-bold text-primary" style="max-width: 120px;">
+                <a href="{{ route('profile.edit') }}" class="btn btn-light btn-sm fw-bold text-primary" style="max-width: 120px;" dusk="edit-profile-btn">
                     <i class="fas fa-pencil-alt"></i> Edit Profil
                 </a>
                 <div class="text-white user-role-location">
@@ -51,7 +51,7 @@
                 <button class="nav-link" id="review-tab" data-bs-toggle="tab" data-bs-target="#review" type="button" role="tab" aria-controls="review" aria-selected="false">Review</button>
             </li>
             <li class="nav-item" role="presentation">
-                <button class="nav-link" id="milestone-tab" data-bs-toggle="tab" data-bs-target="#milestone" type="button" role="tab" aria-controls="milestone" aria-selected="false">Milestone</button>
+                <button class="nav-link" id="milestone-tab" data-bs-toggle="tab" data-bs-target="#milestone" type="button" role="tab" aria-controls="milestone" aria-selected="false" dusk="milestone-tab">Milestone</button>
             </li>
         </ul>
     </div>
@@ -106,7 +106,7 @@
                     <div class="mb-3 p-3" style="background: transparent; border-radius: 12px; border: 1px solid #fff; width: 100%;">
                         <div class="d-flex align-items-center mb-2" style="gap: 10px;">
                             <span style="font-size: 1.1em;">Target Hours : <b>{{ $targetHours }}</b></span>
-                            <a href="{{ route('profile.editTarget') }}" class="btn btn-outline-light btn-sm ms-2">
+                            <a href="{{ route('profile.editTarget') }}" class="btn btn-outline-light btn-sm ms-2" dusk="edit-target-btn">
                                 <i class="bi bi-pencil"></i> Edit Target
                             </a>
                         </div>
@@ -124,11 +124,11 @@
                     <div class="mb-3 row text-center" style="gap: 0;">
                         <div class="col-6 p-3" style="background: transparent; border-radius: 12px; border: 1px solid #fff;">
                             <div class="fw-bold" style="font-size: 1.1em;">Total Sessions :</div>
-                            <div style="font-size: 1.5em;">{{ $totalSessions }}</div>
+                            <div dusk="total-sessions">{{ $totalSessions }}</div>
                         </div>
                         <div class="col-6 p-3" style="background: transparent; border-radius: 12px; border: 1px solid #fff;">
                             <div class="fw-bold" style="font-size: 1.1em;">Total Hours :</div>
-                            <div style="font-size: 1.5em;">{{ $totalHours }}</div>
+                            <div dusk="total-hours">{{ $totalHours }}</div>
                         </div>
                     </div>
                     @php
@@ -153,7 +153,7 @@
                     <h5 class="mb-3">Badges</h5>
                     <div class="d-flex justify-content-between align-items-end mb-3" style="padding: 0 10px;">
                         <div class="text-center flex-fill">
-                            <img src="{{ asset('img/bronze.png') }}" width="100" style="filter: {{ $badge == 'bronze' ? 'none' : 'grayscale(1)' }};">
+                            <img src="{{ asset('img/bronze.png') }}" width="100" style="filter: {{ $badge == 'bronze' ? 'none' : 'grayscale(1)' }};" dusk="badge-bronze">
                             <div class="fw-bold mt-2" style="color: #cd7f32;">BRONZE (1-500)</div>
                             @if($badgeLabel == 'bronze')
                                 <div class="progress" style="height: 12px; background: #e0e0e0; max-width: 100px; margin: 0 auto;">
@@ -164,7 +164,7 @@
                             @endif
                         </div>
                         <div class="text-center flex-fill">
-                            <img src="{{ asset('img/silver.png') }}" width="100" style="filter: {{ $badge == 'silver' ? 'none' : 'grayscale(1)' }};">
+                            <img src="{{ asset('img/silver.png') }}" width="100" style="filter: {{ $badge == 'silver' ? 'none' : 'grayscale(1)' }};" dusk="badge-silver">
                             <div class="fw-bold mt-2" style="color: #b0b0b0;">SILVER (501-1000)</div>
                             @if($badgeLabel == 'silver')
                                 <div class="progress" style="height: 12px; background: #e0e0e0; max-width: 100px; margin: 0 auto;">
@@ -175,7 +175,7 @@
                             @endif
                         </div>
                         <div class="text-center flex-fill">
-                            <img src="{{ asset('img/gold.png') }}" width="100" style="filter: {{ $badge == 'gold' ? 'none' : 'grayscale(1)' }};">
+                            <img src="{{ asset('img/gold.png') }}" width="100" style="filter: {{ $badge == 'gold' ? 'none' : 'grayscale(1)' }};" dusk="badge-gold">
                             <div class="fw-bold mt-2" style="color: #ffd700;">GOLD (1001-5000)</div>
                             @if($badgeLabel == 'gold')
                                 <div class="progress" style="height: 12px; background: #e0e0e0; max-width: 100px; margin: 0 auto;">

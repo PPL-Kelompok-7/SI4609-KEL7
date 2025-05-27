@@ -26,13 +26,13 @@
                                 <div class="rounded-circle overflow-hidden" style="width: 160px; height: 160px; background: rgba(255, 255, 255, 0.1); border: 2px solid rgba(255, 255, 255, 0.2);">
                                     <img id="profile-preview" src="{{ (!empty($user->profile_photo) && file_exists(public_path('storage/' . $user->profile_photo))) ? Storage::url($user->profile_photo) : asset('profile2.png') }}"
                                          alt="Profile Photo" 
-                                         style="width: 100%; height: 100%; object-fit: cover; display: block;">
+                                         style="width: 100%; height: 100%; object-fit: cover; display: block;" dusk="profile-preview">
                                 </div>
                                 <label for="profile_photo" class="position-absolute bottom-0 end-0 bg-white rounded-circle p-2 d-flex align-items-center justify-content-center" 
                                        style="width: 40px; height: 40px; cursor: pointer; box-shadow: 0 2px 8px rgba(0,0,0,0.2);">
                                     <i class="fas fa-camera text-primary"></i>
                                 </label>
-                                <input type="file" id="profile_photo" name="profile_photo" class="d-none" accept="image/*">
+                                <input type="file" id="profile_photo" name="profile_photo" class="d-none" accept="image/*" dusk="profile_photo">
                             </div>
                             @error('profile_photo')
                                 <span class="text-danger d-block mt-2">{{ $message }}</span>
@@ -45,7 +45,7 @@
                                     <label class="text-white-50 mb-2">Nama Depan <span style="color: #ff6b6b;">*</span></label>
                                     <input type="text" class="form-control bg-transparent text-white @error('first_name') is-invalid @enderror" 
                                            name="first_name" value="{{ old('first_name', $user->first_name) }}"
-                                           style="border: 1px solid rgba(255,255,255,0.2);" required>
+                                           style="border: 1px solid rgba(255,255,255,0.2);" required dusk="first_name">
                                     @error('first_name')
                                         <span class="invalid-feedback">{{ $message }}</span>
                                     @enderror
@@ -56,7 +56,7 @@
                                     <label class="text-white-50 mb-2">Nama Belakang <span style="color: #ff6b6b;">*</span></label>
                                     <input type="text" class="form-control bg-transparent text-white @error('last_name') is-invalid @enderror" 
                                            name="last_name" value="{{ old('last_name', $user->last_name) }}"
-                                           style="border: 1px solid rgba(255,255,255,0.2);" required>
+                                           style="border: 1px solid rgba(255,255,255,0.2);" required dusk="last_name">
                                     @error('last_name')
                                         <span class="invalid-feedback">{{ $message }}</span>
                                     @enderror
@@ -78,7 +78,7 @@
                                     <label class="text-white-50 mb-2">Mobile Phone</label>
                                     <input type="text" class="form-control bg-transparent text-white @error('mobile_phone') is-invalid @enderror" 
                                            name="mobile_phone" value="{{ old('mobile_phone', $user->mobile_phone) }}"
-                                           style="border: 1px solid rgba(255,255,255,0.2);">
+                                           style="border: 1px solid rgba(255,255,255,0.2);" dusk="mobile_phone">
                                     @error('mobile_phone')
                                         <span class="invalid-feedback">{{ $message }}</span>
                                     @enderror
@@ -89,7 +89,7 @@
                                     <label class="text-white-50 mb-2">Profesi <span style="color: #ff6b6b;">*</span></label>
                                     <input type="text" class="form-control bg-transparent text-white @error('profession') is-invalid @enderror" 
                                            name="profession" value="{{ old('profession', $user->profession) }}"
-                                           style="border: 1px solid rgba(255,255,255,0.2);" required>
+                                           style="border: 1px solid rgba(255,255,255,0.2);" required dusk="profession">
                                     @error('profession')
                                         <span class="invalid-feedback">{{ $message }}</span>
                                     @enderror
@@ -100,7 +100,7 @@
                                     <label class="text-white-50 mb-2">Domisili <span style="color: #ff6b6b;">*</span></label>
                                     <input type="text" class="form-control bg-transparent text-white @error('domicile') is-invalid @enderror" 
                                            name="domicile" value="{{ old('domicile', $user->domicile) }}"
-                                           style="border: 1px solid rgba(255,255,255,0.2);" required>
+                                           style="border: 1px solid rgba(255,255,255,0.2);" required dusk="domicile">
                                     @error('domicile')
                                         <span class="invalid-feedback">{{ $message }}</span>
                                     @enderror
@@ -110,7 +110,7 @@
 
                         <div class="d-flex flex-column flex-md-row justify-content-between gap-3 mt-5">
                             <a href="{{ route('profile') }}" class="btn btn-light px-4 order-2 order-md-1">Batal</a>
-                            <button type="submit" class="btn btn-success px-4 order-1 order-md-2">Simpan</button>
+                            <button type="submit" class="btn btn-success px-4 order-1 order-md-2" dusk="save-profile-btn">Simpan</button>
                         </div>
                     </form>
                 </div>
