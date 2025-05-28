@@ -20,6 +20,9 @@ use App\Http\Controllers\AdminAuthController;
 use App\Http\Controllers\WishlistController;
 use App\Http\Controllers\NotificationController;
 use Illuminate\Http\Request;
+use App\Http\Controllers\RatingRelawanController;
+
+
 
 /*
 |--------------------------------------------------------------------------
@@ -203,6 +206,7 @@ Route::middleware(['web', 'auth'])->group(function () {
 // Event routes (public)
 Route::get('/events', [EventController::class, 'index'])->name('events.index');
 Route::get('/event-detail/{id}', [EventController::class, 'show'])->name('event.detail');
+Route::get('/detailevent-mitra/{id}', [EventController::class, 'showMitra'])->name('event.detail.mitra');
 
 // Posting Event
 Route::get('/posting-event', [App\Http\Controllers\EventController::class, 'postingEventIndex'])->name('posting-event.index');
@@ -247,8 +251,10 @@ Route::post('/history-kegiatan/store', [HistoryKegiatanController::class, 'store
 
 Route::post('/profile/milestone/update-target', [ProfileController::class, 'updateTarget'])->name('profile.milestone.updateTarget');
 
-Route::get('/ratingrelawan', function () {
-    return view('ratingrelawan');
-})->name('ratingrelawan');
+// Rating Relawan
+Route::get('/ratingrelawan', [RatingRelawanController::class, 'index'])->name('ratingrelawan');
+Route::get('/formrating/{relawan_id}/{event_id}', [RatingRelawanController::class, 'create'])->name('formrating');
+Route::post('/formrating', [RatingRelawanController::class, 'store'])->name('formrating.store');
+Route::get('/lihatreview/{relawan_id}/{event_id}', [App\Http\Controllers\RatingRelawanController::class, 'showReview'])->name('lihatreview');
 
 Route::get('/detail/notifikasi/{id}', [NotificationController::class, 'showDetail'])->name('detail.notifikasi');
