@@ -1,0 +1,317 @@
+/* formrating.css */
+
+/* Reset dan styling dasar */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+
+body {
+    background: #e600cc;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 40px 20px;
+}
+
+/* Container form */
+.form-container {
+    background: #f5f5f5;
+    border-radius: 20px;
+    padding: 40px;
+    width: 100%;
+    max-width: 900px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15);
+    display: flex;
+    gap: 50px;
+    align-items: flex-start;
+}
+
+/* Left Section */
+.left-section {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.form-title {
+    font-size: 32px;
+    font-weight: 700;
+    color: #333;
+    margin-bottom: 40px;
+    line-height: 1.2;
+}
+
+.profile-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+}
+
+.profile-photo {
+    width: 160px;
+    height: 160px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-bottom: 20px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.profile-photo.no-photo {
+    background-color: #ddd;
+    color: #666;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.profile-info {
+    color: #666;
+    font-size: 14px;
+    line-height: 1.4;
+    text-align: center;
+    font-weight: 500;
+}
+
+/* Right Section */
+.right-section {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.section-title {
+    color: #333;
+    font-size: 16px;
+    margin-bottom: 30px;
+    line-height: 1.4;
+    font-weight: 500;
+}
+
+.rating-section {
+    margin-bottom: 25px;
+}
+
+.rating-title {
+    font-size: 36px;
+    font-weight: 700;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+.rating-input-container {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    margin-bottom: 30px;
+}
+
+.rating-input {
+    width: 100px;
+    height: 60px;
+    border: 2px solid #ddd;
+    border-radius: 12px;
+    text-align: center;
+    font-size: 24px;
+    font-weight: 700;
+    outline: none;
+    background: white;
+}
+
+.rating-input:focus {
+    border-color: #e600cc;
+}
+
+.rating-buttons {
+    display: flex;
+    gap: 8px;
+}
+
+.rating-btn {
+    width: 45px;
+    height: 45px;
+    border: none;
+    border-radius: 50%;
+    background: #333;
+    color: white;
+    font-size: 24px;
+    font-weight: 300;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s ease;
+}
+
+.rating-btn:hover {
+    background: #555;
+    transform: scale(1.05);
+}
+
+/* Feedback Section */
+.feedback-section {
+    margin-bottom: 35px;
+}
+
+.feedback-label {
+    font-weight: 600;
+    color: #333;
+    margin-bottom: 12px;
+    display: block;
+    font-size: 16px;
+}
+
+.feedback-textarea {
+    width: 100%;
+    height: 140px;
+    border: 2px solid #ddd;
+    border-radius: 12px;
+    padding: 16px;
+    resize: vertical;
+    font-size: 15px;
+    font-family: inherit;
+    outline: none;
+    background: white;
+    line-height: 1.5;
+}
+
+.feedback-textarea:focus {
+    border-color: #e600cc;
+}
+
+.feedback-textarea::placeholder {
+    color: #999;
+}
+
+/* Button Section */
+.button-section {
+    display: flex;
+    gap: 15px;
+}
+
+.btn {
+    padding: 16px 32px;
+    border: none;
+    border-radius: 30px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-decoration: none;
+    display: inline-block;
+    text-align: center;
+    min-width: 140px;
+}
+
+.btn-cancel {
+    background: #ccc;
+    color: #666;
+    flex: 0 0 auto;
+}
+
+.btn-cancel:hover {
+    background: #bbb;
+    transform: translateY(-1px);
+}
+
+.btn-submit {
+    background: #333;
+    color: white;
+    flex: 1;
+}
+
+.btn-submit:hover {
+    background: #555;
+    transform: translateY(-1px);
+}
+
+/* Success Message */
+.success-message {
+    background-color: #d4edda;
+    color: #155724;
+    border: 1px solid #c3e6cb;
+    padding: 15px;
+    border-radius: 10px;
+    margin-bottom: 20px;
+    text-align: center;
+    font-weight: bold;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .form-container {
+        flex-direction: column;
+        gap: 30px;
+        padding: 30px 25px;
+        max-width: 500px;
+    }
+
+    .left-section {
+        align-items: center;
+        text-align: center;
+    }
+
+    .form-title {
+        font-size: 28px;
+        text-align: center;
+    }
+
+    .rating-title {
+        font-size: 32px;
+    }
+
+    .rating-input-container {
+        justify-content: center;
+    }
+
+    .button-section {
+        flex-direction: column;
+    }
+
+    .btn {
+        width: 100%;
+        margin-bottom: 10px;
+    }
+}
+
+@media (max-width: 480px) {
+    body {
+        padding: 20px 10px;
+    }
+    
+    .form-container {
+        padding: 25px 20px;
+    }
+
+    .form-title {
+        font-size: 24px;
+    }
+
+    .rating-title {
+        font-size: 28px;
+    }
+
+    .profile-photo {
+        width: 140px;
+        height: 140px;
+    }
+    
+    .rating-input {
+        width: 90px;
+        height: 55px;
+        font-size: 20px;
+    }
+    
+    .rating-btn {
+        width: 40px;
+        height: 40px;
+        font-size: 20px;
+    }
+}
