@@ -100,11 +100,6 @@
             </div>
             <!-- KANAN: Sidebar -->
             <div class="sidebar" style="flex:1;">
-                <div class="promo">
-                    <input type="text" placeholder="Kode Promo">
-                    <button>Terapkan</button>
-                </div>
-                <p class="promo-note">Pilih metode pembayaran terlebih dahulu untuk menggunakan kode promo</p>
 
                 <div class="harga">
                     <p class="judul">Detail Harga</p>
