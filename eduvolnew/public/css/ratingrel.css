@@ -18,7 +18,8 @@ body {
 .container {
     width: 100%;
     max-width: 1000px;
-    margin-left: 350px;
+    margin-left: 220px;
+    margin-top: 130px;
 }
 
 /* Styling untuk tabel rating */
@@ -27,6 +28,7 @@ body {
     border-radius: 15px;
     overflow: hidden;
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    width: 1000px;
 }
 
 /* Header tabel */
@@ -131,6 +133,26 @@ body {
 .btn-profile:hover {
     background-color: #4029a0;
 }
+
+
+.review-card {
+    background: #fff;
+    border-radius: 10px;
+    padding: 30px;
+    max-width: 600px;
+    margin: 30px auto;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+.review-card h2 {
+    margin-bottom: 20px;
+}
+
+.review-card p {
+    font-size: 16px;
+    margin-bottom: 10px;
+}
+
 
 /* Responsif untuk layar kecil */
 @media screen and (max-width: 768px) {
