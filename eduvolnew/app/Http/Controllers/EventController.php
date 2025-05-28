@@ -101,7 +101,7 @@ class EventController extends Controller
         $now = now();
         $oneDayAfter = $now->copy()->addDay();
         
-        $events = \App\Models\Event::where('status_id', 7)
+        $events = \App\Models\Event::whereIn('status_id', [3, 7, 8])
             ->where(function($query) use ($now, $oneDayAfter) {
                 $query->where('end_date', '>=', $now)
                       ->orWhere(function($q) use ($now, $oneDayAfter) {
@@ -156,7 +156,7 @@ class EventController extends Controller
 
     public function postingEventIndex()
     {
-        $events = Event::all()->map(function($event) {
+        $events = Event::whereIn('status_id', [1, 7])->get()->map(function($event) {
             // Menggunakan Carbon untuk perbandingan tanggal
             $now = Carbon::now();
             $eventEndDate = Carbon::parse($event->end_date);

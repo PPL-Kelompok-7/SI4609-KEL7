@@ -25,20 +25,20 @@
                         <img src="{{ asset('images/star.png') }}" alt="Star Icon" style="width: 32px; height: 32px;">
                             <span class="title-text"><span class="green">Event</span> Saya</span>
                         </div>
-                        <div class="status-summary">
-                            <div class="status-box">
+                        <!-- <div class="status-summary"> -->
+                            <!-- <div class="status-box">
                                 <span class="dot green"></span>
                                 <div><strong>2</strong><br>On Going</div>
-                            </div>
-                            <div class="status-box">
+                            </div> -->
+                            <!-- <div class="status-box">
                                 <span class="dot orange"></span>
                                 <div><strong>1</strong><br>Coming Soon</div>
-                            </div>
-                            <div class="status-box">
+                            </div> -->
+                            <!-- <div class="status-box">
                                 <span class="dot grey"></span>
                                 <div><strong>10</strong><br>Ended</div>
-                            </div>
-                        </div>
+                            </div> -->
+                        <!-- </div> -->
                     </div>
 
                     <!-- Tombol Tambah Event -->
