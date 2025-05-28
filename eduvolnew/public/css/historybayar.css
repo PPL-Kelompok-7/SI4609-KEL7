@@ -134,8 +134,10 @@ body {
 /* Content Area */
 .content {
     flex: 1;
-    padding: 25px;
+    padding: 40px;
     color: white;
+    max-width: calc(100% - 290px);
+    margin-bottom: 50px; /* Adjust width to account for sidebar and new margin */
 }
 
 .title-area {
