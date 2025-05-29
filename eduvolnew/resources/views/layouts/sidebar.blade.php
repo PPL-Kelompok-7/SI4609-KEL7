@@ -10,9 +10,10 @@
         <li class="sidebar-item {{ Request::is('history-pembayaran') ? 'active' : '' }}">
             <a href="{{ route('history-pembayaran') }}">History Pembayaran</a>
         </li>
-        <li class="sidebar-item">
-            <a href="#">Voucher Saya</a>
+        <li class="sidebar-item {{ Request::is('voucherpengguna*') ? 'active' : '' }}">
+            <a href="{{ route('voucherpengguna.index') }}">Voucher Saya</a>
         </li>
+
         <li class="sidebar-item">
             <a href="#">Rating Saya</a>
         </li>
