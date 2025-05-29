@@ -14,8 +14,9 @@
             <a href="{{ route('voucherpengguna.index') }}">Voucher Saya</a>
         </li>
 
-        <li class="sidebar-item">
-            <a href="#">Rating Saya</a>
+        <li class="sidebar-item {{ Request::is('ratingsaya*') ? 'active' : '' }}">
+            <a href="{{ route('ratingsaya.index') }}">Rating Saya</a>
         </li>
+
     </ul>
 </div>
