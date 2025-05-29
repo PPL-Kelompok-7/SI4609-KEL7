@@ -21,6 +21,7 @@ use App\Http\Controllers\WishlistController;
 use App\Http\Controllers\NotificationController;
 use Illuminate\Http\Request;
 use App\Http\Controllers\RatingRelawanController;
+use App\Http\Controllers\RatingSayaController;
 
 
 
@@ -263,5 +264,12 @@ Route::get('/ratingrelawan', [RatingRelawanController::class, 'index'])->name('r
 Route::get('/formrating/{relawan_id}/{event_id}', [RatingRelawanController::class, 'create'])->name('formrating');
 Route::post('/formrating', [RatingRelawanController::class, 'store'])->name('formrating.store');
 Route::get('/lihatreview/{relawan_id}/{event_id}', [App\Http\Controllers\RatingRelawanController::class, 'showReview'])->name('lihatreview');
+
+Route::middleware(['auth'])->group(function () {
+    Route::get('/ratingsaya', [RatingSayaController::class, 'index'])->name('ratingsaya.index');
+    Route::get('/ulasansaya/{event_id}', [RatingSayaController::class, 'show'])->name('ratingsaya.show');
+});
+
+
 
 Route::get('/detail/notifikasi/{id}', [NotificationController::class, 'showDetail'])->name('detail.notifikasi');
