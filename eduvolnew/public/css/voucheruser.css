@@ -216,6 +216,56 @@ body {
     border-spacing: 0;
 }
 
+.generate-btn {
+    background: linear-gradient(135deg, #49E9A6, #217440);
+    color: white;
+    border: none;
+    border-radius: 30px;
+    padding: 12px 25px;
+    font-weight: 700;
+    font-size: 16px;
+    cursor: pointer;
+    box-shadow: 0 6px 12px rgba(33, 116, 64, 0.5);
+    transition: all 0.3s ease;
+    min-width: 180px;
+    text-align: center;
+    letter-spacing: 0.05em;
+    user-select: none;
+    display: inline-block;
+}
+
+.generate-btn:hover {
+    background: linear-gradient(135deg, #2f7a4f, #145225);
+    box-shadow: 0 8px 18px rgba(20, 82, 37, 0.7);
+    transform: translateY(-2px);
+}
+
+.generate-btn:active {
+    transform: translateY(1px);
+    box-shadow: 0 4px 8px rgba(33, 116, 64, 0.4);
+}
+
+.generate-btn:disabled,
+.generate-btn.disabled {
+    background: rgba(33, 116, 64, 0.5);
+    cursor: not-allowed;
+    box-shadow: none;
+    color: #c4f0d2;
+}
+
+.voucher-icon {
+    background-color: rgba(255, 255, 255, 0.2);
+    border-radius: 10px;
+    width: 56px;
+    height: 56px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 15px;
+}
+
+
+
 /* Responsiveness */
 @media (max-width: 768px) {
     .voucher-card {
