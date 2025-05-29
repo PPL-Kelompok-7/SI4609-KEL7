@@ -182,6 +182,11 @@ Route::middleware(['web', 'auth'])->group(function () {
     return view('confirmgivevoucher', compact('kode', 'user_id', 'nama'));
     })->name('voucher.confirm');
 
+    Route::middleware(['auth'])->group(function () {
+        Route::get('/voucherpengguna', [VoucherUserController::class, 'index'])->name('voucherpengguna.index');
+        Route::post('/voucherpengguna/generate/{id}', [VoucherUserController::class, 'generate'])->name('voucherpengguna.generate');
+    });    
+    
     // Payment Controller Routes
     Route::get('/payments/{event}', [PaymentController::class, 'show'])->name('payments.show');
     Route::post('/payments/{event}/upload-proof', [PaymentController::class, 'uploadProof'])->name('payments.uploadProof');
