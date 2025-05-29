@@ -185,6 +185,8 @@ Route::middleware(['web', 'auth'])->group(function () {
     Route::middleware(['auth'])->group(function () {
         Route::get('/voucherpengguna', [VoucherUserController::class, 'index'])->name('voucherpengguna.index');
         Route::post('/voucherpengguna/generate/{id}', [VoucherUserController::class, 'generate'])->name('voucherpengguna.generate');
+        Route::post('/voucherpengguna/reveal/{id}', [VoucherUserController::class, 'reveal'])->name('voucherpengguna.reveal');
+
     });    
     
     // Payment Controller Routes

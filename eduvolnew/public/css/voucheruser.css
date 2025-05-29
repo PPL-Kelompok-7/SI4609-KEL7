@@ -1,17 +1,147 @@
 /* voucheruser.css */
 
+/* Import Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
+
 /* Global Styles */
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: 'Inter', sans-serif;
+    font-family: 'Poppins', sans-serif;
 }
 
 body {
-    background-color: #217440;
+    background-color: #4e37e9;
     color: #ffffff;
-    padding: 20px;
+    font-family: 'Poppins', sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+/* Navigation Bar Styles - Konsisten dengan historybayar.css */
+.navbar {
+    background-color: #4019F1;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 30px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+    position: relative;
+    z-index: 100;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    color: white;
+    font-weight: bold;
+    font-size: 18px;
+    text-decoration: none;
+}
+
+.logo img {
+    height: 36px;
+    margin-right: 10px;
+}
+
+.nav-links {
+    display: flex;
+    align-items: center;
+    gap: 25px;
+}
+
+.nav-links a {
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 15px;
+}
+
+.nav-links a:hover {
+    text-decoration: underline;
+}
+
+.user-menu {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.icon-button {
+    color: white;
+    background: none;
+    border: none;
+    font-size: 20px;
+    cursor: pointer;
+}
+
+.profile {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: white;
+    text-decoration: none;
+    font-size: 15px;
+}
+
+.profile img {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    border: 2px solid white;
+    object-fit: cover;
+}
+
+/* Main Layout */
+.main-container {
+    display: flex;
+    min-height: calc(100vh - 56px);
+}
+
+/* Sidebar Styles - Konsisten dengan historybayar.css */
+.sidebar {
+    width: 240px;
+    background-color: #3616c9;
+    flex-shrink: 0;
+}
+
+.sidebar-menu {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.sidebar-menu li {
+    border-left: 5px solid transparent;
+    transition: all 0.3s ease;
+}
+
+.sidebar-menu li.active {
+    border-left: 5px solid #00FF85;
+    background-color: rgba(0, 0, 0, 0.15);
+}
+
+.sidebar-menu a {
+    display: block;
+    padding: 15px 20px;
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+    transition: background-color 0.3s;
+}
+
+.sidebar-menu li:hover:not(.active) {
+    background-color: rgba(0, 0, 0, 0.1);
+}
+
+/* Content Area */
+.content {
+    flex: 1;
+    padding: 40px;
+    color: white;
+    max-width: calc(100% - 290px);
+    margin-bottom: 50px;
 }
 
 .container {
@@ -20,13 +150,24 @@ body {
     padding: 20px;
 }
 
-/* Header Styles */
-.header {
+/* Title Area */
+.title-area {
     display: flex;
     align-items: center;
-    margin-bottom: 30px;
+    gap: 10px;
+    margin-bottom: 25px;
 }
 
+.title-text {
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.green {
+    color: #00FF85;
+}
+
+/* Voucher Icon */
 .voucher-icon {
     background-color: rgba(255, 255, 255, 0.2);
     border-radius: 10px;
@@ -36,6 +177,13 @@ body {
     align-items: center;
     justify-content: center;
     margin-right: 15px;
+}
+
+/* Header Styles */
+.header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 30px;
 }
 
 .header-title {
@@ -123,9 +271,15 @@ body {
     width: 100%;
     border-collapse: collapse;
     color: #333;
+    background-color: #f0f0f0;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 0 12px rgba(60, 40, 212, 0.6);
+    border-collapse: separate;
+    border-spacing: 0;
 }
 
-.voucher-table th, 
+.voucher-table th,
 .voucher-table td {
     padding: 15px;
     text-align: left;
@@ -137,10 +291,20 @@ body {
     color: #5945FF;
     font-weight: 600;
     font-size: 14px;
+    border-bottom: 2px solid #ccc;
 }
 
 .voucher-table tbody tr:last-child td {
     border-bottom: none;
+}
+
+.voucher-table tbody td {
+    padding: 14px;
+    border-bottom: 1px solid #ccc;
+    font-size: 15px;
+    color: #222;
+    vertical-align: middle;
+    text-align: left;
 }
 
 .status-badge {
@@ -208,16 +372,57 @@ body {
     margin-top: 20px;
 }
 
-/* Supaya border-radius juga terlihat pada tabel */
-.voucher-table {
-    border-radius: 10px;
-    overflow: hidden;
-    border-collapse: separate;
-    border-spacing: 0;
+.generate-btn {
+    background: linear-gradient(135deg, #49E9A6, #217440);
+    color: white;
+    border: none;
+    border-radius: 30px;
+    padding: 12px 25px;
+    font-weight: 700;
+    font-size: 16px;
+    cursor: pointer;
+    box-shadow: 0 6px 12px rgba(33, 116, 64, 0.5);
+    transition: all 0.3s ease;
+    min-width: 180px;
+    text-align: center;
+    letter-spacing: 0.05em;
+    user-select: none;
+    display: inline-block;
 }
 
-/* Responsiveness */
+.generate-btn:hover {
+    background: linear-gradient(135deg, #2f7a4f, #145225);
+    box-shadow: 0 8px 18px rgba(20, 82, 37, 0.7);
+    transform: translateY(-2px);
+}
+
+.generate-btn:active {
+    transform: translateY(1px);
+    box-shadow: 0 4px 8px rgba(33, 116, 64, 0.4);
+}
+
+.generate-btn:disabled,
+.generate-btn.disabled {
+    background: rgba(33, 116, 64, 0.5);
+    cursor: not-allowed;
+    box-shadow: none;
+    color: #c4f0d2;
+}
+
+/* Responsive Adjustments */
 @media (max-width: 768px) {
+    .main-container {
+        flex-direction: column;
+    }
+
+    .sidebar {
+        width: 100%;
+    }
+
+    .content {
+        max-width: 100%;
+    }
+
     .voucher-card {
         width: 100%;
     }
@@ -256,5 +461,31 @@ body {
 
     .sub-status {
         font-size: 9px;
+    }
+}
+
+/* --- Tambahan untuk menghindari konten tertutup sidebar/navbar/footer --- */
+@media (min-width: 901px) {
+    .content {
+        margin-left: 220px;
+        /* Lebar sidebar dari sidebar.blade.php */
+    }
+
+    .main-container {
+        padding-top: 70px;
+        /* Tinggi navbar */
+        padding-bottom: 70px;
+        /* Jika ada footer fixed, sesuaikan jika perlu */
+    }
+}
+
+@media (max-width: 900px) {
+    .content {
+        margin-left: 0;
+    }
+
+    .main-container {
+        padding-top: 70px;
+        padding-bottom: 70px;
     }
 }
