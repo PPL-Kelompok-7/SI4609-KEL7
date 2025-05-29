@@ -22,6 +22,8 @@ use App\Http\Controllers\NotificationController;
 use Illuminate\Http\Request;
 use App\Http\Controllers\RatingRelawanController;
 use App\Http\Controllers\RatingSayaController;
+use App\Http\Controllers\LandingPageController;
+use App\Http\Controllers\EventStatController;
 
 
 
@@ -37,9 +39,7 @@ use App\Http\Controllers\RatingSayaController;
 */
 
 // Public Routes
-Route::get('/', function () {
-    return view('landingpage');
-})->name('landingpage');
+Route::get('/', [LandingPageController::class, 'index'])->name('landingpage');
 
 Route::get('/welcome', function () {
     return view('welcome');
@@ -273,3 +273,5 @@ Route::middleware(['auth'])->group(function () {
 
 
 Route::get('/detail/notifikasi/{id}', [NotificationController::class, 'showDetail'])->name('detail.notifikasi');
+
+Route::get('/top-users', [EventStatController::class, 'showTopUsers']);
