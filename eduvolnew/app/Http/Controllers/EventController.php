@@ -5,9 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Event;
 use App\Models\EventStatus;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Storage;
-use Illuminate\Support\Carbon; // Import Carbon untuk perbandingan tanggal
+use Illuminate\Support\Carbon;
 
 class EventController extends Controller
 {
@@ -27,14 +25,14 @@ class EventController extends Controller
             'lokasi' => 'required|string|max:255',
             'deskripsi_event' => 'required|string',
             'nominal_tiket' => 'nullable|integer|min:0',
-            'thumbnail' => 'nullable|image|mimes:jpeg,jpg|max:10240',
+            'thumbnail' => 'nullable|image|mimes:jpeg,jpg,png|max:10240',
             'agreement' => 'accepted'
         ]);
 
         $event = new Event();
         $event->title = $request->nama_event;
         $event->description = $request->deskripsi_event;
-        $event->terms = 'Syarat dan ketentuan berlaku'; // Atur sesuai kebutuhan
+        $event->terms = 'Syarat dan ketentuan berlaku';
         $event->start_date = $request->tanggal_event;
         $event->end_date = $request->tanggal_event;
         $event->start_time = $request->jam_mulai;
@@ -42,13 +40,19 @@ class EventController extends Controller
         $event->location = $request->lokasi;
         $event->max_participants = $request->kebutuhan_volunteer;
         $event->price = $request->nominal_tiket ?? 0;
-        $event->status_id = 1; // Atur default status
-        $event->created_by = auth()->id() ?? 1; // Atur sesuai user login
+        $event->status_id = 1;
+        $event->created_by = auth()->id() ?? 1;
 
-        // Upload foto
         if ($request->hasFile('thumbnail')) {
-            $path = $request->file('thumbnail')->store('event_photos', 'public');
-            $event->event_photo = $path;
+            $filename = time() . '_' . $request->file('thumbnail')->getClientOriginalName();
+
+            $destinationPath = public_path('images/fotoevent');
+            if (!file_exists($destinationPath)) {
+                mkdir($destinationPath, 0755, true);
+            }
+
+            $request->file('thumbnail')->move($destinationPath, $filename);
+            $event->event_photo = 'images/fotoevent/' . $filename;
         }
 
         $event->save();
@@ -69,7 +73,7 @@ class EventController extends Controller
             'description' => 'required|string',
             'terms' => 'required|string',
             'start_date' => 'required|date',
-            'end_date' => 'required|date|after:start_date',
+            'end_date' => 'required|date|after_or_equal:start_date',
             'start_time' => 'required',
             'end_time' => 'required',
             'location' => 'required|string|max:255',
@@ -79,136 +83,117 @@ class EventController extends Controller
             'status_id' => 'required|exists:event_statuses,id'
         ]);
 
-        // Handle photo upload
         if ($request->hasFile('event_photo')) {
-            // Delete old photo if exists
-            if ($event->event_photo && Storage::disk('public')->exists($event->event_photo)) {
-                Storage::disk('public')->delete($event->event_photo);
+            // Hapus file lama jika ada
+            if ($event->event_photo && file_exists(public_path($event->event_photo))) {
+                unlink(public_path($event->event_photo));
             }
-            
-            $path = $request->file('event_photo')->store('event-photos', 'public');
-            $validated['event_photo'] = $path;
+
+            $filename = time() . '_' . $request->file('event_photo')->getClientOriginalName();
+
+            $destinationPath = public_path('images/fotoevent');
+            if (!file_exists($destinationPath)) {
+                mkdir($destinationPath, 0755, true);
+            }
+
+            $request->file('event_photo')->move($destinationPath, $filename);
+            $validated['event_photo'] = 'images/fotoevent/' . $filename;
         }
 
         $event->update($validated);
 
-        return redirect()->route('events.index')
-            ->with('success', 'Event updated successfully');
+        return redirect()->route('events.index')->with('success', 'Event updated successfully');
     }
 
     public function index()
     {
         $now = now();
         $oneDayAfter = $now->copy()->addDay();
-        
-        $events = \App\Models\Event::whereIn('status_id', [3, 7, 8])
-            ->where(function($query) use ($now, $oneDayAfter) {
+
+        $events = Event::whereIn('status_id', [3, 7, 8])
+            ->where(function ($query) use ($now, $oneDayAfter) {
                 $query->where('end_date', '>=', $now)
-                      ->orWhere(function($q) use ($now, $oneDayAfter) {
-                          $q->where('end_date', '>=', $now->copy()->subDay())
-                            ->where('end_date', '<=', $oneDayAfter);
-                      });
+                    ->orWhere(function ($q) use ($now, $oneDayAfter) {
+                        $q->where('end_date', '>=', $now->copy()->subDay())
+                          ->where('end_date', '<=', $oneDayAfter);
+                    });
             })
             ->orderBy('start_date', 'asc')
             ->get()
-            ->map(function($event) {
+            ->map(function ($event) {
                 return [
-                    'id'    => $event->id,
+                    'id' => $event->id,
                     'event_photo' => $event->event_photo,
                     'title' => $event->title,
-                    'price' => $event->price > 0 ? 'Rp ' . number_format($event->price,0,',','.') : 'Free',
-                    'date'  => \Carbon\Carbon::parse($event->start_date)->translatedFormat('d F Y'),
+                    'price' => $event->price > 0 ? 'Rp ' . number_format($event->price, 0, ',', '.') : 'Free',
+                    'date' => Carbon::parse($event->start_date)->translatedFormat('d F Y'),
                 ];
             });
+
         return view('event', ['events' => $events]);
     }
 
     public function show($id)
     {
         $event = Event::findOrFail($id);
-        // Format tanggal dan jam
-        $tanggal = \Carbon\Carbon::parse($event->start_date)->translatedFormat('d F Y');
+        $tanggal = Carbon::parse($event->start_date)->translatedFormat('d F Y');
         $jam = $event->start_time . ' - ' . $event->end_time;
-        $harga = $event->price > 0 ? 'Rp' . number_format($event->price,0,',','.') : 'Gratis';
-        return view('event-detail', [
-            'event' => $event,
-            'tanggal' => $tanggal,
-            'jam' => $jam,
-            'harga' => $harga
-        ]);
+        $harga = $event->price > 0 ? 'Rp' . number_format($event->price, 0, ',', '.') : 'Gratis';
+
+        return view('event-detail', compact('event', 'tanggal', 'jam', 'harga'));
     }
 
-    // Method untuk menampilkan detail event untuk mitra
     public function showMitra($id)
     {
         $event = Event::findOrFail($id);
-        // Format tanggal dan jam
-        $tanggal = \Carbon\Carbon::parse($event->start_date)->translatedFormat('d F Y');
+        $tanggal = Carbon::parse($event->start_date)->translatedFormat('d F Y');
         $jam = $event->start_time . ' - ' . $event->end_time;
-        $harga = $event->price > 0 ? 'Rp' . number_format($event->price,0,',','.') : 'Gratis';
-        return view('detailevent_mitra', [
-            'event' => $event,
-            'tanggal' => $tanggal,
-            'jam' => $jam,
-            'harga' => $harga
-        ]);
+        $harga = $event->price > 0 ? 'Rp' . number_format($event->price, 0, ',', '.') : 'Gratis';
+
+        return view('detailevent_mitra', compact('event', 'tanggal', 'jam', 'harga'));
     }
 
     public function postingEventIndex()
     {
-        $events = Event::whereIn('status_id', [1, 7])->get()->map(function($event) {
-            // Menggunakan Carbon untuk perbandingan tanggal
+        $events = Event::whereIn('status_id', [1, 7])->get()->map(function ($event) {
             $now = Carbon::now();
             $eventEndDate = Carbon::parse($event->end_date);
-
             $status = 'coming-soon';
-            // Periksa status_id terlebih dahulu untuk event yang dikonfirmasi
-            if ($event->status_id == 7) { // If event is confirmed
-                 // Menggunakan betweenInclusive jika perlu mencakup tanggal mulai dan berakhir
+
+            if ($event->status_id == 7) {
                 if ($now->between($event->start_date, $event->end_date)) {
                     $status = 'on-going';
-                } elseif ($now->gt($eventEndDate)) { // Menggunakan gt untuk tanggal yang sudah lewat
+                } elseif ($now->gt($eventEndDate)) {
                     $status = 'ended';
-                } else { // Jika sudah dikonfirmasi tapi belum on-going atau ended, berarti coming-soon
+                } else {
                     $status = 'coming-soon';
                 }
-            } else { // Jika belum dikonfirmasi, selalu coming-soon di halaman posting event
-                 $status = 'coming-soon';
             }
 
             return [
                 'id' => $event->id,
                 'title' => $event->title,
-                'status_id' => $event->status_id, // Tetap sertakan status_id
+                'status_id' => $event->status_id,
                 'status' => $status,
-                'date' => $event->end_date // Sertakan end_date untuk perbandingan di view
+                'date' => $event->end_date
             ];
         });
 
-        // Count events by status
         $statusCounts = [
             'on-going' => $events->where('status', 'on-going')->count(),
             'coming-soon' => $events->where('status', 'coming-soon')->count(),
             'ended' => $events->where('status', 'ended')->count()
         ];
 
-        return view('posting-event', [
-            'events' => $events,
-            'statusCounts' => $statusCounts
-        ]);
+        return view('posting-event', compact('events', 'statusCounts'));
     }
 
-    // Menampilkan daftar event yang perlu diverifikasi (untuk admin)
     public function verificationIndex(Request $request)
     {
-        // Ambil status filter dari request
         $selectedStatuses = $request->input('status', []);
 
-        // Query event dengan relasi status
-        $events = \App\Models\Event::with('status')
-            ->orderBy('created_at', 'desc');
+        $events = Event::with('status')->orderBy('created_at', 'desc');
 
-        // Terapkan filter berdasarkan status jika ada yang dipilih (selain 'all')
         if (!empty($selectedStatuses) && !in_array('all', $selectedStatuses)) {
             $events->whereHas('status', function ($query) use ($selectedStatuses) {
                 $query->whereIn('name', $selectedStatuses);
@@ -217,42 +202,33 @@ class EventController extends Controller
 
         $events = $events->get();
 
-        return view('verifevent', compact('events', 'selectedStatuses')); // Kirim juga status yang dipilih ke view
+        return view('verifevent', compact('events', 'selectedStatuses'));
     }
 
-    // Setujui Event (Admin)
     public function acceptEvent(Event $event)
     {
-        // Temukan status 'Sudah Dikonfirmasi' atau status yang sesuai
-        $approvedStatus = \App\Models\EventStatus::where('name', 'Sudah Dikonfirmasi')->first(); // Sesuaikan nama status approved Anda
-
-        // Debugging: Periksa apakah status ditemukan
-        // dd($approvedStatus);
+        $approvedStatus = EventStatus::where('name', 'Sudah Dikonfirmasi')->first();
 
         if (!$approvedStatus) {
-            // Jika status 'Sudah Dikonfirmasi' tidak ditemukan
             return redirect()->back()->withErrors(['msg' => 'Status event "Sudah Dikonfirmasi" tidak ditemukan. Harap periksa tabel event_statuses.']);
         }
 
-        // Perbarui status event
         $event->status_id = $approvedStatus->id;
         $event->save();
 
-        // Redirect kembali ke halaman verifikasi dengan pesan sukses
         return redirect()->route('verification.event.index')->with('success', 'Event berhasil disetujui!');
     }
 
     public function destroy($id)
     {
         $event = Event::findOrFail($id);
-        
-        // Optional: Hapus juga event photo dari storage jika ada
-        if ($event->event_photo && Storage::disk('public')->exists($event->event_photo)) {
-            Storage::disk('public')->delete($event->event_photo);
+
+        if ($event->event_photo && file_exists(public_path($event->event_photo))) {
+            unlink(public_path($event->event_photo));
         }
 
         $event->delete();
 
-        return redirect()->route('posting-event.index')->with('success', 'Event berhasil dihapus.');
+        return redirect()->route('posting-event.index')->with('success', 'Event berhasil dihapus');
     }
 }
