@@ -12,6 +12,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <!-- Custom CSS -->
     <link rel="stylesheet" href="{{ asset('css/profile.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/sidebar.css') }}">
     @yield('css')
     <!-- jQuery -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
@@ -199,13 +200,15 @@
                         <a href="{{ route('history-kegiatan.index') }}" class="nav-link text-white me-3" title="History Kegiatan">
                             <i class="fas fa-list fa-lg"></i>
                         </a>
-                        <a href="#" class="nav-link text-white me-3">
+                        <a href="{{ route('notifikasi.relawan') }}" class="nav-link text-white me-3" title="Notifikasi">
                             <i class="fas fa-bell fa-lg"></i>
                         </a>
                         <div class="dropdown">
                             <a href="#" class="d-flex align-items-center text-decoration-none dropdown-toggle" 
                                data-bs-toggle="dropdown" aria-expanded="false">
-                                <img src="{{ Auth::user()->profile_photo ? asset('storage/' . Auth::user()->profile_photo) : asset('profile1.png') }}" 
+                                <img src="{{ Auth::user()->profile_photo && file_exists(public_path('storage/' . Auth::user()->profile_photo)) 
+                                    ? Storage::url(Auth::user()->profile_photo) 
+                                    : asset('profile2.png') }}" 
                                      alt="Foto Profil"
                                      class="rounded-circle nav-profile-photo me-2">
                                 <span class="text-white fw-semibold">{{ Auth::user()->first_name }}</span>

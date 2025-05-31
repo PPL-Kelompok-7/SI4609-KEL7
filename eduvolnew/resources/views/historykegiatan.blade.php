@@ -1,6 +1,5 @@
 @extends('layouts.app')
 @include('layouts.sidebar')
-@section('content')
 
 
 <!DOCTYPE html>
@@ -37,84 +36,72 @@
         }
     </style>
 </head>
-
+@section('content')
 <body>
-    <div class="container" style="margin-top: 48px; margin-left: 240px;">
-        <div class="header" style="margin-bottom: 40px;">
-            <div class="title-left">
-                <span class="star">★</span>
-                <span class="title-text"><span class="green">Event</span> Saya</span>
-            </div>
-            <div class="status-summary">
-                <div class="status-box">
-                    <span class="dot green"></span>
-                    <div><strong>2</strong><br>On Going</div>
-                </div>
-                <div class="status-box">
-                    <span class="dot orange"></span>
-                    <div><strong>1</strong><br>Coming Soon</div>
-                </div>
-                <div class="status-box">
-                    <span class="dot grey"></span>
-                    <div><strong>10</strong><br>Ended</div>
-                </div>
-            </div>
-        </div>
 
-        <div class="filter-box">
-            <form method="GET" action="{{ route('history-kegiatan.index') }}" class="filter-left" style="width:100%;display:flex;align-items:center;justify-content:space-between;">
-                <div style="display:flex;align-items:center;gap:15px;">
-                    <span class="filter-label">Filter berdasarkan :</span>
-                    <label for="ongoing"><input type="checkbox" id="ongoing" name="status[]" value="ongoing" {{ request()->has('status') && in_array('ongoing', (array)request('status')) ? 'checked' : '' }}> On Going</label>
-                    <label for="coming"><input type="checkbox" id="coming" name="status[]" value="coming soon" {{ request()->has('status') && in_array('coming soon', (array)request('status')) ? 'checked' : '' }}> Coming Soon</label>
-                    <label for="ended"><input type="checkbox" id="ended" name="status[]" value="ended" {{ request()->has('status') && in_array('ended', (array)request('status')) ? 'checked' : '' }}> Ended</label>
+    <div class="container" style="margin-top: 80px; margin-left: 260px;">
+        <div class="content-container" style="width: 80%;">
+            <div class="header" style="margin-bottom: 40px; display: flex; justify-content: space-between; align-items: center;">
+                <div class="title-left">
+                    <span class="star">★</span>
+                    <span class="title-text"><span class="green">Event</span> Saya</span>
                 </div>
-                <div class="filter-right">
-                    <button type="submit" class="apply">Terapkan</button>
-                    <a href="{{ route('history-kegiatan.index') }}" class="reset">Hapus Filter</a>
+                {{-- Search Form --}}
+                <div class="search-right" style="display: flex; align-items: center; margin-top: 5px;">
+                    <form method="GET" action="{{ route('history-kegiatan.index') }}" style="display:flex; align-items:center; gap: 5px;">
+                        <input type="text" name="search" placeholder="Cari Nama Event..." value="{{ request('search') }}" style="padding: 8px; border: 1px solid #ccc; border-radius: 4px;">
+                        <button type="submit" style="padding: 8px 10px; background-color: #00cc00; color: white; border: 1px solid #00cc00; border-radius: 4px; cursor: pointer;">Cari</button>
+                        {{-- Preserve existing filters when searching --}}
+                        @if(request()->has('status'))
+                            @foreach((array)request('status') as $status)
+                                <input type="hidden" name="status[]" value="{{ $status }}">
+                            @endforeach
+                        @endif
+                    </form>
                 </div>
-            </form>
-        </div>
+            </div>
 
-        <table class="event-table">
-            <thead>
-                <tr>
-                    <th>Status</th>
-                    <th>Nama Event</th>
-                    <th>Aksi</th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach($events as $event)
+            <div class="filter-box" style="display:flex; justify-content:center; align-items:center;">
+                <form method="GET" action="{{ route('history-kegiatan.index') }}" class="filter-left" style="display:flex;align-items:center;gap:15px; justify-content: flex-end;">
+                    <div style="display:flex;align-items:center;gap:15px;">
+                        <span class="filter-label">Filter berdasarkan :</span>
+                        <label for="ongoing"><input type="checkbox" id="ongoing" name="status[]" value="ongoing" {{ request()->has('status') && in_array('ongoing', (array)request('status')) ? 'checked' : '' }}> On Going</label>
+                        <label for="coming"><input type="checkbox" id="coming" name="status[]" value="coming soon" {{ request()->has('status') && in_array('coming soon', (array)request('status')) ? 'checked' : '' }}> Coming Soon</label>
+                        <label for="ended"><input type="checkbox" id="ended" name="status[]" value="ended" {{ request()->has('status') && in_array('ended', (array)request('status')) ? 'checked' : '' }}> Ended</label>
+                    </div>
+                    <div class="filter-right">
+                        {{-- Removed search input from here --}}
+                        <button type="submit" class="apply">Terapkan</button>
+                        <a href="{{ route('history-kegiatan.index') }}" class="reset">Hapus Filter</a>
+                    </div>
+                </form>
+            </div>
+
+            <table class="event-table">
+                <thead>
                     <tr>
-                        <td>
-                            @php
-                                $statusName = strtolower(optional($event->status)->name ?? '');
-                            @endphp
-                            @if($statusName == 'ongoing')
-                                <span class="dot green"></span>
-                            @elseif($statusName == 'published' || $statusName == 'coming soon')
-                                <span class="dot orange"></span>
-                            @elseif($statusName == 'completed' || $statusName == 'ended')
-                                <span class="dot grey"></span>
-                            @else
-                                <span class="dot"></span>
-                            @endif
-                        </td>
-                        <td>{{ $event->title }}</td>
-                        <td>
-                            <a href="{{ route('event.detail', $event->id) }}" class="detail-btn" style="text-decoration:none;">
-                                <span class="icon-eye">👁</span>
-                                <span>Lihat Detail Event</span>
-                            </a>
-                        </td>
+                        <th>Nama Event</th>
+                        <th>Aksi</th>
                     </tr>
-                @endforeach
-            </tbody>
-        </table>
+                </thead>
+                <tbody>
+                    @foreach($events as $event)
+                        <tr>
+                            <td>{{ $event->title }}</td>
+                            <td>
+                                <a href="{{ route('event.detail', $event->id) }}" class="detail-btn" style="text-decoration:none;">
+                                    <span class="icon-eye">👁</span>
+                                    <span>Lihat Detail Event</span>
+                                </a>
+                            </td>
+                        </tr>
+                    @endforeach
+                </tbody>
+            </table>
+        </div>
     </div>
 
-    <div class="sidebar">
+    <!-- <div class="sidebar">
         <ul class="sidebar-menu">
             <li>
                 <a href="{{ route('history-kegiatan.index') }}">Event Saya</a>
@@ -123,7 +110,7 @@
                 <a href="{{ route('history-pembayaran') }}">History Pembayaran</a>
             </li>
         </ul>
-    </div>
+    </div> -->
 </body>
 
 </html>

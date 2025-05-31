@@ -7,6 +7,7 @@ use App\Models\EventStatus;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Carbon; // Import Carbon untuk perbandingan tanggal
 
 class EventController extends Controller
 {
@@ -97,15 +98,28 @@ class EventController extends Controller
 
     public function index()
     {
-        $events = \App\Models\Event::all()->map(function($event) {
-            return [
-                'id'    => $event->id,
-                'event_photo' => $event->event_photo,
-                'title' => $event->title,
-                'price' => $event->price > 0 ? 'Rp ' . number_format($event->price,0,',','.') : 'Free',
-                'date'  => \Carbon\Carbon::parse($event->start_date)->translatedFormat('d F Y'),
-            ];
-        });
+        $now = now();
+        $oneDayAfter = $now->copy()->addDay();
+        
+        $events = \App\Models\Event::whereIn('status_id', [3, 7, 8])
+            ->where(function($query) use ($now, $oneDayAfter) {
+                $query->where('end_date', '>=', $now)
+                      ->orWhere(function($q) use ($now, $oneDayAfter) {
+                          $q->where('end_date', '>=', $now->copy()->subDay())
+                            ->where('end_date', '<=', $oneDayAfter);
+                      });
+            })
+            ->orderBy('start_date', 'asc')
+            ->get()
+            ->map(function($event) {
+                return [
+                    'id'    => $event->id,
+                    'event_photo' => $event->event_photo,
+                    'title' => $event->title,
+                    'price' => $event->price > 0 ? 'Rp ' . number_format($event->price,0,',','.') : 'Free',
+                    'date'  => \Carbon\Carbon::parse($event->start_date)->translatedFormat('d F Y'),
+                ];
+            });
         return view('event', ['events' => $events]);
     }
 
@@ -121,6 +135,66 @@ class EventController extends Controller
             'tanggal' => $tanggal,
             'jam' => $jam,
             'harga' => $harga
+        ]);
+    }
+
+    // Method untuk menampilkan detail event untuk mitra
+    public function showMitra($id)
+    {
+        $event = Event::findOrFail($id);
+        // Format tanggal dan jam
+        $tanggal = \Carbon\Carbon::parse($event->start_date)->translatedFormat('d F Y');
+        $jam = $event->start_time . ' - ' . $event->end_time;
+        $harga = $event->price > 0 ? 'Rp' . number_format($event->price,0,',','.') : 'Gratis';
+        return view('detailevent_mitra', [
+            'event' => $event,
+            'tanggal' => $tanggal,
+            'jam' => $jam,
+            'harga' => $harga
+        ]);
+    }
+
+    public function postingEventIndex()
+    {
+        $events = Event::whereIn('status_id', [1, 7])->get()->map(function($event) {
+            // Menggunakan Carbon untuk perbandingan tanggal
+            $now = Carbon::now();
+            $eventEndDate = Carbon::parse($event->end_date);
+
+            $status = 'coming-soon';
+            // Periksa status_id terlebih dahulu untuk event yang dikonfirmasi
+            if ($event->status_id == 7) { // If event is confirmed
+                 // Menggunakan betweenInclusive jika perlu mencakup tanggal mulai dan berakhir
+                if ($now->between($event->start_date, $event->end_date)) {
+                    $status = 'on-going';
+                } elseif ($now->gt($eventEndDate)) { // Menggunakan gt untuk tanggal yang sudah lewat
+                    $status = 'ended';
+                } else { // Jika sudah dikonfirmasi tapi belum on-going atau ended, berarti coming-soon
+                    $status = 'coming-soon';
+                }
+            } else { // Jika belum dikonfirmasi, selalu coming-soon di halaman posting event
+                 $status = 'coming-soon';
+            }
+
+            return [
+                'id' => $event->id,
+                'title' => $event->title,
+                'status_id' => $event->status_id, // Tetap sertakan status_id
+                'status' => $status,
+                'date' => $event->end_date // Sertakan end_date untuk perbandingan di view
+            ];
+        });
+
+        // Count events by status
+        $statusCounts = [
+            'on-going' => $events->where('status', 'on-going')->count(),
+            'coming-soon' => $events->where('status', 'coming-soon')->count(),
+            'ended' => $events->where('status', 'ended')->count()
+        ];
+
+        return view('posting-event', [
+            'events' => $events,
+            'statusCounts' => $statusCounts
         ]);
     }
 
@@ -167,4 +241,18 @@ class EventController extends Controller
         // Redirect kembali ke halaman verifikasi dengan pesan sukses
         return redirect()->route('verification.event.index')->with('success', 'Event berhasil disetujui!');
     }
-} 
+
+    public function destroy($id)
+    {
+        $event = Event::findOrFail($id);
+        
+        // Optional: Hapus juga event photo dari storage jika ada
+        if ($event->event_photo && Storage::disk('public')->exists($event->event_photo)) {
+            Storage::disk('public')->delete($event->event_photo);
+        }
+
+        $event->delete();
+
+        return redirect()->route('posting-event.index')->with('success', 'Event berhasil dihapus.');
+    }
+}

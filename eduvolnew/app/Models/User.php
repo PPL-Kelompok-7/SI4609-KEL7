@@ -6,6 +6,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Facades\Storage;
 
 class User extends Authenticatable
 {
@@ -52,5 +53,25 @@ class User extends Authenticatable
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
         ];
+    }
+
+    public function teachingSessions()
+    {
+        return $this->hasMany(TeachingSession::class);
+    }
+
+    public function getProfilePhotoUrlAttribute()
+    {
+        if (!empty($this->profile_photo) && file_exists(public_path('storage/' . $this->profile_photo))) {
+            return Storage::url($this->profile_photo);
+        }
+        return asset('profile2.png');
+    }
+
+    public function completedEvents()
+    {
+        return $this->belongsToMany(Event::class, 'regist_event', 'user_id', 'event_id')
+            ->wherePivot('status', 'completed')
+            ->orderByDesc('end_date'); // atau 'start_date'
     }
 }

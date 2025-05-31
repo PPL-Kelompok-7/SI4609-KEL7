@@ -1,0 +1,110 @@
+body {
+    background-color: #4E36E9; /* Deep purple background */
+    color: white; /* Default text color */
+}
+
+.container {
+    margin-top: 50px;
+    padding-bottom: 70px; /* Add padding at the bottom */
+}
+
+h2 {
+    color: white;
+    margin-bottom: 20px;
+    font-size: 2.5rem;
+}
+
+.notification-card {
+    background-color: #4E36E9; /* Slightly transparent white background */
+    border-radius: 15px; /* Rounded corners */
+    padding: 20px;
+    margin-bottom: 20px;
+    border: 1px solid #fff; /* Subtle border */
+}
+
+.notification-card .status {
+    color: white; /* White color for status */
+    font-size: 1.4rem;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.notification-card p {
+    color: rgba(255, 255, 255, 0.9); /* Slightly transparent white for description */
+    margin-bottom: 15px;
+}
+
+.event-details {
+    background-color: #DD0BCE; /* Pink background */
+    border-radius: 10px;
+    padding: 15px;
+    margin-top: 15px;
+    margin-bottom: 15px;
+    border: 1px solid #fff; /* Subtle border */
+}
+
+.event-details h3 {
+    color: white;
+    font-size: 1.2rem;
+    margin-bottom: 10px;
+}
+
+/* Style for the event header (title and transaction code) */
+.event-details .event-header {
+    display: flex;
+    justify-content: space-between; /* Push items to opposite ends */
+    align-items: center; /* Vertically align items */
+    margin-bottom: 10px; /* Add some space below the header */
+}
+
+.event-details .info {
+    display: flex;
+    align-items: center;
+    gap: 20px; /* Space between info items */
+    margin-bottom: 10px;
+    font-size: 0.9rem;
+}
+
+.event-details .info i {
+    margin-right: 5px;
+}
+
+.event-details .transaction-code {
+    background-color: #fff; /* Semi-transparent white background for code */
+    border-radius: 20px; /* Pill shape */
+    padding: 5px 15px;
+    /* font-weight: bold; */
+    font-size: 0.8rem;
+    color: #4E36E9; /* Added color property - change #000 to your desired color */
+}
+
+.notification-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.9rem;
+    color: rgba(255, 255, 255, 0.6); /* Lighter text for footer meta */
+    margin-top: 15px;
+}
+
+.notification-footer .close-detail-btn {
+    background-color: transparent;
+    border: 1px solid rgba(255, 255, 255, 0.6); /* Subtle white border */
+    color: rgba(255, 255, 255, 0.8); /* White text */
+    padding: 5px 15px;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.notification-footer .close-detail-btn:hover {
+    background-color: rgba(255, 255, 255, 0.1); /* Slight background on hover */
+    border-color: white;
+    color: white;
+}
+
+/* Style for the green text */
+.text-green {
+    color: #69FD8D; /* Green color */
+    font-weight: bold;
+} 

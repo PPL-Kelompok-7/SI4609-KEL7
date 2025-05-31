@@ -7,13 +7,45 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Log;
+use App\Models\TeachingSession;
+use App\Models\Event;
+use Illuminate\Support\Facades\DB;
 
 class ProfileController extends Controller
 {
     public function index()
     {
-        $user = Auth::user(); // Get the currently authenticated user
-        return view('profile', compact('user'));
+        $user = Auth::user();
+
+        // Ambil event_id dari regist_event yang sudah dibayar (payment_status_id = 3) dan event sudah ended (event_status_id = 9)
+        $completedEventIds = DB::table('regist_event')
+            ->join('payments', 'regist_event.id', '=', 'payments.registration_id')
+            ->join('events', 'regist_event.event_id', '=', 'events.id')
+            ->where('regist_event.user_id', $user->id)
+            ->where('payments.payment_status_id', 3) // Sudah dibayar/lunas
+            ->where('events.status_id', 9)           // Event sudah ended (ganti sesuai nama kolom)
+            ->pluck('regist_event.event_id');
+
+        // Ambil detail event, urutkan dari terbaru ke lama (misal: end_date DESC), maksimal 10 event
+        $featuredEvents = Event::whereIn('id', $completedEventIds)
+            ->orderByDesc('end_date')
+            ->take(10)
+            ->get();
+
+        // Milestone data
+        $targetHours = $user->target_hours;
+        $totalSessions = $user->teachingSessions()->count();
+        $totalHours = $user->teachingSessions()->sum('duration');
+
+        // Badge logic
+        if ($totalHours >= 1001) $badge = 'gold';
+        elseif ($totalHours >= 501) $badge = 'silver';
+        elseif ($totalHours >= 1) $badge = 'bronze';
+        else $badge = null;
+
+        return view('profile', compact(
+            'user', 'featuredEvents', 'targetHours', 'totalSessions', 'totalHours', 'badge'
+        ));
     }
 
     public function edit()
@@ -35,6 +67,9 @@ class ProfileController extends Controller
                 'mobile_phone' => 'nullable|string|max:20',
                 'profile_photo' => 'nullable|image|mimes:jpeg,png,jpg|max:2048'
             ]);
+
+            // Pastikan email tidak diubah
+            unset($validated['email']);
 
             // Handle photo upload
             if ($request->hasFile('profile_photo')) {
@@ -61,6 +96,9 @@ class ProfileController extends Controller
 
             // Update user data
             $user->update($validated);
+
+            // Refresh session user
+            Auth::setUser($user->fresh());
 
             // Log the successful update
             Log::info('Profile updated successfully', [
@@ -148,5 +186,42 @@ class ProfileController extends Controller
                 'message' => 'Gagal mengupload foto profil: ' . $e->getMessage()
             ], 500);
         }
+    }
+
+    public function show()
+    {
+        $user = Auth::user();
+        $targetHours = $user->target_hours;
+        $totalSessions = $user->teachingSessions()->count();
+        $totalHours = $user->teachingSessions()->sum('duration');
+
+        // Badge logic
+        if ($totalHours >= 1001) $badge = 'gold';
+        elseif ($totalHours >= 501) $badge = 'silver';
+        elseif ($totalHours >= 1) $badge = 'bronze';
+        else $badge = null;
+
+        return view('profile', compact(
+            'user', 'targetHours', 'totalSessions', 'totalHours', 'badge'
+        ));
+    }
+
+    public function editTarget()
+    {
+        $user = Auth::user();
+        $targetHours = $user->target_hours;
+        return view('profile.edit_target', compact('targetHours'));
+    }
+
+    public function updateTarget(Request $request)
+    {
+        $request->validate([
+            'target_hours' => 'required|integer|min:1|max:5000'
+        ]);
+        $user = Auth::user();
+        $user->target_hours = $request->target_hours;
+        $user->save();
+
+        return redirect()->route('profile')->with('success', 'Target hours updated!');
     }
 } 
