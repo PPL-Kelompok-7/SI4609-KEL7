@@ -34,9 +34,12 @@
                             </td>
                             <td class="event-name">{{ $review->event_title }}</td>
                             <td>
-                                <a href="{{ route('ratingsaya.show', ['event_id' => $review->event_id]) }}">
-                                    <button class="voucher-button info">Lihat Rating</button>
-                                </a>
+                            <form action="{{ route('ratingsaya.show', ['event_id' => $review->event_id]) }}" method="GET">
+                                <button type="submit" class="voucher-button info" data-dusk="lihat-rating-{{ $loop->index }}">
+                                    Lihat Rating
+                                </button>
+                            </form>
+
                             </td>
                         </tr>
                     @empty
