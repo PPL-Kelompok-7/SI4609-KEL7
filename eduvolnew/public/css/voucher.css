@@ -13,9 +13,9 @@ body {
 }
 
 .container {
-    max-width: 960px;
-    margin: 0 auto;
-    padding: 20px;
+    margin-top: 120px;
+    max-width: 1000px;
+    margin-right: 70px;
 }
 
 /* Header Styles */
@@ -34,6 +34,13 @@ body {
     align-items: center;
     justify-content: center;
     margin-right: 15px;
+}
+
+.header-title2 {
+    margin-left: 700px;
+    color: #ffffff;
+    font-size: 24px;
+    font-weight: 600;
 }
 
 .header-title {
@@ -199,15 +206,18 @@ body {
 
 /* Tambahan khusus untuk tampilan tabel voucher */
 .table-wrapper {
+    width: 1000px;
     background-color: white;
     padding: 20px;
     border-radius: 10px;
     box-shadow: 0 4px 10px rgba(0,0,0,0.1);
     margin-top: 20px;
+    margin-left: 330px;
 }
 
 /* Supaya border-radius juga terlihat pada tabel */
 .voucher-table {
+    width: 400px;
     border-radius: 10px;
     overflow: hidden;
     border-collapse: separate; /* supaya border-radius berfungsi */
