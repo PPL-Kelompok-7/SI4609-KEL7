@@ -20,7 +20,7 @@
         @foreach ($events as $event)
         <div class="wishlist-card" data-event-id="{{ $event->id }}">
             <div class="wishlist-card-img-wrapper">
-                <img src="{{ !empty($event->event_photo) ? asset('storage/' . $event->event_photo) : asset('default-event.png') }}" alt="Event" class="wishlist-card-img">
+<img src="{{ !empty($event['event_photo']) ? asset($event['event_photo']) : asset('default-event.png') }}"  class="event-banner">
                 {{-- Jika ingin menampilkan logo kecil di pojok kiri atas, tambahkan di sini --}}
                 {{-- <img src="/logo0.png" alt="Logo" class="wishlist-card-logo"> --}}
                 <div class="wishlist-card-label">{{ $event->title }}</div>

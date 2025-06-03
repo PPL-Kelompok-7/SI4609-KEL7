@@ -67,7 +67,7 @@
                 @forelse($featuredEvents as $event)
                     <div class="col-md-6 mb-3">
                         <div class="card h-100" style="background: rgba(255,255,255,0.05); border: none;">
-                            <img src="{{ $event->event_photo ? Storage::url($event->event_photo) : asset('default-event.png') }}" class="card-img-top" alt="Event Banner" style="height: 180px; object-fit: cover;">
+<img src="{{ !empty($event['event_photo']) ? asset($event['event_photo']) : asset('default-event.png') }}"  class="event-banner">
                             <div class="card-body">
                                 <h5 class="card-title text-white">{{ $event->title }}</h5>
                                 <p class="card-text mb-1 text-white">
