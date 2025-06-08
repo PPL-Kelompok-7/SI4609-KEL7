@@ -189,6 +189,9 @@ Route::middleware(['web', 'auth'])->group(function () {
         Route::post('/voucherpengguna/reveal/{id}', [VoucherUserController::class, 'reveal'])->name('voucherpengguna.reveal');
 
     });    
+
+    Route::get('/voucher/confirmation', [VoucherController::class, 'confirm'])->name('voucher.confirm');
+
     
     // Payment Controller Routes
     Route::get('/payments/{event}', [PaymentController::class, 'show'])->name('payments.show');
