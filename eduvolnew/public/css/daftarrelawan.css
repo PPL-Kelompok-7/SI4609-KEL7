@@ -334,9 +334,17 @@ ul li i {
 .image-mask-group {
   position: relative;
   width: 260px;
-  height: auto;
+  height: 200px;
   border-radius: 12px;
   overflow: hidden;
+}
+
+.image-mask-group img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* biar gambarnya memenuhi dan terpotong jika perlu */
+  display: block; /* hilangkan spasi bawah */
+  border-radius: 12px; /* agar sudut gambar juga rounded */
 }
 
 .background-img {

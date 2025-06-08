@@ -20,7 +20,7 @@
 
         <div class="event-header">
             <div class="image-mask-group">
-                <img src="{{ asset($event->event_photo ? 'storage/' . $event->event_photo : 'Mask group.png') }}" alt="Event Image" class="background-img">
+<img src="{{ !empty($event['event_photo']) ? asset($event['event_photo']) : asset('default-event.png') }}" alt="Event Banner" class="event-banner">
 
                 <div class="logo-bulet">
                     <img src="{{ asset('telkom.png') }}" alt="Logo Telkom" class="logo-img">

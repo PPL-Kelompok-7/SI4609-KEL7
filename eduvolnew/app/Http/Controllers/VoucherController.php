@@ -14,7 +14,22 @@ class VoucherController extends Controller
     // Tampilkan form untuk membuat voucher type dan generate kode voucher
     public function create()
     {
-        return view('buatvoucher');
+        // Tambahan fitur baru: ambil 3 volunteer teratas
+        $topVolunteers = DB::table('regist_event')
+            ->join('users', 'regist_event.user_id', '=', 'users.id')
+            ->select(
+                'users.id',
+                'users.email',
+                DB::raw("CONCAT(users.first_name, ' ', users.last_name) as full_name"),
+                'users.profile_photo',
+                DB::raw('COUNT(regist_event.event_id) as event_count')
+            )
+            ->groupBy('regist_event.user_id', 'users.id', 'users.email', 'users.first_name', 'users.last_name', 'users.profile_photo')
+            ->orderByDesc('event_count')
+            ->limit(3)
+            ->get();
+
+        return view('buatvoucher', compact('topVolunteers'));
     }
 
     // Proses simpan voucher type dan generate kode voucher
@@ -71,35 +86,68 @@ class VoucherController extends Controller
     }
 
     // Tampilkan form untuk memberikan voucher ke user tertentu
-    public function useVoucher($id)
-    {
-        $voucher = Voucher::findOrFail($id);
-        $users = User::select('id', 'first_name')->get();
-
-        return view('use', compact('voucher', 'users'));
+   public function useVoucher($id)
+{
+    $voucher = Voucher::findOrFail($id);
+    if ($voucher->user_id) {
+        return redirect()->back()->withErrors('Voucher ini sudah digunakan oleh user.');
     }
+
+    $users = User::select('id', 'first_name')->get();
+
+    // Tambahkan query top volunteers di sini juga, sama seperti di method create()
+    $topVolunteers = DB::table('regist_event')
+        ->join('users', 'regist_event.user_id', '=', 'users.id')
+        ->select(
+            'users.id',
+            'users.email',
+            DB::raw("CONCAT(users.first_name, ' ', users.last_name) as full_name"),
+            'users.profile_photo',
+            DB::raw('COUNT(regist_event.event_id) as event_count')
+        )
+        ->groupBy('regist_event.user_id', 'users.id', 'users.email', 'users.first_name', 'users.last_name', 'users.profile_photo')
+        ->orderByDesc('event_count')
+        ->limit(3)
+        ->get();
+
+    return view('use', compact('voucher', 'users', 'topVolunteers'));
+}
+
 
     // Proses pemberian voucher ke user yang dipilih
-   public function assignVoucher(Request $request, $id)
+    public function assignVoucher(Request $request, $id)
     {
-    $request->validate([
-        'user_id' => 'required|exists:users,id',
-    ]);
+        $request->validate([
+            'user_id' => 'required|exists:users,id',
+        ]);
 
-    $voucher = Voucher::findOrFail($id);
-    $user = User::findOrFail($request->user_id);
+        $voucher = Voucher::findOrFail($id);
 
-    $voucher->user_id = $request->user_id;
-    $voucher->is_active = 0;
-    $voucher->save();
+        if ($voucher->user_id) {
+            return redirect()->back()->withErrors('Voucher ini sudah diberikan ke user lain.');
+        }
 
-    // Redirect ke halaman konfirmasi dengan data voucher dan user
-    return redirect()->route('voucher.confirm', [
-        'kode' => $voucher->code,
-        'user_id' => $user->id,
-        'nama' => $user->first_name
-    ]);
+        $user = User::findOrFail($request->user_id);
+
+        $voucher->update([
+            'user_id' => $user->id,
+            'is_active' => 0
+        ]);
+
+        return redirect()->route('voucher.confirm', [
+            'kode' => $voucher->code,
+            'user_id' => $user->id,
+            'nama' => $user->first_name
+        ]);
     }
 
-    
+    public function confirm(Request $request)
+{
+    $kode = $request->kode;
+    $user_id = $request->user_id;
+    $nama = $request->nama;
+
+    return view('confirmgivevoucher', compact('kode', 'user_id', 'nama'));
+}
+
 }

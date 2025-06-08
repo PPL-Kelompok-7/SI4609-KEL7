@@ -31,6 +31,9 @@
         <form action="{{ route('vouchers.store') }}" method="POST">
             @csrf
 
+
+
+
             <div class="form-group">
                 <label for="name">Nama Voucher :</label>
                 <input type="text" name="name" class="form-control" value="{{ old('name') }}" required>
@@ -52,13 +55,11 @@
             </div>
 
             <div class="form-group">
-                <label for="generate_count">Jumlah Kode Voucher</label>
-                <select name="generate_count" class="form-control" required>
-                    <option value="10" {{ old('generate_count') == 10 ? 'selected' : '' }}>10 Kode</option>
-                    <option value="15" {{ old('generate_count') == 15 ? 'selected' : '' }}>15 Kode</option>
-                    <option value="20" {{ old('generate_count') == 20 ? 'selected' : '' }}>20 Kode</option>
-                </select>
+                <label for="generate_count">Input Jumlah Voucher (1–100)</label>
+                <input type="number" name="generate_count" class="form-control" value="{{ old('generate_count') }}" min="1" max="100" required>
             </div>
+
+
 
             <div class="button-group">
                 <button type="button" class="btn btn-cancel" onclick="history.back()">Batal</button>
